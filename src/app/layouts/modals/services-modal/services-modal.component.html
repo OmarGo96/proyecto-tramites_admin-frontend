@@ -1,0 +1,59 @@
+<h2 mat-dialog-title>Trámites y Servicios</h2>
+<form [formGroup]="servicesForm" (submit)="editing ? updateService() : createService()">
+    <mat-dialog-content class="p-8">
+        <div class="mb-3">
+            <label class="block mb-1 text-sm font-medium text-gray-600">Nombre del Trámite</label>
+            <input type="text" formControlName="nombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+        </div>
+        <div class="grid gap-y-3 gap-x-5 mb-3 lg:grid-cols-2">
+
+            <div>
+                <label class="block mb-1 text-sm font-medium text-gray-600">Clave</label>
+                <input type="text" formControlName="clave" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+            </div>
+            <div>
+                <label class="block mb-1 text-sm font-medium text-gray-600">Costo</label>
+                <input type="email" formControlName="costo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+            </div>
+            <div>
+                <label class="block mb-1 text-sm font-medium text-gray-600">Vigencia</label>
+                <input type="text" formControlName="vigencia" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+            </div>
+            <div>
+                <label class="block mb-1 text-sm font-medium text-gray-600">Tiempo</label>
+                <input type="tel" formControlName="tiempo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="block mb-1 text-sm font-medium text-gray-600">Documento Expedido</label>
+            <input type="text" formControlName="documento_expedido" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+        </div>
+        <div class="mb-3">
+            <label class="block mb-1 text-sm font-medium text-gray-600">Descripción</label>
+            <textarea rows="4" formControlName="descripcion" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300"></textarea>
+        </div>
+
+
+        <div class="flex">
+            <div class="flex items-center mr-4">
+                <input id="active" type="checkbox" formControlName="activo" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="active" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Activo</label>
+            </div>
+            <div class="flex items-center mr-4">
+                <input id="online" type="checkbox" formControlName="en_linea" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="online" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">En línea</label>
+            </div>
+        </div>
+
+
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">
+            Cancel
+        </button>
+        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">
+            <mat-spinner class="inline w-4 h-4 mr-7" diameter="20" color="accent" *ngIf="loading"></mat-spinner>
+            {{ editing ? 'Actualizar' : 'Crear' }}
+        </button>
+    </mat-dialog-actions>
+</form>

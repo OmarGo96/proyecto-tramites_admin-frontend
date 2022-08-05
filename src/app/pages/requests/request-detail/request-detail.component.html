@@ -1,0 +1,141 @@
+<div *ngIf="request">
+    <div class="lg:flex lg:items-center lg:justify-between">
+        <div class="flex-1 min-w-0">
+            <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">Detalle de la Solicitud</h2>
+            <p>Trámite {{ request.Servicio.nombre }}</p>
+        </div>
+
+        <div class="mt-5 flex lg:mt-0 lg:ml-4">
+            <span class="sm:ml-3">
+                <button (click)="openHistoryDialog(request.id)" mat-flat-button class="rounded-md" color="primary">
+                    <mat-icon>history</mat-icon> Historial de cambios
+                </button>
+            </span>
+
+            <span class="sm:ml-3">
+                <button (click)="openMessagesDialog(request.id)" mat-flat-button class="rounded-md" color="primary">
+                    <mat-icon>chat</mat-icon> Mensajes
+                </button>
+            </span>
+        </div>
+    </div>
+
+</div>
+
+<div class="grid grid-cols-2 gap-5 mt-5" *ngIf="request">
+    <div class="p-6 w-full bg-white rounded-lg border border-gray-200 shadow-md">
+        <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">Información del
+            contribuyente</h5>
+
+        <h5 class="text-sm font-bold tracking-tight text-gray-500">Nombre</h5>
+        <p class="mb-1 text-xs font-normal text-gray-700">{{ request.Contribuyente.nombre }} {{ request.Contribuyente.apellidos }}</p>
+        <h5 class="text-sm font-bold tracking-tight text-gray-500">Teléfono</h5>
+        <p class="mb-1 text-xs font-normal text-gray-700">{{ request.Contribuyente.telefono }}</p>
+        <h5 class="text-sm font-bold tracking-tight text-gray-500">Correo electrónico</h5>
+        <p class="mb-1 text-xs font-normal text-gray-700">{{ request.Contribuyente.email }}</p>
+        <h5 class="text-sm font-bold tracking-tight text-gray-500">Comentario del contribuyente</h5>
+        <p class="mb-1 text-xs font-normal text-gray-700">{{ request.comentario }}</p>
+    </div>
+    <div class=" p-6 w-full bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+        <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">Información de la solicitud</h5>
+
+        <h5 class="text-sm font-bold tracking-tight text-gray-500">Folio</h5>
+        <p class="mb-1 text-xs font-normal text-gray-700">#{{ request.folio }}</p>
+        <h5 class="text-sm font-bold tracking-tight text-gray-500">Fecha de solicitud</h5>
+        <p class="mb-1 text-xs font-normal text-gray-700">{{ request.fecha_alta | date:'medium' }}</p>
+        <h5 class="text-sm font-bold tracking-tight text-gray-500">Fecha de envio</h5>
+        <p class="mb-1 text-xs font-normal text-gray-700">{{ request.fecha_envio | date:'medium' }}</p>
+        <h5 class="text-sm font-bold tracking-tight text-gray-500">Fecha de recepción</h5>
+        <p class="mb-1 text-xs font-normal text-gray-700">{{ request.fecha_recepcion | date:'medium' }}</p>
+        <h5 class="text-sm font-bold tracking-tight text-gray-500">Fecha de rechazo</h5>
+        <p class="mb-1 text-xs font-normal text-gray-700">{{ request.fecha_rechazo | date:'medium' }}</p>
+        <h5 class="text-sm font-bold tracking-tight text-gray-500">Fecha de finalizacion</h5>
+        <p class="mb-1 text-xs font-normal text-gray-700">{{ request.fecha_final | date:'medium' }}</p>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 gap-5 mt-5" *ngIf="request">
+    <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+        <div class="px-4 py-5 sm:px-6">
+            <h3 class="text-lg leading-6 font-medium text-gray-900">Requisitos del trámite</h3>
+            <p class="mt-1 max-w-2xl text-sm text-gray-500">Relación de requerimientos para el proceso de
+                trámite</p>
+        </div>
+        <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+        <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="w-full">
+            <ng-container matColumnDef="requisito">
+                <th mat-header-cell *matHeaderCellDef class="w-3/5"> Requisito</th>
+                <td mat-cell *matCellDef="let element"> {{ element.Requisito.nombre }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="archivo">
+                <th mat-header-cell *matHeaderCellDef>Archivo</th>
+                <td mat-cell *matCellDef="let element">
+                    <a (click)="openDocument(element.Requisito.Documento.Documentacion.id)"
+                       class="font-medium text-blue-600 dark:text-blue-500 hover:underline hover:cursor-pointer"
+                       *ngIf="element.Requisito.Documento">
+                        Ver adjunto
+                    </a>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="accion">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-radio-group required>
+                        <mat-radio-button value="1" [checked]="(element.Requisito.Documento.estatus === 1)"
+                                          color="primary" class="mr-3"
+                                          (click)="acceptOrDenyDocument(1, element.Requisito.Documento.id)">
+                            Aceptar
+                        </mat-radio-button>
+                        <mat-radio-button value="-1" [checked]="(element.Requisito.Documento.estatus === -1)"
+                                          color="primary"
+                                          (click)="acceptOrDenyDocument(-1, element.Requisito.Documento.id)">
+                            Rechazar
+                        </mat-radio-button>
+                    </mat-radio-group>
+
+                </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+</div>
+
+
+<div *ngIf="request">
+    <div class="lg:flex lg:items-center lg:justify-between mt-5">
+        <form class="flex items-center" [formGroup]="solicitudForm" *ngIf="reqRejected && reqRejected.length === 0">
+
+            <div class="relative w-full">
+                <mat-form-field appearance="legacy">
+                    <mat-label>Selecciona un estatus</mat-label>
+                    <mat-select formControlName="estatus_solicitud_id">
+                        <mat-option *ngFor="let status of statuses" [value]="status.EstatusSolicitud.id">{{ status.EstatusSolicitud.nombre }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <button mat-flat-button color="primary" (click)="updateRequest()" [disabled]="disabledButton || solicitudForm.disabled"
+                    class="p-2.5 ml-2 text-sm text-white rounded-md w-full">
+                <mat-icon>update</mat-icon>
+                Actualizar
+            </button>
+        </form>
+        <div class="mt-5 flex lg:mt-0 lg:ml-4">
+            <span class="sm:ml-3">
+                <button (click)="openHistoryDialog(request.id)" mat-flat-button class="rounded-md" color="primary">
+                    <mat-icon>history</mat-icon> Historial de cambios
+                </button>
+            </span>
+
+            <span class="sm:ml-3">
+                <button (click)="openMessagesDialog(request.id)" mat-flat-button class="rounded-md" color="primary">
+                    <mat-icon>chat</mat-icon> Mensajes
+                </button>
+            </span>
+        </div>
+    </div>
+</div>

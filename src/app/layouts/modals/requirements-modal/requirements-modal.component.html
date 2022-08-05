@@ -1,0 +1,88 @@
+<h2 mat-dialog-title>Requerimientos de Trámite</h2>
+<mat-dialog-content class="p-5 space-y-5">
+
+    <form [formGroup]="requirementsForm" (ngSubmit)="editing ? updateRequirement() : createRequirement()" class="space-y-2">
+        <h3 class="text-md text-gray-700">Agregar requerimiento</h3>
+        <div class="flex flex-row gap-2">
+            <div class="basis-1/2">
+                <input type="text" formControlName="nombre"
+                       class="block w-full p-2 text-gray-900  border border-gray-300 rounded-lg bg-gray-50 sm:text-xs"
+                       placeholder="Nombre del requerimiento">
+            </div>
+            <div class="basis-1/2">
+                <input type="text" formControlName="descripcion"
+                       class="block w-full p-2 text-gray-900  border border-gray-300 rounded-lg bg-gray-50 sm:text-xs"
+                       placeholder="Descripción">
+            </div>
+        </div>
+        <div class="flex flex-row gap-2">
+            <div class="basis-1/4">
+                <select class="block p-2 w-full text-xs text-gray-900 bg-gray-50 rounded-lg border border-gray-300"
+                        formControlName="tipos_documentos_id">
+                    <option value="undefined" disabled class="text-gray-500">Tipos de Documentos</option>
+                    <option *ngFor="let document of documentTypes"
+                            value="{{document.id}}">{{ document.nombre }}</option>
+                </select>
+            </div>
+            <div>
+                <input type="number" formControlName="no_copias"
+                       class="block w-full p-2 text-gray-900  border border-gray-300 rounded-lg bg-gray-50 sm:text-xs"
+                       placeholder="Número de copias">
+            </div>
+            <div class="flex items-center">
+                <input type="checkbox" id="original" formControlName="original"
+                       class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label class="ml-2 text-xs font-medium text-gray-900 dark:text-gray-300" for="original">Original</label>
+            </div>
+            <div class="flex items-center">
+                <input type="checkbox" id="complementario" formControlName="complementario"
+                       class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label class="ml-2 text-xs font-medium text-gray-900 dark:text-gray-300" for="complementario">Complementario</label>
+            </div>
+            <div class="flex items-center">
+                <input type="checkbox" id="obligatorio" formControlName="obligatorio"
+                       class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label class="ml-2 text-xs font-medium text-gray-900 dark:text-gray-300" for="obligatorio">Obligatorio</label>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button type="submit"
+                        class="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <mat-spinner class="inline w-4 h-4 mr-7" diameter="15" color="accent" *ngIf="loading"></mat-spinner>
+                    {{ editing ? 'Editar requisito' : 'Crear requisito' }}
+                </button>
+                <button (click)="initCreateForm()" *ngIf="editing"
+                        class="px-3 py-2 text-xs font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <mat-spinner class="inline w-4 h-4 mr-7" diameter="15" color="accent" *ngIf="loading"></mat-spinner>
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div>
+        <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="w-full">
+            <ng-container matColumnDef="nombre">
+                <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                <td mat-cell *matCellDef="let element"> {{ element.Requisito.nombre | excerpt:150 }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="accion">
+                <th mat-header-cell *matHeaderCellDef> Accion </th>
+                <td mat-cell *matCellDef="let element">
+                    <a (click)="initUpdateForm(element)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline hover:cursor-pointer">Editar</a>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+        </table>
+
+        <!--<mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                       showFirstLastButtons
+                       aria-label="Select page of periodic elements">
+        </mat-paginator>-->
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cerrar</button>
+</mat-dialog-actions>
