@@ -82,6 +82,39 @@ export class MessageService {
         return this.deletePopOup;
     }
 
+    printStatusArrayNew(errors: [], status: any, mailed?: any) {
+        console.log(errors);
+        let msg;
+        errors.forEach((error: any, index) => {
+            if (index === 0) {
+                msg = error.message;
+            }
+        });
+
+        this.status = status;
+
+        if (this.status === 'success') {
+            Swal.fire({
+                html: '' + msg,
+                icon: this.status,
+                showConfirmButton: false,
+                timer: mailed ? 4000 : 2500,
+            });
+
+        } else if (this.status === 'error') {
+            Swal.fire({
+                html: '' + msg,
+                icon: this.status
+            });
+        } else if (this.status === 'warning') {
+            Swal.fire({
+                html: '' + msg,
+                icon: this.status,
+                timer: 4000
+            });
+        }
+    }
+
     confirmRemove() {
         this.deletePopOup = Swal.fire({
             title: 'Are you sure you want to remove this item?',

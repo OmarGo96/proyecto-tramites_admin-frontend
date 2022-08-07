@@ -61,7 +61,7 @@ export class DocumentTypesComponent implements OnInit {
             },
             error: err => {
                 this.loading = false;
-                this.messagesService.printStatus(err.error.errors, 'error');
+                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
             }
         });
     }
@@ -76,7 +76,7 @@ export class DocumentTypesComponent implements OnInit {
             },
             error: err => {
                 this.loading = false;
-                this.messagesService.printStatus(err.error.errors, 'error');
+                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
             }
         })
     }

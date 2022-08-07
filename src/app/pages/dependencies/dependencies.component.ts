@@ -33,7 +33,7 @@ export class DependenciesComponent implements OnInit {
                 console.log(this.dependencies);
             },
             error: err => {
-                this.messagesService.printStatus(err.error.errors, 'error');
+                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
             }
         })
     }

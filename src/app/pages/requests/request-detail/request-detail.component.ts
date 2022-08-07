@@ -108,7 +108,7 @@ export class RequestDetailComponent implements OnInit {
                 this.messagesService.printStatus(res.message, 'success');
             },
             error: err => {
-                this.messagesService.printStatus(err.error.errors, 'error');
+                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
             }
         })
     }
@@ -120,7 +120,7 @@ export class RequestDetailComponent implements OnInit {
                 window.open(url, '_blank');
             },
             error: err => {
-                this.messagesService.printStatus(err.error.errors, 'error');
+                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
             }
         });
     }
@@ -140,7 +140,7 @@ export class RequestDetailComponent implements OnInit {
                 },
                 error: err => {
                     this.loading = false;
-                    this.messagesService.printStatus(err.error.errors, 'error');
+                    this.messagesService.printStatusArrayNew(err.error.errors, 'error');
                 }
             }
         );
@@ -155,7 +155,7 @@ export class RequestDetailComponent implements OnInit {
                 this.messagesService.printStatus(res.message, 'success');
             },
             error: err => {
-                this.messagesService.printStatus(err.error.errors, 'error');
+                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
             }
         })
     }
@@ -172,7 +172,7 @@ export class RequestDetailComponent implements OnInit {
                 this.statuses = res.estatuses;
             },
             error: err => {
-                this.messagesService.printStatus(err.error.errors, 'error');
+                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
             }
         })
     }

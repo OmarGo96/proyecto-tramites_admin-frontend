@@ -101,7 +101,7 @@ export class RequirementsModalComponent implements OnInit {
             },
             error: err => {
                 this.loading = false;
-                this.messagesService.printStatus(err.error.errors, 'error');
+                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
             }
         });
     }
@@ -109,7 +109,6 @@ export class RequirementsModalComponent implements OnInit {
     updateRequirement() {
         this.loading = true;
         const data = this.requirementsForm.value;
-        console.log(data);
         this.requirementsService.updateRecord(data.uuid, data).subscribe({
             next: res => {
                 this.loading = false;
@@ -121,7 +120,7 @@ export class RequirementsModalComponent implements OnInit {
             },
             error: err => {
                 this.loading = false;
-                this.messagesService.printStatus(err.error.errors, 'error');
+                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
             }
         });
     }
@@ -134,7 +133,7 @@ export class RequirementsModalComponent implements OnInit {
                 // this.dataSource.paginator = this.paginator;
             },
             error: err => {
-                this.messagesService.printStatus(err.error.errors, 'error');
+                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
             }
         })
     }
@@ -146,7 +145,7 @@ export class RequirementsModalComponent implements OnInit {
                 this.documentTypes = res.documentos;
             },
             error: err => {
-                this.messagesService.printStatus(err.error.errors, 'error');
+                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
             }
         })
     }

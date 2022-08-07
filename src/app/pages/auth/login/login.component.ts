@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
             },
             error: err => {
                 this.loading = false;
-                this.messagesService.printStatus(err.error.errors[0].message, 'warning');
+                this.messagesService.printStatusArrayNew(err.error.errors, 'warning');
             }
         });
     }
@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
                 this.router.navigate(['dependencias']);
             },
             error: err => {
-                this.messagesService.printStatus(err.error.errors.message, 'warning');
+                this.messagesService.printStatusArrayNew(err.error.errors, 'warning');
             }
         })
     }

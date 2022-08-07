@@ -40,7 +40,7 @@ export class RequestsComponent implements OnInit {
                 this.dataSource.sort = this.sort;
             },
             error: err => {
-                this.messagesService.printStatus(err.error.errors, 'error');
+                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
             }
         });
     }
@@ -55,7 +55,7 @@ export class RequestsComponent implements OnInit {
                 console.log('La solicitud se abrio y paso a estatus "Revision"');
             },
             error: err => {
-                this.messagesService.printStatus(err.error.errors, 'error');
+                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
             }
         })
     }

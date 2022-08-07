@@ -50,7 +50,7 @@ export class MessagesModalComponent implements OnInit {
                 this.records = res.mensajes;
             },
             error: err => {
-                this.messagesService.printStatus(err.error.errors, 'error');
+                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
             }
         })
     }
@@ -78,7 +78,7 @@ export class MessagesModalComponent implements OnInit {
             },
             error: err => {
                 this.uploadingFile = false;
-                this.messagesService.printStatus(err.error.errors.message, 'error');
+                this.messagesService.printStatusArrayNew(err.error.errors.message, 'error');
             }
         });
     }

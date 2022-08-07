@@ -69,7 +69,7 @@ export class UsersComponent implements OnInit {
             },
             error: err => {
                 this.loading = false;
-                this.messagesService.printStatus(err.error.errors, 'warning');
+                this.messagesService.printStatusArrayNew(err.error.errors, 'warning');
             }
         });
     }
