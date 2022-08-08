@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {RequestsService} from "../../../services/requests.service";
 import {MessageService} from "../../../services/messages.service";
-import {FormBuilder, Validators} from "@angular/forms";
+import {UntypedFormBuilder, Validators} from "@angular/forms";
 import {MensajesService} from "../../../services/mensajes.service";
 
 @Component({
@@ -25,7 +25,7 @@ export class MessagesModalComponent implements OnInit {
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
         private requestService: RequestsService,
-        private formBuilder: FormBuilder,
+        private formBuilder: UntypedFormBuilder,
         private mensajeServie: MensajesService,
         private messagesService: MessageService
     ) {

@@ -3,7 +3,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 import {MatPaginator} from "@angular/material/paginator";
 import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 import {MatTableDataSource} from "@angular/material/table";
-import {FormBuilder, Validators} from "@angular/forms";
+import {UntypedFormBuilder, Validators} from "@angular/forms";
 
 /* Services */
 import {MessageService} from "src/app/services/messages.service";
@@ -43,7 +43,7 @@ export class RequirementsModalComponent implements OnInit {
         private requirementsService: RequerimentsService,
         private documentTypesService: DocumentTypesService,
         private messagesService: MessageService,
-        private formBuilder: FormBuilder,
+        private formBuilder: UntypedFormBuilder,
         public matDialog: MatDialog,
     ) {
     }

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {FormBuilder, Validators} from "@angular/forms";
+import {UntypedFormBuilder, Validators} from "@angular/forms";
 import {UsersService} from "../../../services/users.service";
 import {MessageService} from "../../../services/messages.service";
 
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
     public loading = false;
 
     constructor(
-        private formBuilder: FormBuilder,
+        private formBuilder: UntypedFormBuilder,
         private usersService: UsersService,
         private messagesService: MessageService,
         private router: Router,

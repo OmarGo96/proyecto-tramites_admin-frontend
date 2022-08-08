@@ -5,7 +5,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {DocumentsService} from "../../../services/documents.service";
 import {MessageService} from "../../../services/messages.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {FormBuilder, Validators} from "@angular/forms";
+import {UntypedFormBuilder, Validators} from "@angular/forms";
 import {StatusesService} from "../../../services/statuses.service";
 import {
     RequestHistoryModalComponent
@@ -41,7 +41,7 @@ export class RequestDetailComponent implements OnInit {
         private documentsService: DocumentsService,
         private messagesService: MessageService,
         private statusesService: StatusesService,
-        private formBuilder: FormBuilder,
+        private formBuilder: UntypedFormBuilder,
         private dialog: MatDialog,
         private router: Router,
         private _snackBar: MatSnackBar,

@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from "@angular/forms";
+import {UntypedFormBuilder, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 
 import {MessageService} from "src/app/services/messages.service";
@@ -23,7 +23,7 @@ export class ServicesModalComponent implements OnInit {
         @Inject(MAT_DIALOG_DATA) public data: any,
         private servicesService: ServicesService,
         private messagesService: MessageService,
-        private formBuilder: FormBuilder,
+        private formBuilder: UntypedFormBuilder,
         public matDialog: MatDialog,
     ) {
     }
