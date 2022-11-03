@@ -44,6 +44,7 @@ export class RequestDetailComponent implements OnInit {
         private formBuilder: UntypedFormBuilder,
         private dialog: MatDialog,
         private router: Router,
+        private activeRouter: ActivatedRoute,
         private _snackBar: MatSnackBar,
         private activatedRoute: ActivatedRoute,
     ) {
@@ -106,6 +107,9 @@ export class RequestDetailComponent implements OnInit {
         this.requestsService.updateRecord(data).subscribe({
             next: res => {
                 this.messagesService.printStatus(res.message, 'success');
+                setTimeout(() => {
+                    this.router.navigate(['solicitudes']);
+                }, 2500);
             },
             error: err => {
                 this.messagesService.printStatusArrayNew(err.error.errors, 'error');
