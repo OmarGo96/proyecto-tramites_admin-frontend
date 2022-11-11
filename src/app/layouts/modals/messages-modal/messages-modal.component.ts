@@ -71,14 +71,16 @@ export class MessagesModalComponent implements OnInit {
         this.mensajeServie.createRecord(formData).subscribe({
             next: res => {
                 this.uploadingFile = false;
-                this.messagesService.printStatus(res.mensaje, 'success');
+                this.messagesService.printStatus(res.message, 'success');
                 this.messageForm.reset();
                 this.getMessages(this.data.requestId);
                 this.selectedFile = false;
+                this.initMessageForm(this.data.requestId);
+
             },
             error: err => {
                 this.uploadingFile = false;
-                this.messagesService.printStatusArrayNew(err.error.errors.message, 'error');
+                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
             }
         });
     }

@@ -26,7 +26,7 @@
     <form [formGroup]="messageForm" (ngSubmit)="createMessage(selectedFile)" class="w-full">
         <label for="chat" class="sr-only">Your message</label>
         <div class="flex items-center py-2 px-3 bg-gray-50 rounded-lg dark:bg-gray-700">
-            <input type="file" class="hidden" #file (change)="getFile($event)">
+            <input type="file" class="hidden" #file (change)="getFile($event)" accept="application/pdf">
             <button type="button" (click)="file.click()" class="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd" />
