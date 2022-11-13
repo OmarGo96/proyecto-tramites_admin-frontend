@@ -16,7 +16,7 @@ import {MatTableDataSource} from "@angular/material/table";
 export class UsersComponent implements OnInit {
 
     public dataSource: any;
-    public displayedColumns: string[] = ['nombre', 'apellidos', 'usuario', 'accion'];
+    public displayedColumns: string[] = ['nombre', 'apellidos', 'usuario'];
     public expandedElement: any;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -45,8 +45,8 @@ export class UsersComponent implements OnInit {
 
     initCreateForm() {
         this.usersForm = this.formBuilder.group({
-            area_uuid: ['', Validators.required],
-            rol: ['', Validators.required],
+            area_uuid: ['Seleccionar dependencia', Validators.required],
+            rol: ['Seleccionar rol de usuario', Validators.required],
             nombre: ['', Validators.required],
             apellidos: ['', Validators.required],
             usuario: ['', Validators.required],

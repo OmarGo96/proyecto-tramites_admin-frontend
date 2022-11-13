@@ -12,6 +12,7 @@ import {
 } from "../../../layouts/modals/request-history-modal/request-history-modal.component";
 import {MessagesModalComponent} from "../../../layouts/modals/messages-modal/messages-modal.component";
 import {MatDialog} from "@angular/material/dialog";
+import {NgxSpinnerService} from "ngx-spinner";
 
 @Component({
     selector: 'app-request-detail',
@@ -47,12 +48,12 @@ export class RequestDetailComponent implements OnInit {
         private activeRouter: ActivatedRoute,
         private _snackBar: MatSnackBar,
         private activatedRoute: ActivatedRoute,
+        private spinner: NgxSpinnerService
     ) {
     }
 
     ngOnInit(): void {
         this.getId();
-
     }
 
     getId() {
@@ -69,8 +70,10 @@ export class RequestDetailComponent implements OnInit {
 
 
     getSolicitud(id: any) {
+        this.spinner.show();
         this.requestsService.getRecord(id).subscribe({
             next: res => {
+                this.spinner.hide();
                 this.request = res.solicitud;
                 const estatusSolicitud = this.request.estatus_solicitud_id;
                 const requeriments = res.requisitos.filter((req: any) => req.Requisito.Documento);
@@ -86,6 +89,7 @@ export class RequestDetailComponent implements OnInit {
                 }
             },
             error: err => {
+                this.spinner.hide();
                 console.log(err);
                 //this.messagesService.printStatus(err.error.errors, 'error');
             }
@@ -100,37 +104,43 @@ export class RequestDetailComponent implements OnInit {
     }
 
     updateRequest(){
+        this.spinner.show();
         const data = {
             estatus_solicitud_id: this.solicitudForm.value.estatus_solicitud_id.toString(),
             solicitud_id: this.solicitudForm.value.solicitud_id
         };
         this.requestsService.updateRecord(data).subscribe({
             next: res => {
+                this.spinner.hide();
                 this.messagesService.printStatus(res.message, 'success');
                 setTimeout(() => {
                     this.router.navigate(['solicitudes']);
                 }, 2500);
             },
             error: err => {
+                this.spinner.hide();
                 this.messagesService.printStatusArrayNew(err.error.errors, 'error');
             }
         })
     }
 
     openDocument(documentId: any) {
+        this.spinner.show();
         this.documentsService.getUserDocument(documentId).subscribe({
             next: res => {
+                this.spinner.hide();
                 let url = URL.createObjectURL(res);
                 window.open(url, '_blank');
             },
             error: err => {
+                this.spinner.hide();
                 this.messagesService.printStatusArrayNew(err.error.errors, 'error');
             }
         });
     }
 
     acceptOrDenyDocument(estatus: any, documentId: any) {
-        this.loading = true;
+        this.spinner.show();
         let data = {
             'documentacion_id': documentId.toString(),
             'estatus': estatus.toString()
@@ -138,12 +148,12 @@ export class RequestDetailComponent implements OnInit {
 
         this.requestsService.updateEstatusRecord(documentId, data).subscribe({
                 next: res => {
-                    this.loading = false;
+                    this.spinner.hide();
                     this.openSnackBar(estatus === 1 ? 'Se acepto el documento' : 'Se rechazo el documento', '')
                     this.getId();
                 },
                 error: err => {
-                    this.loading = false;
+                    this.spinner.hide();
                     this.messagesService.printStatusArrayNew(err.error.errors, 'error');
                 }
             }
@@ -174,6 +184,7 @@ export class RequestDetailComponent implements OnInit {
         this.statusesService.getRecords(id).subscribe({
             next: res => {
                 this.statuses = res.estatuses;
+                console.log(this.statuses);
             },
             error: err => {
                 this.messagesService.printStatusArrayNew(err.error.errors, 'error');

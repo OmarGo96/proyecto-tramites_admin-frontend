@@ -4,6 +4,7 @@ import {RequestsService} from "../../../services/requests.service";
 import {MessageService} from "../../../services/messages.service";
 import {UntypedFormBuilder, Validators} from "@angular/forms";
 import {MensajesService} from "../../../services/mensajes.service";
+import {NgxSpinnerService} from "ngx-spinner";
 
 @Component({
     selector: 'app-messages-modal',
@@ -27,7 +28,8 @@ export class MessagesModalComponent implements OnInit {
         private requestService: RequestsService,
         private formBuilder: UntypedFormBuilder,
         private mensajeServie: MensajesService,
-        private messagesService: MessageService
+        private messagesService: MessageService,
+        private spinner: NgxSpinnerService
     ) {
     }
 

@@ -20,7 +20,8 @@
 </mat-dialog-content>
 <mat-dialog-actions>
 
-    <a (click)="seeDocument()" class="text-xs hover:cursor-pointer"*ngIf="selectedFile">{{ selectedFile.name }}</a>
+    <a (click)="seeDocument()" class="text-sm text-blue-500 underline hover:cursor-pointer"*ngIf="selectedFile">{{ selectedFile.name }}</a>
+    <p class="text-xs text-gray-400"*ngIf="!selectedFile">Tamaño de archivos maximo: 2MB</p>
     <mat-progress-bar mode="indeterminate" *ngIf="uploadingFile"></mat-progress-bar>
 
     <form [formGroup]="messageForm" (ngSubmit)="createMessage(selectedFile)" class="w-full">
@@ -32,7 +33,7 @@
                     <path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd" />
                 </svg>
             </button>
-            <textarea id="chat" rows="2" formControlName="mensaje" class="block mx-4 p-2.5 w-full text-xs text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your message..."></textarea>
+            <textarea id="chat" rows="2" formControlName="mensaje" class="block mx-4 p-2.5 w-full text-xs text-gray-900 bg-white rounded-lg border border-gray-300" placeholder="Escribir mensaje..."></textarea>
             <button type="submit" class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600">
                 <svg class="w-6 h-6 rotate-90" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path></svg>
             </button>

@@ -11,37 +11,32 @@
             <div class="p-6 space-y-2 max-w-sm bg-white shadow rounded-lg">
                 <h3 class="text-lg leading-6 font-medium text-gray-900">Crear usuario</h3>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Rol de usuario</label>
-                    <select formControlName="rol" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <select formControlName="rol" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                        <option [selected]="true" disabled>Seleccionar rol de usuario</option>
                         <option value="1">Revisor</option>
                         <option value="2">Administrador</option>
                     </select>
                 </div>
                 <div>
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Area</label>
-                    <select formControlName="area_uuid" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <select formControlName="area_uuid" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                        <option [selected]="true" disabled>Seleccionar dependencia</option>
                         <option *ngFor="let dependency of dependencies" [value]="dependency.uuid">{{ dependency.nombre }}</option>
                     </select>
                 </div>
                 <div>
-                    <label class="block mb-1 text-sm font-medium text-gray-600">Nombre de usuario</label>
-                    <input type="text" formControlName="usuario" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                    <input type="text" formControlName="usuario" placeholder="Nombre de usuario" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                 </div>
                 <div>
-                    <label class="block mb-1 text-sm font-medium text-gray-600">Nombre</label>
-                    <input type="text" formControlName="nombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                    <input type="text" formControlName="nombre" placeholder="Nombre(s)" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                 </div>
                 <div>
-                    <label class="block mb-1 text-sm font-medium text-gray-600">Apellidos</label>
-                    <input type="text" formControlName="apellidos" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                    <input type="text" formControlName="apellidos" placeholder="Apellidos" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                 </div>
                 <div>
-                    <label class="block mb-1 text-sm font-medium text-gray-600">Contraseña</label>
-                    <input type="password" formControlName="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                    <input type="password" formControlName="password" placeholder="Contraseña" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                 </div>
                 <div>
-                    <label class="block mb-1 text-sm font-medium text-gray-600">Confirmar contraseña</label>
-                    <input type="password" formControlName="re_password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                    <input type="password" formControlName="re_password" placeholder="Confirmar contraseña" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                 </div>
                 <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">
                     <svg *ngIf="loading" role="status" class="inline w-4 h-4 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -85,12 +80,12 @@
                 </ng-container>
 
                 <!-- Weight Column -->
-                <ng-container matColumnDef="accion">
+                <!--<ng-container matColumnDef="accion">
                     <th mat-header-cell *matHeaderCellDef></th>
                     <td mat-cell *matCellDef="let element">
                         <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
                     </td>
-                </ng-container>
+                </ng-container>-->
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

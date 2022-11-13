@@ -6,6 +6,7 @@ import {AppComponent} from './app.component';
 import {LayoutsModule} from "./layouts/layouts.module";
 import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NgxSpinnerModule} from "ngx-spinner";
 
 @NgModule({
     declarations: [
@@ -15,6 +16,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
+        NgxSpinnerModule.forRoot({ type: 'ball-beat' }),
         LayoutsModule,
         BrowserAnimationsModule,
     ],

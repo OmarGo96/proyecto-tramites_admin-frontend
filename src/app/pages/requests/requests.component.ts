@@ -4,6 +4,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
 import {MessageService} from "../../services/messages.service";
+import {NgxSpinnerService} from "ngx-spinner";
 
 @Component({
     selector: 'app-requests',
@@ -23,8 +24,8 @@ export class RequestsComponent implements OnInit {
 
     constructor(
         private requestsService: RequestsService,
-
-        private messagesService: MessageService
+        private messagesService: MessageService,
+        private spinner: NgxSpinnerService
     ) {
     }
 
@@ -33,28 +34,34 @@ export class RequestsComponent implements OnInit {
     }
 
     getServices(){
+        this.spinner.show();
         this.requestsService.getRecords().subscribe({
             next: res => {
+                this.spinner.hide();
                 this.dataSource = new MatTableDataSource(res.solicitudes);
                 this.dataSource.paginator = this.paginator;
                 this.dataSource.sort = this.sort;
             },
             error: err => {
+                this.spinner.hide();
                 this.messagesService.printStatusArrayNew(err.error.errors, 'error');
             }
         });
     }
 
     updateRequest(solicitudId: any){
+        this.spinner.show();
         const data = {
             estatus_solicitud_id: '12',
             solicitud_id: solicitudId.toString() ,
         };
         this.requestsService.updateRecord(data).subscribe({
             next: res => {
+                this.spinner.hide();
                 console.log('La solicitud se abrio y paso a estatus "Revision"');
             },
             error: err => {
+                this.spinner.hide();
                 this.messagesService.printStatusArrayNew(err.error.errors, 'error');
             }
         })

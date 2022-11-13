@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {UsersService} from "../../services/users.service";
 
 @Component({
     selector: 'app-profile',
@@ -8,14 +9,19 @@ import {Component, OnInit} from '@angular/core';
 export class ProfileComponent implements OnInit {
 
     public files: File[] = [];
+    public profile: any;
 
     /* Banderas */
     public loading: any;
 
-    constructor() {
+    constructor(
+        private usersService: UsersService
+    ) {
     }
 
     ngOnInit(): void {
+        this.profile = this.usersService.getIdentity();
+        console.log(this.profile);
     }
 
     uploadFiles() {
