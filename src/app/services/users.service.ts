@@ -25,6 +25,10 @@ export class UsersService {
         return this.httpClient.post(`${this.urlApi}/administradores`, data, {headers: this.headers});
     }
 
+    public updateRecord(userUuid: any, data: any): Observable<any> {
+        return this.httpClient.put(`${this.urlApi}/administradores/${userUuid}`, data, {headers: this.headers});
+    }
+
     public getRecords(): Observable<any> {
         return this.httpClient.get(`${this.urlApi}/administradores`,{headers: this.headers});
     }

@@ -1,0 +1,31 @@
+<h3>Editar usuario</h3>
+<form [formGroup]="userForm" class="space-y-3">
+    <div>
+        <select formControlName="rol" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+            <option disabled>Seleccionar rol de usuario</option>
+            <option value="1">Revisor</option>
+            <option value="2">Administrador</option>
+        </select>
+    </div>
+
+    <div>
+        <select formControlName="activo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+            <option disabled>Seleccionar estatus</option>
+            <option value="1">Activo</option>
+            <option value="-1">Inactivo</option>
+        </select>
+    </div>
+
+    <div>
+        <input type="text" formControlName="usuario" placeholder="Nombre de usuario" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+    </div>
+    <div>
+        <input type="text" formControlName="nombre" placeholder="Nombre(s)" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+    </div>
+    <div>
+        <input type="text" formControlName="apellidos" placeholder="Apellidos" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+    </div>
+    <button mat-flat-button color="primary" class="w-full rounded-lg" (click)="updateUser()" [disabled]="userForm.invalid">
+        Actualizar usuario
+    </button>
+</form>

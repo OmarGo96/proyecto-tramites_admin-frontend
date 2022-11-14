@@ -16,6 +16,7 @@ import { UploadModalComponent } from './modals/upload-modal/upload-modal.compone
 import {NgxDropzoneModule} from "ngx-dropzone";
 import { RequestHistoryModalComponent } from './modals/request-history-modal/request-history-modal.component';
 import { MessagesModalComponent } from './modals/messages-modal/messages-modal.component';
+import { UsersModalComponent } from './modals/users-modal/users-modal.component';
 
 @NgModule({
     declarations: [
@@ -30,7 +31,8 @@ import { MessagesModalComponent } from './modals/messages-modal/messages-modal.c
         ExcerptPipe,
         UploadModalComponent,
         RequestHistoryModalComponent,
-        MessagesModalComponent
+        MessagesModalComponent,
+        UsersModalComponent
     ],
     imports: [
         CommonModule,

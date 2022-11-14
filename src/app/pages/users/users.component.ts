@@ -7,6 +7,8 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {DependenciesService} from "../../services/dependencies.service";
 import {MatTableDataSource} from "@angular/material/table";
+import {DependenciesModalComponent} from "../../layouts/modals/dependencies-modal/dependencies-modal.component";
+import {UsersModalComponent} from "../../layouts/modals/users-modal/users-modal.component";
 
 @Component({
     selector: 'app-users',
@@ -16,7 +18,7 @@ import {MatTableDataSource} from "@angular/material/table";
 export class UsersComponent implements OnInit {
 
     public dataSource: any;
-    public displayedColumns: string[] = ['nombre', 'apellidos', 'usuario'];
+    public displayedColumns: string[] = ['nombre', 'apellidos', 'usuario', 'activo', 'accion'];
     public expandedElement: any;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -33,7 +35,7 @@ export class UsersComponent implements OnInit {
         private dependenciesService: DependenciesService,
         private messagesService: MessageService,
         private formBuilder: UntypedFormBuilder,
-        public matDialog: MatDialog,
+        public dialog: MatDialog,
     ) {
     }
 
@@ -52,7 +54,7 @@ export class UsersComponent implements OnInit {
             usuario: ['', Validators.required],
             password: ['', Validators.required],
             re_password: ['', Validators.required]
-        })
+        });
     }
 
     createUser() {
@@ -77,7 +79,6 @@ export class UsersComponent implements OnInit {
     getUsers(){
         this.usersService.getRecords().subscribe({
             next: res => {
-                console.log(res);
                 this.dataSource = new MatTableDataSource(res.administradores);
                 this.dataSource.paginator = this.paginator;
                 this.dataSource.sort = this.sort;
@@ -97,6 +98,21 @@ export class UsersComponent implements OnInit {
                 console.log(err);
             }
         })
+    }
+
+    openUsersDialog(user: any){
+        const config = {
+            width: '40%',
+            data: {
+                user
+            },
+        }
+
+        const dialogRef = this.dialog.open(UsersModalComponent, config);
+
+        dialogRef.afterClosed().subscribe(res => {
+            this.getUsers()
+        });
     }
 
 }

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UntypedFormBuilder, Validators} from "@angular/forms";
+import {FormBuilder, UntypedFormBuilder, Validators} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
 
 /* Services */
@@ -19,7 +19,7 @@ export class DependenciesModalComponent implements OnInit {
     constructor(
         private dependenciesService: DependenciesService,
         private messagesService: MessageService,
-        private formBuilder: UntypedFormBuilder,
+        private formBuilder: FormBuilder,
         public matDialog: MatDialog,
     ) {
     }
