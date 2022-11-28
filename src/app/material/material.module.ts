@@ -16,6 +16,7 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatRadioModule} from "@angular/material/radio";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatSelectModule} from "@angular/material/select";
+import {MatInputModule} from "@angular/material/input";
 
 @NgModule({
     declarations: [],
@@ -54,7 +55,8 @@ import {MatSelectModule} from "@angular/material/select";
         MatFormFieldModule,
         MatPaginatorModule,
         MatTableModule,
-        MatSelectModule
+        MatSelectModule,
+        MatInputModule
     ]
 })
 export class MaterialModule {

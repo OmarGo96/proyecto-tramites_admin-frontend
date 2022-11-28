@@ -5,6 +5,7 @@ import {MatDialog} from "@angular/material/dialog";
 /* Services */
 import {DependenciesService} from "src/app/services/dependencies.service";
 import {MessageService} from "../../../services/messages.service";
+import {NgxSpinnerService} from "ngx-spinner";
 
 @Component({
     selector: 'app-dependencies-modal',
@@ -20,6 +21,7 @@ export class DependenciesModalComponent implements OnInit {
         private dependenciesService: DependenciesService,
         private messagesService: MessageService,
         private formBuilder: FormBuilder,
+        private spinner: NgxSpinnerService,
         public matDialog: MatDialog,
     ) {
     }
@@ -42,18 +44,18 @@ export class DependenciesModalComponent implements OnInit {
     }
 
     createDependency(){
-        this.loading = true;
+        this.spinner.show();
         const data = this.dependenciesForm.value;
         this.dependenciesService.createRecord(data).subscribe({
             next: res => {
-                this.loading = false;
+                this.spinner.hide();
                 this.messagesService.printStatus(res.message, 'success')
                 setTimeout(()=>{
                     this.matDialog.closeAll();
                 }, 4000);
             },
             error: err => {
-                this.loading = false;
+                this.spinner.hide();
                 this.messagesService.printStatusArrayNew(err.error.errors, 'error');
             }
         })

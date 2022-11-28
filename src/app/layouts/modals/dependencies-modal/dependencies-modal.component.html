@@ -1,59 +1,48 @@
 <h2 mat-dialog-title>Secretarías y Dependencias Municipales</h2>
 <form [formGroup]="dependenciesForm" (submit)="createDependency()">
     <mat-dialog-content class="mat-typography">
-        <div class="grid gap-y-3 gap-x-5 mb-3 lg:grid-cols-2">
-            <div>
-                <label class="block mb-1 text-sm font-medium text-gray-600">Nombre de la Dependencia</label>
-                <input type="text" formControlName="nombre"
-                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-            </div>
-            <div>
-                <label class="block mb-1 text-sm font-medium text-gray-600">Responsable</label>
-                <input type="text" formControlName="responsable"
-                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-            </div>
-            <div>
-                <label class="block mb-1 text-sm font-medium text-gray-600">Correo electrónico</label>
-                <input type="email" formControlName="email"
-                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-            </div>
-            <div>
-                <label class="block mb-1 text-sm font-medium text-gray-600">Extensión</label>
-                <input type="tel" formControlName="extension"
-                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                       pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
-            </div>
-            <div>
-                <label class="block mb-1 text-sm font-medium text-gray-600">Teléfono</label>
-                <input type="tel" formControlName="telefono"
-                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                       pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
-            </div>
-            <div>
-                <label class="block mb-1 text-sm font-medium text-gray-600">Horario</label>
-                <input type="text" formControlName="horario"
-                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-            </div>
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Nombre de la dependencia</mat-label>
+            <input matInput formControlName="nombre">
+        </mat-form-field>
+        <div class="grid grid-cols-2 gap-3">
+            <mat-form-field appearance="outline">
+                <mat-label>Responsable</mat-label>
+                <input matInput formControlName="responsable">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Correo electrónico</mat-label>
+                <input matInput formControlName="email" type="mail">
+            </mat-form-field>
         </div>
-        <div class="mb-3">
-            <label class="block mb-1 text-sm font-medium text-gray-600">Ubicación</label>
-            <input type="text" formControlName="ubicacion"
-                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+        <div class="grid grid-cols-3 gap-3">
+            <mat-form-field appearance="outline">
+                <mat-label>Horario</mat-label>
+                <input matInput formControlName="horario">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Teléfono</mat-label>
+                <input matInput formControlName="telefono">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Extensión</mat-label>
+                <input matInput formControlName="extension">
+            </mat-form-field>
         </div>
-        <div class="mb-3">
-            <label class="block mb-1 text-sm font-medium text-gray-600">Descripción</label>
-            <textarea rows="4" formControlName="descripcion"
-                      class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300"></textarea>
-        </div>
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Ubicación</mat-label>
+            <input matInput formControlName="ubicacion">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Descripción</mat-label>
+            <textarea matInput rows="4" formControlName="descripcion"></textarea>
+        </mat-form-field>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-        <button mat-button mat-dialog-close
-                class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">
+        <button mat-button mat-dialog-close class="rounded-lg">
             Cancel
         </button>
-        <button type="submit"
-                class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">
-            <mat-spinner class="inline w-4 h-4 mr-7" diameter="20" color="accent" *ngIf="loading"></mat-spinner>
+        <button type="submit" mat-flat-button color="primary" class="rounded-lg">
             Agregar
         </button>
     </mat-dialog-actions>

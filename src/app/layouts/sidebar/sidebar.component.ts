@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {UsersService} from "../../services/users.service";
 
 @Component({
     selector: 'app-sidebar',
@@ -7,55 +8,81 @@ import {Component, OnInit} from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-    public singleMenuItems: any;
-    public dropdownMenu = false;
-    public groupMenuItems: any;
+    public menuItems: any;
+    public menu: any;
+    public user: any;
 
-    constructor() {
+    constructor(
+        private usersService: UsersService
+    ) {
     }
 
     ngOnInit(): void {
-        this.sideBarMenu();
+        this.user = this.usersService.getIdentity();
+        console.log(this.user);
+        this.setMenuItem();
     }
 
-    sideBarMenu(): void {
-        const routes = ROUTES;
-        this.groupMenuItems = [];
+    setMenuItem(){
+        this.menuItems = ROUTES.filter(menuItem => menuItem);
 
-        const groupItems = new Set(routes.map((item: any) => item.group));
-        this.singleMenuItems = routes.filter((item: any) => !item.group);
+        const groups = new Set(this.menuItems.map((item: any) => item.group));
 
-        groupItems.forEach((item: any) =>
-            this.groupMenuItems.push({
-                    name: item,
-                    values: routes.filter((i: any) => i.group === item)
+        this.menu = [];
+        groups.forEach(g =>
+            this.menu.push({
+                    name: g,
+                    values: this.menuItems.filter((i: any) => i.group === g),
+                    module: ''
                 }
             ));
 
-        for (let i = 0; i < this.groupMenuItems.length; i++) {
-            for (let j = 0; j < this.groupMenuItems[i].values.length; j++) {
-                this.groupMenuItems[i].module = this.groupMenuItems[i].values[j].module;
-                this.groupMenuItems[i].icon = this.groupMenuItems[i].values[j].icon;
+        for (let i = 0; i < this.menu.length; i++) {
+            for (let j = 0; j < this.menu[i].values.length; j++) {
+                this.menu[i].module = this.menu[i].values[j].module;
             }
         }
     }
 
-    openDropdownMenu() {
-        this.dropdownMenu = !this.dropdownMenu;
-    }
 
 }
+
 
 export const ROUTES = [
     {
         path: '/solicitudes',
-        group: 'Solicitudes',
+        group: 'SOLICITUDES',
         module: 'solicitudes',
+        action: 'list',
         title: 'Ver todas',
-        icon: 'folder',
+        icon: 'fa-list',
         class: ''
     },
-    {path: '/dependencias', module: 'dependencias', title: 'Dependencias', icon: 'business', class: ''},
-    {path: '/usuarios', module: 'usuarios', title: 'Usuarios', icon: 'people', class: ''},
-    {path: '/documentos', module: 'documentos', title: 'Tipo de Documentos', icon: 'description', class: ''}
+    {
+        path: '/dependencias',
+        group: 'ADMINISTRACIÓN',
+        module: 'dependencias',
+        action: 'list',
+        title: 'Dependencias',
+        icon: 'fa-building-flag',
+        class: ''
+    },
+    {
+        path: '/usuarios',
+        group: 'ADMINISTRACIÓN',
+        module: 'usuarios',
+        action: 'list',
+        title: 'Usuarios',
+        icon: 'fa-users',
+        class: ''
+    },
+    {
+        path: '/documentos',
+        group: 'ADMINISTRACIÓN',
+        module: 'documentos',
+        action: 'list',
+        title: 'Tipo de Documentos',
+        icon: 'fa-file-export',
+        class: ''
+    }
 ];
