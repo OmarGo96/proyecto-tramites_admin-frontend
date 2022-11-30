@@ -107,13 +107,14 @@
 
 <div class="flex mt-3">
     <div class="basis-1/2 p-3 w-full bg-white rounded-lg border border-gray-200 shadow-md">
-        <form class="flex items-center" [formGroup]="solicitudForm">
+        <form [formGroup]="solicitudForm" class="flex items-center">
             <div class="relative w-full">
                 <mat-form-field appearance="outline" class="w-full">
                     <mat-label>Selecciona un estatus</mat-label>
                     <mat-select formControlName="estatus_solicitud_id">
-                        <mat-option *ngFor="let status of statuses"
-                                    [value]="status.EstatusSolicitud.id">{{ status.EstatusSolicitud.nombre }}</mat-option>
+                        <mat-option *ngFor="let status of statuses" [value]="status.EstatusSolicitud.id">
+                            {{ status.EstatusSolicitud.nombre }}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>

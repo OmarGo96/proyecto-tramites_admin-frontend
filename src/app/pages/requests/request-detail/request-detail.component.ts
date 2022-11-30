@@ -67,8 +67,6 @@ export class RequestDetailComponent implements OnInit {
         });
     }
 
-
-
     getSolicitud(id: any) {
         this.spinner.show();
         this.requestsService.getRecord(id).subscribe({
@@ -81,7 +79,6 @@ export class RequestDetailComponent implements OnInit {
                 this.reqWithDocuments = requeriments;
                 this.requeriments = res.requisitos;
                 this.dataSource = new MatTableDataSource(res.requisitos);
-                this.initSolicitudForm();
                 this.getStatuses(this.request.Servicio.id);
                 if (estatusSolicitud === 3 || estatusSolicitud === 4 || estatusSolicitud === 7){
                     this.solicitudForm.disable();
@@ -98,7 +95,7 @@ export class RequestDetailComponent implements OnInit {
 
     initSolicitudForm() {
         this.solicitudForm = this.formBuilder.group({
-            estatus_solicitud_id: this.request.estatus_solicitud_id,
+            estatus_solicitud_id: ['', Validators.required],
             solicitud_id: this.request.id.toString(),
         });
     }
