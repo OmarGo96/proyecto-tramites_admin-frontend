@@ -98,23 +98,6 @@ export class MessagesModalComponent implements OnInit {
             var blob = this.dataURItoBlob(data);
             this.file = blob;
         }
-
-        /*reader.onprogress = (data) => {
-            value = Math.round(data.loaded / data.total * 100);
-        }*/
-
-        /*reader.onload = (e) => {
-            value = 100;
-            var data = e.target?.result;
-            var blob = this.dataURItoBlob(data);
-            this.documentFile = blob;
-
-            setTimeout(() => {
-                this.resourcesLoaded = true;
-                this.loading = false;
-                this.value = 0;
-            }, 500);
-        }*/
     }
 
     dataURItoBlob(dataURI: any) {

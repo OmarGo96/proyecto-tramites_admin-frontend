@@ -1,80 +1,34 @@
 <ng-container *ngIf="direction">
-    <div class="lg:flex lg:items-center lg:justify-between">
+    <div class="lg:flex lg:items-center lg:justify-between mb-5">
         <div class="flex-1 min-w-0">
-            <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">Tramites disponibles
-                para {{ direction.nombre }}</h2>
+            <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">Tramites disponibles para {{ direction.nombre }}</h2>
             <p>Se encontraron {{ services.length }} trámites disponibles</p>
         </div>
-        <div class="mt-5 flex lg:mt-0 lg:ml-4">
-        <span class="sm:ml-3">
-          <button type="button"
-                  class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  (click)="openDialog()">
-                <mat-icon>add</mat-icon>&nbsp;Crear trámite
+    </div>
+
+    <div class="flex items-center justify-between mb-5">
+        <div class="lg:w-1/3 md:w-1/2">
+            <div class="relative">
+                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <input type="text"
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full pl-10 p-2.5"
+                       placeholder="Buscar solicitud...">
+            </div>
+        </div>
+        <div class="flex space-x-3">
+        <span>
+            <button type="button" mat-flat-button color="primary"
+                    (click)="openDialog()">
+                <i class="fa-solid fa-folder-open"></i>&nbsp;Crear trámite
             </button>
         </span>
         </div>
     </div>
 
-    <div class="grid grid-cols-2 mt-5">
-        <div class="col-start-2">
-            <div class="relative">
-                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                    <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor"
-                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
-                </div>
-                <input type="search"
-                       class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                       placeholder="Filtrar trámites">
-            </div>
-        </div>
-    </div>
-
     <div class="mt-5 flex gap-4">
         <div class="w-full bg-white shadow overflow-hidden rounded-lg">
-
-            <!-- <div class="relative overflow-x-auto">
-                 <table class="w-full  text-sm text-left text-gray-500 dark:text-gray-400">
-                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                     <tr>
-                         <th scope="col" class="px-6 py-3">
-                             Trámite
-                         </th>
-                         <th scope="col" class="px-6 py-3">
-                             Requisitos
-                         </th>
-                         <th scope="col" class="px-6 py-3">
-                             Costo
-                         </th>
-                         <th scope="col" class="px-6 py-3">
-                             <span class="sr-only">Edit</span>
-                         </th>
-                     </tr>
-                     </thead>
-                     <tbody>
-                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                         *ngFor="let service of services">
-                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                             {{ service.nombre }}
-                         </th>
-                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                             <a (click)="openRequirementsDialog(service.uuid)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline hover:cursor-pointer">
-                                 {{ service.Requisitos.length }} requisitos
-                             </a>
-                         </th>
-                         <td class="px-6 py-4">
-                             {{ service.costo }}
-                         </td>
-                         <td class="px-6 py-4 space-x-1">
-                             <a [routerLink]="['/servicio', service.uuid]" class="font-medium text-blue-600 hover:underline">Ver detalle</a>
-                         </td>
-                     </tr>
-                     </tbody>
-                 </table>
-             </div>-->
             <table mat-table [dataSource]="dataSource" class="w-full">
                 <ng-container matColumnDef="tramite">
                     <th mat-header-cell *matHeaderCellDef> Trámite</th>
@@ -85,8 +39,7 @@
                 <ng-container matColumnDef="requisitos">
                     <th mat-header-cell *matHeaderCellDef> Requisitos</th>
                     <td mat-cell *matCellDef="let element">
-                        <a (click)="openRequirementsDialog(element.uuid)"
-                           class="font-medium text-blue-600 dark:text-blue-500 hover:underline hover:cursor-pointer">
+                        <a mat-button color="primary" (click)="openRequirementsDialog(element.uuid)">
                             {{element.Requisitos.length}} requisitos
                         </a>
                     </td>
@@ -105,8 +58,9 @@
                 <ng-container matColumnDef="accion">
                     <th mat-header-cell *matHeaderCellDef></th>
                     <td mat-cell *matCellDef="let element">
-                        <a [routerLink]="['/servicio', element.uuid]" class="font-medium text-blue-600 hover:underline">Ver
-                            detalle</a>
+                        <a mat-flat-button color="primary" class="rounded-md" [routerLink]="['/servicio', element.uuid]">
+                            Ver detalle
+                        </a>
                     </td>
                 </ng-container>
 

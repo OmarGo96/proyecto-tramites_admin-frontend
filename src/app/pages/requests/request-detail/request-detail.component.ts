@@ -13,6 +13,7 @@ import {
 import {MessagesModalComponent} from "../../../layouts/modals/messages-modal/messages-modal.component";
 import {MatDialog} from "@angular/material/dialog";
 import {NgxSpinnerService} from "ngx-spinner";
+import {MensajesService} from "../../../services/mensajes.service";
 
 @Component({
     selector: 'app-request-detail',
@@ -28,6 +29,10 @@ export class RequestDetailComponent implements OnInit {
     public reqWithDocuments: any;
     public reqRejected: any;
     public statuses: any;
+    public records: any;
+    public messageForm: any;
+    public selectedFile: any;
+    public file: any;
 
     public dataSource: any;
     public displayedColumns: string[] = ['requisito', 'archivo', 'accion'];
@@ -42,6 +47,7 @@ export class RequestDetailComponent implements OnInit {
         private documentsService: DocumentsService,
         private messagesService: MessageService,
         private statusesService: StatusesService,
+        private mensajeServie: MensajesService,
         private formBuilder: UntypedFormBuilder,
         private dialog: MatDialog,
         private router: Router,
@@ -54,6 +60,7 @@ export class RequestDetailComponent implements OnInit {
 
     ngOnInit(): void {
         this.getId();
+        this.initSolicitudForm();
     }
 
     getId() {
@@ -84,6 +91,8 @@ export class RequestDetailComponent implements OnInit {
                     this.solicitudForm.disable();
                     this.disabledButton = true;
                 }
+                this.getHistory(res.solicitud.id);
+                this.getMessages(res.solicitud.id);
             },
             error: err => {
                 this.spinner.hide();
@@ -91,6 +100,13 @@ export class RequestDetailComponent implements OnInit {
                 //this.messagesService.printStatus(err.error.errors, 'error');
             }
         });
+    }
+
+    initMessageForm(requestId: any) {
+        this.messageForm = this.formBuilder.group({
+            solicitu_id: requestId,
+            mensaje: ['', Validators.required]
+        })
     }
 
     initSolicitudForm() {
@@ -189,33 +205,98 @@ export class RequestDetailComponent implements OnInit {
         })
     }
 
-    openHistoryDialog(requestId: any): void {
-        const config = {
-            width: '50%',
-            data: {
-                requestId
+    getHistory(requestId: any){
+        this.requestsService.getHistory(requestId).subscribe({
+            next: res => {
+                this.records = res.history;
             },
-        }
-
-        const dialogRef = this.dialog.open(RequestHistoryModalComponent, config);
-
-        dialogRef.afterClosed().subscribe(res => {
-            console.log('The dialog was closed');
+            error: err => {
+                this.spinner.hide();
+                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+            }
         });
     }
 
-    openMessagesDialog(requestId: any): void {
-        const config = {
-            width: '50%',
-            data: {
-                requestId
+    getMessages(requestId: any) {
+        this.requestsService.getMessages(requestId).subscribe({
+            next: res => {
+                this.records = res.mensajes;
             },
+            error: err => {
+                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+            }
+        })
+    }
+
+    createMessage(selectedFile: any) {
+        this.spinner.show();
+        var formData = new FormData();
+
+        const solicitudId = this.messageForm.value.solicitu_id;
+        const mensaje = this.messageForm.value.mensaje;
+
+        formData.append('solicitud_id', solicitudId.toString());
+        formData.append('mensaje', mensaje);
+        if (selectedFile) {
+            formData.append('file', selectedFile);
         }
 
-        const dialogRef = this.dialog.open(MessagesModalComponent, config);
+        this.mensajeServie.createRecord(formData).subscribe({
+            next: res => {
+                this.spinner.hide();
+                this.messagesService.printStatus(res.message, 'success');
+                this.messageForm.reset();
+                // this.getMessages(this.data.requestId);
+                this.selectedFile = false;
+                // this.initMessageForm(this.data.requestId);
 
-        dialogRef.afterClosed().subscribe(res => {
-            console.log('The dialog was closed');
+            },
+            error: err => {
+                this.spinner.hide();
+                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+            }
         });
+    }
+
+    getFile(event: any) {
+        var reader = new FileReader();
+        this.selectedFile = event.target.files[0];
+
+        reader.readAsDataURL(this.selectedFile);
+
+        reader.onload = (e) => {
+            var data = e.target?.result;
+            var blob = this.dataURItoBlob(data);
+            this.file = blob;
+        }
+    }
+
+    dataURItoBlob(dataURI: any) {
+        // convert base64/URLEncoded data component to raw binary data held in a string
+        var byteString;
+        if (dataURI.split(',')[0].indexOf('base64') >= 0)
+            byteString = atob(dataURI.split(',')[1]);
+        else
+            byteString = unescape(dataURI.split(',')[1]);
+
+        // separate out the mime component
+        var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+        // write the bytes of the string to a typed array
+        var ia = new Uint8Array(byteString.length);
+        for (var i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+
+        return new Blob([ia], {type: mimeString});
+    }
+
+    seeDocument() {
+        if (this.file) {
+            let url = URL.createObjectURL(this.file)
+            window.open(url, '_blank')
+        } else {
+            this.messagesService.printStatus('Hubo un error, intente de nuevo más tarde', 'error');
+        }
     }
 }
