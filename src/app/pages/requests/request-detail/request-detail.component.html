@@ -62,23 +62,40 @@
             </div>
 
             <div class="p-8 bg-white shadow rounded-xl">
-                <a (click)="seeDocument()" class="text-sm text-blue-500 underline hover:cursor-pointer"*ngIf="selectedFile">{{ selectedFile.name }}</a>
-                <p class="text-xs text-gray-400"*ngIf="!selectedFile">Tamaño de archivos maximo: 2MB</p>
-                <mat-progress-bar mode="indeterminate" *ngIf="uploadingFile"></mat-progress-bar>
 
-                <form [formGroup]="messageForm" (ngSubmit)="createMessage(selectedFile)" class="w-full">
-                    <label for="chat" class="sr-only">Your message</label>
-                    <div class="flex items-center py-2 px-3 bg-gray-50 rounded-lg dark:bg-gray-700">
-                        <input type="file" class="hidden" #file (change)="getFile($event)" accept="application/pdf">
-                        <button type="button" (click)="file.click()" class="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd" />
-                            </svg>
+                <ol class="relative border-l border-gray-200 dark:border-gray-700" *ngIf="messages">
+                    <div *ngIf="messages.length <= 0"
+                         class="p-4 text-sm text-gray-700 bg-gray-100 rounded-lg dark:bg-gray-700 dark:text-gray-300"
+                         role="alert">
+                        No se encontraron mensajes para esta solicitud
+                    </div>
+                    <li class="mb-3 ml-4" *ngFor="let record of messages">
+                        <div
+                            class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white"></div>
+                        <time
+                            class="mb-1 text-xs font-normal leading-none text-gray-400">{{ record.fecha_alta | date:'medium'}}</time>
+                        <p class="mb-4 text-md font-normal text-gray-500">{{ record.mensaje }}</p>
+                    </li>
+                </ol>
+
+                <a (click)="seeDocument()" class="text-sm text-blue-500 underline hover:cursor-pointer"
+                   *ngIf="selectedFile">{{ selectedFile.name }}</a>
+                <!--<p class="text-xs text-gray-400" *ngIf="!selectedFile">Tamaño de archivos maximo: 2MB</p>-->
+
+                <form [formGroup]="messageForm" (ngSubmit)="createMessage(selectedFile)">
+                    <mat-form-field appearance="outline" class="w-full">
+                        <mat-label>Mensaje para el contribuyente</mat-label>
+                        <textarea matInput formControlName="mensaje"></textarea>
+                    </mat-form-field>
+
+                    <div class="flex justify-between">
+                        <button type="submit" mat-flat-button color="primary" class="rounded-md">
+                            Enviar mensaje
                         </button>
-                        <textarea id="chat" rows="2" formControlName="mensaje" class="block mx-4 p-2.5 w-full text-xs text-gray-900 bg-white rounded-lg border border-gray-300" placeholder="Escribir mensaje..."></textarea>
-                        <button type="submit" class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600">
-                            <svg class="w-6 h-6 rotate-90" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path></svg>
-                        </button>
+                        <!--<input type="file" class="hidden" #file (change)="getFile($event)" accept="application/pdf">
+                        <button type="button" (click)="file.click()" mat-stroked-button color="primary" class="rounded-md">
+                            Adjuntar documento
+                        </button>-->
                     </div>
                 </form>
             </div>
@@ -116,7 +133,8 @@
             </div>
 
             <div class="p-8 bg-white shadow rounded-xl">
-                <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">Información de la solicitud</h5>
+                <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">Información de la
+                    solicitud</h5>
 
                 <h5 class="text-sm font-bold tracking-tight text-gray-500">Folio</h5>
                 <p class="mb-1 text-xs font-normal text-gray-700">#{{ request.folio }}</p>
@@ -135,10 +153,12 @@
             <div class="p-8 bg-white shadow rounded-xl">
                 <h3 class="text-lg font-medium text-gray-900">Historial del trámite</h3>
                 <ol class="relative border-l border-gray-200">
-                    <li class="mb-3 ml-4" *ngFor="let record of records">
-                        <div class="absolute w-3 h-3 rounded-full mt-1.5 -left-1.5 border border-white" style="background-color: {{ record.Estatus.color }}"></div>
-                        <time class="mb-1 text-xs font-normal leading-none text-gray-400">{{ record.fecha_alta | date: 'medium' }}</time>
-                        <h3 class="text-sm font-semibold text-gray-700">{{ record.comentario }}</h3>
+                    <li class="mb-3 ml-4" *ngFor="let history of histories">
+                        <div class="absolute w-3 h-3 rounded-full mt-1.5 -left-1.5 border border-white"
+                             style="background-color: {{ history.Estatus.color }}"></div>
+                        <time
+                            class="mb-1 text-xs font-normal leading-none text-gray-400">{{ history.fecha_alta | date: 'medium' }}</time>
+                        <h3 class="text-sm font-semibold text-gray-700">{{ history.comentario }}</h3>
                     </li>
                 </ol>
             </div>

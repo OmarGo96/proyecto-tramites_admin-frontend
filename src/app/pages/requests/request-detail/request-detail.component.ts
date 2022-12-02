@@ -29,7 +29,8 @@ export class RequestDetailComponent implements OnInit {
     public reqWithDocuments: any;
     public reqRejected: any;
     public statuses: any;
-    public records: any;
+    public messages: any;
+    public histories: any;
     public messageForm: any;
     public selectedFile: any;
     public file: any;
@@ -60,7 +61,6 @@ export class RequestDetailComponent implements OnInit {
 
     ngOnInit(): void {
         this.getId();
-        this.initSolicitudForm();
     }
 
     getId() {
@@ -71,6 +71,20 @@ export class RequestDetailComponent implements OnInit {
             error: err => {
                 console.log(err);
             }
+        });
+    }
+
+    initSolicitudForm() {
+        this.solicitudForm = this.formBuilder.group({
+            estatus_solicitud_id: ['', Validators.required],
+            solicitud_id: this.request.id.toString(),
+        });
+    }
+
+    initMessageForm() {
+        this.messageForm = this.formBuilder.group({
+            solicitud_id: this.request.id.toString(),
+            mensaje: ['']
         });
     }
 
@@ -86,35 +100,26 @@ export class RequestDetailComponent implements OnInit {
                 this.reqWithDocuments = requeriments;
                 this.requeriments = res.requisitos;
                 this.dataSource = new MatTableDataSource(res.requisitos);
+
+                this.getHistory(res.solicitud.id);
                 this.getStatuses(this.request.Servicio.id);
+                this.getMessages(res.solicitud.id);
+                this.initMessageForm();
+                this.initSolicitudForm();
+
                 if (estatusSolicitud === 3 || estatusSolicitud === 4 || estatusSolicitud === 7){
                     this.solicitudForm.disable();
                     this.disabledButton = true;
                 }
-                this.getHistory(res.solicitud.id);
-                this.getMessages(res.solicitud.id);
             },
             error: err => {
                 this.spinner.hide();
                 console.log(err);
-                //this.messagesService.printStatus(err.error.errors, 'error');
             }
         });
     }
 
-    initMessageForm(requestId: any) {
-        this.messageForm = this.formBuilder.group({
-            solicitu_id: requestId,
-            mensaje: ['', Validators.required]
-        })
-    }
 
-    initSolicitudForm() {
-        this.solicitudForm = this.formBuilder.group({
-            estatus_solicitud_id: ['', Validators.required],
-            solicitud_id: this.request.id.toString(),
-        });
-    }
 
     updateRequest(){
         this.spinner.show();
@@ -197,7 +202,6 @@ export class RequestDetailComponent implements OnInit {
         this.statusesService.getRecords(id).subscribe({
             next: res => {
                 this.statuses = res.estatuses;
-                console.log(this.statuses);
             },
             error: err => {
                 this.messagesService.printStatusArrayNew(err.error.errors, 'error');
@@ -208,7 +212,7 @@ export class RequestDetailComponent implements OnInit {
     getHistory(requestId: any){
         this.requestsService.getHistory(requestId).subscribe({
             next: res => {
-                this.records = res.history;
+                this.histories = res.history;
             },
             error: err => {
                 this.spinner.hide();
@@ -220,7 +224,7 @@ export class RequestDetailComponent implements OnInit {
     getMessages(requestId: any) {
         this.requestsService.getMessages(requestId).subscribe({
             next: res => {
-                this.records = res.mensajes;
+                this.messages = res.mensajes;
             },
             error: err => {
                 this.messagesService.printStatusArrayNew(err.error.errors, 'error');
@@ -232,7 +236,7 @@ export class RequestDetailComponent implements OnInit {
         this.spinner.show();
         var formData = new FormData();
 
-        const solicitudId = this.messageForm.value.solicitu_id;
+        const solicitudId = this.messageForm.value.solicitud_id;
         const mensaje = this.messageForm.value.mensaje;
 
         formData.append('solicitud_id', solicitudId.toString());
@@ -245,11 +249,8 @@ export class RequestDetailComponent implements OnInit {
             next: res => {
                 this.spinner.hide();
                 this.messagesService.printStatus(res.message, 'success');
-                this.messageForm.reset();
-                // this.getMessages(this.data.requestId);
                 this.selectedFile = false;
-                // this.initMessageForm(this.data.requestId);
-
+                this.getId();
             },
             error: err => {
                 this.spinner.hide();
