@@ -8,7 +8,7 @@
 <div class="grid grid-cols-12 gap-4 mt-5">
     <div class="col-span-4">
         <form [formGroup]="usersForm" (submit)="createUser()">
-            <div class="p-6 space-y-2 max-w-sm bg-white shadow rounded-lg">
+            <div class="p-6 space-y-4 w-full bg-white shadow rounded-lg">
                 <h3 class="text-lg leading-6 font-medium text-gray-900">Crear usuario</h3>
                 <div>
                     <select formControlName="rol" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
@@ -100,7 +100,7 @@
                     <td class="mat-cell" colspan="4">No se encontraron resultados...</td>
                 </tr>
             </table>
-            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+            <mat-paginator [pageSizeOptions]="[10, 30, 40, 100]" aria-label="Select page of users"></mat-paginator>
         </div>
     </div>
 </div>

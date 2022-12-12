@@ -5,20 +5,9 @@
     </div>
 </div>
 <div class="grid grid-cols-12 gap-4 mt-5">
-    <!--<div class="col-span-6 col-start-7">
-        <div class="relative w-full">
-            <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                <mat-icon>search</mat-icon>
-            </div>
-            <input type="text"
-                   class="block p-3 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300"
-                   placeholder="Buscar trámite" required="">
-        </div>
-    </div>-->
-
     <div class="col-span-4">
         <form [formGroup]="documentTypesForm" (submit)="createDocumentType()">
-            <div class="p-6 space-y-2 max-w-sm bg-white shadow rounded-lg">
+            <div class="p-6 space-y-2 w-full bg-white shadow rounded-lg">
                 <h3 class="text-lg leading-6 font-medium text-gray-900">Crear Registro</h3>
                 <div>
                     <label class="block mb-1 text-sm font-medium text-gray-600">Nombre</label>

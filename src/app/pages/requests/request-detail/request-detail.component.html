@@ -112,7 +112,8 @@
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
-                    <button mat-flat-button color="primary" (click)="updateRequest()" class="w-full rounded-md">
+                    <button mat-flat-button color="primary" (click)="updateRequest()" class="w-full rounded-md"
+                    [disabled]="(solicitudForm.disabled || solicitudForm.invalid)">
                         Actualizar
                     </button>
                 </form>
