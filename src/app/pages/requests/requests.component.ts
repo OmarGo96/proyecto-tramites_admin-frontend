@@ -37,6 +37,7 @@ export class RequestsComponent implements OnInit {
         this.spinner.show();
         this.requestsService.getRecords().subscribe({
             next: res => {
+                console.log(res.solicitudes);
                 this.spinner.hide();
                 this.dataSource = new MatTableDataSource(res.solicitudes);
                 this.dataSource.paginator = this.paginator;

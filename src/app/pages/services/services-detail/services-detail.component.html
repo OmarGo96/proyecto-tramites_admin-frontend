@@ -1,21 +1,21 @@
 <div *ngIf="service">
     <div class="lg:flex lg:items-center lg:justify-between">
         <div class="flex-1 min-w-0">
-            <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">Información del Trámite/Servicio</h2>
+            <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">Información del
+                Trámite/Servicio</h2>
         </div>
         <div class="mt-5 flex lg:mt-0 lg:ml-4">
         <span class="sm:ml-3">
-          <button type="button" (click)="openDialogEdit()"
-                  class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          <button mat-raised-button class="rounded-md py-1"  (click)="openDialogEdit()">
             <mat-icon>edit</mat-icon>&nbsp;Editar
           </button>
         </span>
-            <span class="sm:ml-3">
+            <!--<span class="sm:ml-3">
           <button type="button" (click)="openDialog()"
                   class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-slate-600 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             <mat-icon>upload_file</mat-icon>&nbsp;Agregar Documento
           </button>
-        </span>
+        </span>-->
         </div>
     </div>
 
@@ -51,8 +51,14 @@
                     <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{ service.en_linea ? 'Si' : 'No' }}</dd>
                 </div>
                 <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">Documentos</dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" *ngIf="service.Documento">
+                    <dt class="text-sm font-medium text-gray-500">Formato</dt>
+                    <button mat-flat-button color="primary" (click)="openDialog()" *ngIf="!service.Documento || uploadNewDoc"
+                            class="rounded-md py-1 w-1/3">
+                        <i class="fa-solid fa-file-arrow-up"></i>
+                        Subir formato
+                    </button>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" *ngIf="service.Documento && !uploadNewDoc">
+
                         <ul role="list" class="border border-gray-200 rounded-md divide-y divide-gray-200">
                             <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
                                 <div class="w-0 flex-1 flex items-center">
@@ -65,8 +71,14 @@
                                     </svg>
                                     <span class="ml-2 flex-1 w-0 truncate"> {{ service.Documento.url }} </span>
                                 </div>
-                                <div class="ml-4 flex-shrink-0">
-                                    <a (click)="getDocument()" class="font-medium text-indigo-600 hover:text-indigo-500 hover:cursor-pointer"> Descargar </a>
+                                <div class="ml-4 flex-shrink-0 space-x-2">
+                                    <a (click)="getDocument()"
+                                       class="font-medium text-indigo-600 hover:text-indigo-500 hover:cursor-pointer">
+                                        Descargar </a>
+                                    <a (click)="uploadNewDocument()"
+                                       class="font-medium text-red-600 hover:text-red-500 hover:cursor-pointer">
+                                        Eliminar
+                                    </a>
                                 </div>
                             </li>
                         </ul>

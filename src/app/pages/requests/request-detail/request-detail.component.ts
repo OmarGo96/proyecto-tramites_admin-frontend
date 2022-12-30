@@ -95,10 +95,12 @@ export class RequestDetailComponent implements OnInit {
                 this.spinner.hide();
                 this.request = res.solicitud;
                 const estatusSolicitud = this.request.estatus_solicitud_id;
-                const requeriments = res.requisitos.filter((req: any) => req.Requisito.Documento);
+                this.reqWithDocuments = res.requisitos.filter((req: any) => req.Requisito.Documento);
                 this.reqRejected = res.requisitos.filter((req: any) => req.Requisito.Documento.estatus === -1);
-                this.reqWithDocuments = requeriments;
                 this.requeriments = res.requisitos;
+                console.log('requerimientos rechazados -> ' + this.reqRejected.length);
+                console.log('requerimientos docs ->' + this.reqWithDocuments.length)
+                console.log('requerimientos ->' + this.requeriments.length);
                 this.dataSource = new MatTableDataSource(res.requisitos);
 
                 this.getHistory(res.solicitud.id);
@@ -107,7 +109,7 @@ export class RequestDetailComponent implements OnInit {
                 this.initMessageForm();
                 this.initSolicitudForm();
 
-                if (estatusSolicitud === 3 || estatusSolicitud === 4 || estatusSolicitud === 7){
+                if (estatusSolicitud === 3 || estatusSolicitud === 7){
                     this.solicitudForm.disable();
                     this.disabledButton = true;
                 }

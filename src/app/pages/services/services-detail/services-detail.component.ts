@@ -17,6 +17,7 @@ export class ServicesDetailComponent implements OnInit {
     public service: any;
     public document: any;
     public serviceUuid: any;
+    public uploadNewDoc = false;
 
     constructor(
         private servicesService: ServicesService,
@@ -78,6 +79,7 @@ export class ServicesDetailComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(res => {
             this.getUuid();
+            this.uploadNewDoc = false;
         });
     }
 
@@ -93,6 +95,14 @@ export class ServicesDetailComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(res => {
             this.getUuid();
+        });
+    }
+
+    uploadNewDocument(){
+        this.messagesService.confirmDelete('¿Estás seguro de eliminar este archivo?').then((result: any) => {
+            if (result.isConfirmed) {
+                this.uploadNewDoc = true;
+            }
         });
     }
 
