@@ -227,6 +227,7 @@ export class RequestDetailComponent implements OnInit {
         this.requestsService.getMessages(requestId).subscribe({
             next: res => {
                 this.messages = res.mensajes;
+                console.log(res.mensajes);
             },
             error: err => {
                 this.messagesService.printStatusArrayNew(err.error.errors, 'error');
