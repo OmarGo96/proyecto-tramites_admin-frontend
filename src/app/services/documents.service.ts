@@ -27,4 +27,8 @@ export class DocumentsService {
     public getUserDocument(id: any): Observable<any> {
         return this.httpClient.get(`${this.urlApi}/archivo_documentacion/${id}`, { responseType: 'blob' });
     }
+
+    public downloadZip(id: any): Observable<any> {
+        return this.httpClient.get(`${this.urlApi}/solicitud/get-documents-zip/${id}`, { responseType: 'blob', headers: this.headers });
+    }
 }

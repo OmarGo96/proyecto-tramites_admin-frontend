@@ -303,4 +303,20 @@ export class RequestDetailComponent implements OnInit {
             this.messagesService.printStatus('Hubo un error, intente de nuevo más tarde', 'error');
         }
     }
+
+    downloadZip(){
+        this.spinner.show();
+        const requestId = this.request.id;
+        this.documentsService.downloadZip(requestId).subscribe({
+            next: res => {
+                this.spinner.hide();
+                let url = URL.createObjectURL(res);
+                window.open(url, '_blank');
+            },
+            error: err => {
+                this.spinner.hide();
+                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+            }
+        })
+    }
 }

@@ -18,9 +18,10 @@
                         </p>
                     </div>
                     <div>
-                        <span *ngIf="request.estatus_solicitud_id === 4" class="bg-green-400 text-blue-800 text-sm font-medium mr-2 px-2.5 py-2 rounded">
-                            Solicitud aceptada
-                        </span>
+                        <button mat-flat-button color="primary" class="rounded-md" (click)="downloadZip()">
+                            <i class="fa-solid fa-cloud-arrow-down"></i>
+                            Descargar adjuntos en ZIP
+                        </button>
                     </div>
                 </div>
 
@@ -46,17 +47,17 @@
                         <td mat-cell *matCellDef="let element">
                             <mat-radio-group required>
                                 <mat-radio-button value="1" [checked]="(element.Requisito.Documento.estatus === 1)"
-                                                  color="primary" class="mr-3" *ngIf="request.estatus_solicitud_id !== 4"
+                                                  color="primary" class="mr-3 text-xs" *ngIf="request.estatus_solicitud_id !== 4"
                                                   (click)="acceptOrDenyDocument(1, element.Requisito.Documento.id)">
                                     Aceptar
                                 </mat-radio-button>
                                 <mat-radio-button value="-1" [checked]="(element.Requisito.Documento.estatus === -1)"
-                                                  color="primary" class="mr-3" *ngIf="request.estatus_solicitud_id !== 4"
+                                                  color="primary" class="mr-3 text-xs" *ngIf="request.estatus_solicitud_id !== 4"
                                                   (click)="acceptOrDenyDocument(-1, element.Requisito.Documento.id)">
                                     Rechazar
                                 </mat-radio-button>
                                 <mat-radio-button value="3" [checked]="(element.Requisito.Documento.estatus === 3)"
-                                                  color="primary" *ngIf="request.estatus_solicitud_id !== 4"
+                                                  color="primary" class="text-xs" *ngIf="request.estatus_solicitud_id !== 4"
                                                   (click)="acceptOrDenyDocument(3, element.Requisito.Documento.id)">
                                     No requerido
                                 </mat-radio-button>
