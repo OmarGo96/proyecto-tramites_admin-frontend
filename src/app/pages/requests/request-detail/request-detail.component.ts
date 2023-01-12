@@ -98,9 +98,6 @@ export class RequestDetailComponent implements OnInit {
                 this.reqWithDocuments = res.requisitos.filter((req: any) => req.Requisito.Documento);
                 this.reqRejected = res.requisitos.filter((req: any) => req.Requisito.Documento.estatus === -1);
                 this.requeriments = res.requisitos;
-                console.log('requerimientos rechazados -> ' + this.reqRejected.length);
-                console.log('requerimientos docs ->' + this.reqWithDocuments.length)
-                console.log('requerimientos ->' + this.requeriments.length);
                 this.dataSource = new MatTableDataSource(res.requisitos);
 
                 this.getHistory(res.solicitud.id);
@@ -169,7 +166,7 @@ export class RequestDetailComponent implements OnInit {
         this.requestsService.updateEstatusRecord(documentId, data).subscribe({
                 next: res => {
                     this.spinner.hide();
-                    this.openSnackBar(estatus === 1 ? 'Se acepto el documento' : 'Se rechazo el documento', '')
+                    this.openSnackBar(estatus === 1 ? 'Se acepto el documento' : estatus === 3 ? 'El archivo no es requerido' : 'Se rechazo el documento', '')
                     this.getId();
                 },
                 error: err => {
@@ -201,9 +198,10 @@ export class RequestDetailComponent implements OnInit {
     }
 
     getStatuses(id: any){
-        this.statusesService.getRecords(id).subscribe({
+        this.statusesService.getEstatusById(this.request.servicio_id, this.request.estatus_solicitud_id).subscribe({
             next: res => {
                 this.statuses = res.estatuses;
+                console.log(this.statuses);
             },
             error: err => {
                 this.messagesService.printStatusArrayNew(err.error.errors, 'error');
@@ -227,7 +225,6 @@ export class RequestDetailComponent implements OnInit {
         this.requestsService.getMessages(requestId).subscribe({
             next: res => {
                 this.messages = res.mensajes;
-                console.log(res.mensajes);
             },
             error: err => {
                 this.messagesService.printStatusArrayNew(err.error.errors, 'error');

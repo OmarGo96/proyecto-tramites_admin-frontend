@@ -22,4 +22,8 @@ export class StatusesService {
     public getRecords(id: any): Observable <any> {
         return this.httpClient.get(`${this.urlApi}/estatuses/${id}`, { headers: this.headers });
     }
+
+    public getEstatusById(serviceId: any, estatusId: any): Observable <any> {
+        return this.httpClient.get(`${this.urlApi}/estatusesById/${serviceId}/${estatusId}`, { headers: this.headers });
+    }
 }
