@@ -30,4 +30,8 @@ export class RequerimentsService {
     public getRecords(serviceUuid: any): Observable <any> {
         return this.httpClient.get(`${this.urlApi}/requerimientos/${serviceUuid}`, { headers: this.headers });
     }
+
+    public deleteRecord(requerimentUuid: any): Observable <any> {
+        return this.httpClient.delete(`${this.urlApi}/requerimientos/${requerimentUuid}`, { headers: this.headers });
+    }
 }

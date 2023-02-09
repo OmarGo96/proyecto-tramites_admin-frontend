@@ -9,6 +9,7 @@ import {UntypedFormBuilder, Validators} from "@angular/forms";
 import {MessageService} from "src/app/services/messages.service";
 import {DocumentTypesService} from "src/app/services/document-types.service";
 import {RequerimentsService} from "src/app/services/requeriments.service";
+import {NgxSpinnerService} from "ngx-spinner";
 
 @Component({
     selector: 'app-requirements-modal',
@@ -41,6 +42,7 @@ export class RequirementsModalComponent implements OnInit {
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
         private requirementsService: RequerimentsService,
+        private spinner: NgxSpinnerService,
         private documentTypesService: DocumentTypesService,
         private messagesService: MessageService,
         private formBuilder: UntypedFormBuilder,
@@ -150,7 +152,27 @@ export class RequirementsModalComponent implements OnInit {
         })
     }
 
-    deleteRequeriment(){
-
+    deleteRequeriment(requeriment: any){
+        console.log(requeriment);
+        this.messagesService.confirmDelete('¿Estás seguro de eliminar este requerimiento?')
+            .then((result: any) => {
+                console.log(result);
+                if (result.isConfirmed) {
+                    this.spinner.show();
+                    this.requirementsService.deleteRecord(requeriment.Requisito.uuid).subscribe({
+                        next: res => {
+                            this.spinner.hide();
+                            this.messagesService.printStatus(res.message, 'success');
+                            setTimeout(() => {
+                                this.getRequirements();
+                            }, 2500)
+                        },
+                        error: err => {
+                            this.spinner.hide();
+                            this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+                        }
+                    });
+                }
+            });
     }
 }
