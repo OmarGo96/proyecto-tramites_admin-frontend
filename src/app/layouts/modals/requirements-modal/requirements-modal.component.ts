@@ -149,4 +149,8 @@ export class RequirementsModalComponent implements OnInit {
             }
         })
     }
+
+    deleteRequeriment(){
+
+    }
 }
