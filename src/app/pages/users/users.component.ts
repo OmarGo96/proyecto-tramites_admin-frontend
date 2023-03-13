@@ -71,7 +71,7 @@ export class UsersComponent implements OnInit {
             },
             error: err => {
                 this.loading = false;
-                this.messagesService.printStatusArrayNew(err.error.errors, 'warning');
+                this.messagesService.printStatus('Ha ocurrido un problema al crear el usuario.', 'error');
             }
         });
     }
