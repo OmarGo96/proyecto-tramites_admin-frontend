@@ -4,6 +4,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {DependenciesModalComponent} from "../../layouts/modals/dependencies-modal/dependencies-modal.component";
 import {DependenciesService} from "../../services/dependencies.service";
 import {MessageService} from "../../services/messages.service";
+import {NgxSpinnerService} from "ngx-spinner";
 
 @Component({
     selector: 'app-dependencies',
@@ -18,6 +19,7 @@ export class DependenciesComponent implements OnInit {
         private dependenciesService: DependenciesService,
         private messagesService: MessageService,
         private router: Router,
+        private spinner: NgxSpinnerService,
         public dialog: MatDialog
     ) {
     }
@@ -27,13 +29,15 @@ export class DependenciesComponent implements OnInit {
     }
 
     getAreas(){
+        this.spinner.show();
         this.dependenciesService.getRecords().subscribe({
             next: res => {
+                this.spinner.hide();
                 this.dependencies = res.areas;
-                console.log(this.dependencies);
             },
             error: err => {
-                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+                this.spinner.hide();
+                this.messagesService.errorAlert(err.error.errors);
             }
         })
     }

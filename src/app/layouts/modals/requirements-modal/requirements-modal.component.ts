@@ -51,9 +51,9 @@ export class RequirementsModalComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.spinner.show();
         this.initCreateForm();
         this.getDocumentTypes();
-        this.getRequirements();
     }
 
     initCreateForm() {
@@ -90,11 +90,10 @@ export class RequirementsModalComponent implements OnInit {
     }
 
     createRequirement() {
-        this.loading = true;
+        this.spinner.show();
         const data = this.requirementsForm.value;
         this.requirementsService.createRecord(data).subscribe({
             next: res => {
-                this.loading = false;
                 this.initCreateForm();
                 this.messagesService.printStatus(res.message, 'success')
                 setTimeout(() => {
@@ -102,18 +101,17 @@ export class RequirementsModalComponent implements OnInit {
                 }, 2500);
             },
             error: err => {
-                this.loading = false;
-                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+                this.spinner.hide();
+                this.messagesService.errorAlert(err.error.errors);
             }
         });
     }
 
     updateRequirement() {
-        this.loading = true;
+        this.spinner.show();
         const data = this.requirementsForm.value;
         this.requirementsService.updateRecord(data.uuid, data).subscribe({
             next: res => {
-                this.loading = false;
                 this.initCreateForm();
                 this.messagesService.printStatus(res.message, 'success')
                 setTimeout(() => {
@@ -121,8 +119,8 @@ export class RequirementsModalComponent implements OnInit {
                 }, 2500);
             },
             error: err => {
-                this.loading = false;
-                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+                this.spinner.hide();
+                this.messagesService.errorAlert(err.error.errors);
             }
         });
     }
@@ -131,11 +129,12 @@ export class RequirementsModalComponent implements OnInit {
         const serviceUuid = this.data.serviceUuid;
         this.requirementsService.getRecords(serviceUuid).subscribe({
             next: res => {
+                this.spinner.hide();
                 this.dataSource = new MatTableDataSource(res.requerimientos);
-                // this.dataSource.paginator = this.paginator;
             },
             error: err => {
-                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+                this.spinner.hide();
+                this.messagesService.errorAlert(err.error.errors);
             }
         })
     }
@@ -145,18 +144,18 @@ export class RequirementsModalComponent implements OnInit {
         this.documentTypesService.getRecords().subscribe({
             next: res => {
                 this.documentTypes = res.documentos;
+                this.getRequirements();
             },
             error: err => {
-                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+                this.spinner.hide();
+                this.messagesService.errorAlert(err.error.errors);
             }
         })
     }
 
     deleteRequeriment(requeriment: any){
-        console.log(requeriment);
         this.messagesService.confirmDelete('¿Estás seguro de eliminar este requerimiento?')
             .then((result: any) => {
-                console.log(result);
                 if (result.isConfirmed) {
                     this.spinner.show();
                     this.requirementsService.deleteRecord(requeriment.Requisito.uuid).subscribe({

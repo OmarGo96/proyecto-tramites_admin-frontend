@@ -5,7 +5,7 @@
 export const environment = {
     production: false,
     urlApi: 'http://192.168.10.32:8028/api',
-    //urlApi: 'https://development.ismx.com.mx:8000/api',
+    // urlApi: 'https://development.ismx.com.mx:8000/api',
 };
 
 /*

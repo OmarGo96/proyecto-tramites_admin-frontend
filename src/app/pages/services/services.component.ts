@@ -10,6 +10,7 @@ import {RequirementsModalComponent} from "../../layouts/modals/requirements-moda
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
+import {NgxSpinnerService} from "ngx-spinner";
 
 @Component({
     selector: 'app-services',
@@ -33,11 +34,13 @@ export class ServicesComponent implements OnInit {
         private servicesService: ServicesService,
         private messagesService: MessageService,
         private activatedRoute: ActivatedRoute,
+        private spinner: NgxSpinnerService,
         public dialog: MatDialog
     ) {
     }
 
     ngOnInit(): void {
+        this.spinner.show();
         this.getUuid();
     }
 
@@ -47,7 +50,8 @@ export class ServicesComponent implements OnInit {
                 this.getDirection(res['uuid']);
             },
             error: err => {
-                console.log(err);
+                this.spinner.hide();
+                this.messagesService.errorAlert(['Ocurrio un error al obtener el identificador del area']);
             }
         });
     }
@@ -59,7 +63,8 @@ export class ServicesComponent implements OnInit {
                 this.getServicesByArea(res.area.uuid);
             },
             error: err => {
-                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+                this.spinner.hide();
+                this.messagesService.errorAlert(err.error.errors);
             }
         });
     }
@@ -67,13 +72,15 @@ export class ServicesComponent implements OnInit {
     getServicesByArea(uuid: any) {
         this.servicesService.getServices(uuid).subscribe({
             next: res => {
+                this.spinner.hide();
                 this.services = res.servicios;
                 this.dataSource = new MatTableDataSource(res.servicios);
-                this.dataSource.paginator = this.paginator;
                 this.dataSource.sort = this.sort;
+                this.dataSource.paginator = this.paginator;
             },
             error: err => {
-                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+                this.spinner.hide();
+                this.messagesService.errorAlert(err.error.errors);
             }
         });
     }
