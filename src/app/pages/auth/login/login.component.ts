@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
             },
             error: err => {
                 this.spinner.hide();
-                this.messagesService.printStatusArrayNew(err.error.errors, 'warning');
+                this.messagesService.errorAlert(err.error.errors);
             }
         });
     }

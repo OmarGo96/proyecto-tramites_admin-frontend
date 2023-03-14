@@ -4,10 +4,11 @@ import {registerLocaleData} from "@angular/common";
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {LayoutsModule} from "./layouts/layouts.module";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import localeEsMX from '@angular/common/locales/es-MX';
 import {NgxSpinnerModule} from "ngx-spinner";
+import {JwtInterceptor} from "./interceptors/jwt.interceptor";
 
 registerLocaleData(localeEsMX, 'mx');
 
@@ -25,7 +26,10 @@ registerLocaleData(localeEsMX, 'mx');
         BrowserAnimationsModule,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    providers: [ { provide: LOCALE_ID, useValue: 'mx' } ],
+    providers: [
+        {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+        { provide: LOCALE_ID, useValue: 'mx' }
+    ],
     exports: [
     ],
     bootstrap: [AppComponent]

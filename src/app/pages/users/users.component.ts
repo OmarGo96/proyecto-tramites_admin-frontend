@@ -37,9 +37,10 @@ export class UsersComponent implements OnInit {
     ) {
     }
 
-    ngOnInit(): void {
+    async ngOnInit() {
         this.initCreateForm();
-        this.getAreas();
+        await this.getAreas();
+        this.getUsers();
     }
 
     initCreateForm() {
@@ -82,7 +83,6 @@ export class UsersComponent implements OnInit {
         this.dependenciesService.getRecords().subscribe({
             next: res => {
                 this.dependencies = res.areas;
-                this.getUsers();
             },
             error: err => {
                 this.spinner.hide();
@@ -100,8 +100,9 @@ export class UsersComponent implements OnInit {
                 this.spinner.hide();
             },
             error: err => {
-                this.spinner.hide();
-                this.messagesService.errorAlert(err.error.errors);
+                console.log(err);
+                // this.spinner.hide();
+                // this.messagesService.errorAlert(err.error.errors);
             }
         })
     }

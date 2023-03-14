@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from 'src/environments/environment';
 import {Observable} from 'rxjs';
+import {Router} from "@angular/router";
 
 @Injectable({
     providedIn: 'root'
@@ -12,6 +13,7 @@ export class UsersService {
     public token: any;
     constructor(
         private httpClient: HttpClient,
+        private router: Router
     ) {
         this.token = this.getToken();
         this.headers = new HttpHeaders().set('Authorization', this.token);
@@ -22,20 +24,20 @@ export class UsersService {
     }
 
     public createRecord(data: any): Observable<any> {
-        return this.httpClient.post(`${this.urlApi}/administradores`, data, {headers: this.headers});
+        return this.httpClient.post(`${this.urlApi}/administradores`, data);
     }
 
     public updateRecord(userUuid: any, data: any): Observable<any> {
-        return this.httpClient.put(`${this.urlApi}/administradores/${userUuid}`, data, {headers: this.headers});
+        return this.httpClient.put(`${this.urlApi}/administradores/${userUuid}`, data);
     }
 
     public getRecords(): Observable<any> {
-        return this.httpClient.get(`${this.urlApi}/administradores`,{headers: this.headers});
+        return this.httpClient.get(`${this.urlApi}/administradores`);
     }
 
     public getUser(token: any): Observable<any> {
-        const headers = new HttpHeaders().set('Authorization', token);
-        return this.httpClient.get(`${this.urlApi}/info_administrador`, {headers});
+        // const headers = new HttpHeaders().set('Authorization', token);
+        return this.httpClient.get(`${this.urlApi}/info_administrador`);
     }
 
     public getToken() {
@@ -75,5 +77,10 @@ export class UsersService {
         }
 
         return rol;
+    }
+
+    logout() {
+        sessionStorage.clear();
+        this.router.navigate(['login']);
     }
 }

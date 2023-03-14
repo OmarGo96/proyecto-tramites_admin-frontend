@@ -19,7 +19,6 @@ export class SidebarComponent implements OnInit {
 
     ngOnInit(): void {
         this.user = this.usersService.getIdentity();
-        console.log(this.user);
         this.setMenuItem();
     }
 
@@ -42,6 +41,10 @@ export class SidebarComponent implements OnInit {
                 this.menu[i].module = this.menu[i].values[j].module;
             }
         }
+    }
+
+    logout(): void {
+        this.usersService.logout();
     }
 
 
