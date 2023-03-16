@@ -1,10 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {DependenciesModalComponent} from "../../layouts/modals/dependencies-modal/dependencies-modal.component";
 import {DependenciesService} from "../../services/dependencies.service";
 import {MessageService} from "../../services/messages.service";
 import {NgxSpinnerService} from "ngx-spinner";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatSort} from "@angular/material/sort";
+import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
     selector: 'app-dependencies',

@@ -16,7 +16,6 @@ export class RequestsComponent implements OnInit {
 
     public dataSource: any;
     public displayedColumns: string[] = ['folio', 'tramite', 'creado', 'estatus', 'accion'];
-    public expandedElement: any;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
@@ -38,7 +37,6 @@ export class RequestsComponent implements OnInit {
         this.spinner.show();
         this.requestsService.getRecords().subscribe({
             next: res => {
-                console.log(res.solicitudes);
                 this.spinner.hide();
                 this.dataSource = new MatTableDataSource(res.solicitudes);
                 this.dataSource.paginator = this.paginator;
