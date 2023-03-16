@@ -1,11 +1,15 @@
-<app-navbar></app-navbar>
+<app-navbar>
+    <button type="button" class="text-white rounded-lg p-1 block xl:hidden" (click)="drawer.toggle()">
+        <i class="fa-solid fa-bars fa-lg"></i>
+    </button>
+</app-navbar>
 <mat-drawer-container class="w-full h-full" autosize>
-    <mat-drawer mode="side" opened>
+    <mat-drawer #drawer mode="side" [mode]="isMobile ? 'over' : 'side'" [opened]="isMobile ? false : true">
         <app-sidebar></app-sidebar>
     </mat-drawer>
-    <mat-drawer-content class="ml-0 pl-64 bg-slate-100">
+    <mat-drawer-content class="bg-slate-50">
         <main class="relative top-16">
-            <div class="container-xl p-10">
+            <div class="container-xl">
                 <router-outlet></router-outlet>
             </div>
         </main>

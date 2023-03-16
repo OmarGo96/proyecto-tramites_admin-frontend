@@ -57,10 +57,55 @@ export const ROUTES = [
         group: 'SOLICITUDES',
         module: 'solicitudes',
         action: 'list',
-        title: 'Ver todas',
-        icon: 'fa-list',
+        title: 'Ver solicitudes',
+        icon: 'fa-inbox',
         class: ''
     },
+    /*{
+        path: '/solicitudes',
+        group: 'SOLICITUDES',
+        module: 'solicitudes',
+        action: 'list',
+        title: 'Aceptadas',
+        icon: 'fa-inbox',
+        class: ''
+    },
+    {
+        path: '/solicitudes',
+        group: 'SOLICITUDES',
+        module: 'solicitudes',
+        action: 'list',
+        title: 'En validación de documentos',
+        icon: 'fa-inbox',
+        class: ''
+    },
+    {
+        path: '/solicitudes',
+        group: 'SOLICITUDES',
+        module: 'solicitudes',
+        action: 'list',
+        title: 'Pendiente de documentación',
+        icon: 'fa-inbox',
+        class: ''
+    },
+    {
+        path: '/solicitudes',
+        group: 'SOLICITUDES',
+        module: 'solicitudes',
+        action: 'list',
+        title: 'Calificación de área técnica',
+        icon: 'fa-inbox',
+        class: ''
+    },
+    {
+        path: '/solicitudes',
+        group: 'SOLICITUDES',
+        module: 'solicitudes',
+        action: 'list',
+        title: 'En inspección fisica',
+        icon: 'fa-inbox',
+        class: ''
+    },*/
     {
         path: '/dependencias',
         group: 'ADMINISTRACIÓN',

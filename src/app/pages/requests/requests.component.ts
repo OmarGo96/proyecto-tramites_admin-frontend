@@ -5,6 +5,7 @@ import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
 import {MessageService} from "../../services/messages.service";
 import {NgxSpinnerService} from "ngx-spinner";
+import {RequestsStatus} from "../../const/status";
 
 @Component({
     selector: 'app-requests',
@@ -20,7 +21,7 @@ export class RequestsComponent implements OnInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
-    public loading = false;
+    public statuses = RequestsStatus;
 
     constructor(
         private requestsService: RequestsService,
@@ -66,6 +67,11 @@ export class RequestsComponent implements OnInit {
                 this.messagesService.printStatusArrayNew(err.error.errors, 'error');
             }
         })
+    }
+
+    applyFilter(event: Event) {
+        const filterValue = (event.target as HTMLInputElement).value;
+        this.dataSource.filter = filterValue.trim().toLowerCase();
     }
 
 }

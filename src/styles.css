@@ -29,6 +29,16 @@ body { margin: 0; }
 }
 /* End SweetAlert2 Custom */
 
+/* MatTables Custom */
+.mat-table{
+    font-family: 'Inter var' !important;
+}
+
+th.mat-header-cell, td.mat-cell{
+    @apply whitespace-nowrap pl-5 !important;
+}
+/* End MatTables Custom */
+
 /* Primary Button Styling */
 
 .mat-button.mat-primary,
