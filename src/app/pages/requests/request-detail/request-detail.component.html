@@ -16,7 +16,7 @@
                     <ng-template mat-tab-label>
                         <i class="fa-solid fa-folder-open"></i>&nbsp;Información y Requisitos
                     </ng-template>
-                    <div class="mt-10 p-8 bg-white shadow rounded-xl w-1/2" *ngIf="reqRejected.length === 0">
+                    <!--<div class="mt-10 p-8 bg-white shadow rounded-xl w-1/2" *ngIf="reqRejected.length === 0">
                         <form [formGroup]="solicitudForm">
                             <mat-form-field appearance="outline" class="w-full">
                                 <mat-label>Selecciona un estatus</mat-label>
@@ -34,9 +34,12 @@
                     </div>
 
 
+                    <div
+                        class="p-8 xl:col-span-2 mt-10 flex flex-col flex-auto w-full bg-white shadow rounded-2xl overflow-hidden">
 
-                    <div class="xl:col-span-2 mt-10 flex flex-col flex-auto w-full bg-white shadow rounded-2xl overflow-hidden">
-                        <div class="overflow-x-auto mx-6">
+
+
+                        &lt;!&ndash;<div class="overflow-x-auto mx-6">
                             <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="w-full">
                                 <ng-container matColumnDef="requisito">
                                     <th mat-header-cell *matHeaderCellDef class="py-3 px-6 text-gray-700 font-bold uppercase">
@@ -88,9 +91,81 @@
                                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                                 <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
                             </table>
-                        </div>
+                        </div>&ndash;&gt;
                     </div>
 
+
+-->
+
+                    <div class="overflow-hidden bg-white mt-10 rounded-2xl border">
+                        <div class="px-4 py-5 sm:px-6 flex justify-between">
+                            <div>
+                                <h3 class="text-lg font-medium leading-6 text-gray-900">Requisitos adjuntos</h3>
+                                <p class="mt-1 max-w-2xl text-sm text-gray-500">Proceso de validación de los archivos adjuntos por el contribuyente</p>
+                            </div>
+
+                            <form [formGroup]="solicitudForm" class="flex justify-between items-center">
+                                <mat-form-field appearance="legacy" class="w-full mr-5">
+                                    <mat-label>Selecciona estatus</mat-label>
+                                    <mat-select formControlName="estatus_solicitud_id">
+                                        <mat-option *ngFor="let status of statuses" [value]="status.EstatusSolicitud.id">
+                                            {{ status.EstatusSolicitud.nombre }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <div>
+                                    <button mat-flat-button color="primary" (click)="updateRequest()" class="rounded-md"
+                                            [disabled]="(solicitudForm.disabled || solicitudForm.invalid)">
+                                        Actualizar
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="border-t border-gray-200">
+                            <dl class="text-gray-900 divide-y divide-gray-200 ">
+                                <div class="flex flex-col px-5 py-3" *ngFor="let requeriment of requeriments">
+                                    <dt class="mb-1 ">
+                                        {{ requeriment.Requisito.nombre }}
+                                    </dt>
+                                    <dd class="font-medium text-gray-500">
+                                        <div class="flex flex-1">
+                                            <div class="mr-4">
+                                                <i class="fa-solid fa-file-pdf text-blue-600"></i>
+                                                <a (click)="openDocument(requeriment.Requisito.Documento.Documentacion.id)"
+                                                   class="text-md text-blue-600 hover:underline hover:cursor-pointer"
+                                                   *ngIf="requeriment.Requisito.Documento">
+                                                    Ver adjunto
+                                                </a>
+                                            </div>
+                                            <mat-radio-group required>
+                                                <mat-radio-button value="1"
+                                                                  [checked]="(requeriment.Requisito.Documento.estatus === 1)"
+                                                                  color="primary" class="mr-3 text-md"
+                                                                  *ngIf="request.estatus_solicitud_id !== 4"
+                                                                  (click)="acceptOrDenyDocument(1, requeriment.Requisito.Documento.id)">
+                                                    Aceptar
+                                                </mat-radio-button>
+                                                <mat-radio-button value="-1"
+                                                                  [checked]="(requeriment.Requisito.Documento.estatus === -1)"
+                                                                  color="primary" class="mr-3 text-md"
+                                                                  *ngIf="request.estatus_solicitud_id !== 4"
+                                                                  (click)="acceptOrDenyDocument(-1, requeriment.Requisito.Documento.id)">
+                                                    Rechazar
+                                                </mat-radio-button>
+                                                <mat-radio-button value="3"
+                                                                  [checked]="(requeriment.Requisito.Documento.estatus === 3)"
+                                                                  color="primary" class="text-md"
+                                                                  *ngIf="request.estatus_solicitud_id !== 4"
+                                                                  (click)="acceptOrDenyDocument(3, requeriment.Requisito.Documento.id)">
+                                                    No requerido
+                                                </mat-radio-button>
+                                            </mat-radio-group>
+                                        </div>
+                                    </dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
 
                 </mat-tab>
                 <mat-tab>
