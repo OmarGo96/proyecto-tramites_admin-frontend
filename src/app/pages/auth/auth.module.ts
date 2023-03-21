@@ -5,6 +5,7 @@ import {LoginComponent} from './login/login.component';
 import {AuthComponent} from "./auth.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MaterialModule} from "../../material/material.module";
+import {LayoutsModule} from "../../layouts/layouts.module";
 
 const routes: Routes = [
     {
@@ -33,7 +34,8 @@ const routes: Routes = [
         CommonModule,
         MaterialModule,
         RouterModule.forChild(routes),
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        LayoutsModule
     ]
 })
 export class AuthModule {

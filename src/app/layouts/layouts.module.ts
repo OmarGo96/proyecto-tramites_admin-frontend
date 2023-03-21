@@ -42,7 +42,8 @@ import { UsersModalComponent } from './modals/users-modal/users-modal.component'
         NgxDropzoneModule
     ],
     exports: [
-        ExcerptPipe
+        ExcerptPipe,
+        NavbarComponent
     ],
 })
 export class LayoutsModule {

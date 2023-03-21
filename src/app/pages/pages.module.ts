@@ -12,11 +12,38 @@ import { ServicesDetailComponent } from './services/services-detail/services-det
 import { ProfileComponent } from './profile/profile.component';
 import {NgxDropzoneModule} from "ngx-dropzone";
 import { UsersComponent } from './users/users.component';
-import { RequestsComponent } from './requests/requests.component';
+import { RequestsComponent } from './requests/all-requests/requests.component';
 import { RequestDetailComponent } from './requests/request-detail/request-detail.component';
+import { SentRequestsComponent } from './requests/sent-requests/sent-requests.component';
+import { RequestsValidationComponent } from './requests/requests-validation/requests-validation.component';
+import { PendingRequestsComponent } from './requests/pending-requests/pending-requests.component';
+import { QualificationRequestsComponent } from './requests/qualification-requests/qualification-requests.component';
+import { InspectionRequestsComponent } from './requests/inspection-requests/inspection-requests.component';
+import { PaymentRequestsComponent } from './requests/payment-requests/payment-requests.component';
+import { PaidRequestsComponent } from './requests/paid-requests/paid-requests.component';
+import { PrintingRequestsComponent } from './requests/printing-requests/printing-requests.component';
+import { SigningRequestsComponent } from './requests/signing-requests/signing-requests.component';
+import { DigitizationRequestsComponent } from './requests/digitization-requests/digitization-requests.component';
+import { ToDeliverRequestsComponent } from './requests/to-deliver-requests/to-deliver-requests.component';
+import { DeliveredRequestsComponent } from './requests/delivered-requests/delivered-requests.component';
+import { PreventRequestsComponent } from './requests/prevent-requests/prevent-requests.component';
+import { CancelledRequestsComponent } from './requests/cancelled-requests/cancelled-requests.component';
 
 const routes: Routes = [
-    {path: 'solicitudes', component: RequestsComponent},
+    {path: 'solicitudes/nuevas', component: SentRequestsComponent},
+    {path: 'solicitudes/validacion', component: RequestsValidationComponent},
+    {path: 'solicitudes/pendiente', component: PendingRequestsComponent},
+    {path: 'solicitudes/calificacion', component: QualificationRequestsComponent},
+    {path: 'solicitudes/inspeccion', component: InspectionRequestsComponent},
+    {path: 'solicitudes/pago', component: PaymentRequestsComponent},
+    {path: 'solicitudes/pagado', component: PaidRequestsComponent},
+    {path: 'solicitudes/impresion', component: PrintingRequestsComponent},
+    {path: 'solicitudes/firma', component: SigningRequestsComponent},
+    {path: 'solicitudes/digitalizacion', component: DigitizationRequestsComponent},
+    {path: 'solicitudes/ventanilla', component: ToDeliverRequestsComponent},
+    {path: 'solicitudes/entregados', component: ToDeliverRequestsComponent},
+    {path: 'solicitudes/prevencion', component: PreventRequestsComponent},
+    {path: 'solicitudes/cancelados', component: CancelledRequestsComponent},
     {path: 'solicitud/:id', component: RequestDetailComponent},
     {path: 'dependencias', component: DependenciesComponent},
     {path: 'tramites/:uuid', component: ServicesComponent},
@@ -36,7 +63,21 @@ const routes: Routes = [
         ProfileComponent,
         UsersComponent,
         RequestsComponent,
-        RequestDetailComponent
+        RequestDetailComponent,
+        SentRequestsComponent,
+        RequestsValidationComponent,
+        PendingRequestsComponent,
+        QualificationRequestsComponent,
+        InspectionRequestsComponent,
+        PaymentRequestsComponent,
+        PaidRequestsComponent,
+        PrintingRequestsComponent,
+        SigningRequestsComponent,
+        DigitizationRequestsComponent,
+        ToDeliverRequestsComponent,
+        DeliveredRequestsComponent,
+        PreventRequestsComponent,
+        CancelledRequestsComponent
     ],
     imports: [
         CommonModule,

@@ -53,59 +53,131 @@ export class SidebarComponent implements OnInit {
 
 export const ROUTES = [
     {
-        path: '/solicitudes',
+        path: '/solicitudes/nuevas',
         group: 'SOLICITUDES',
         module: 'solicitudes',
         action: 'list',
-        title: 'Ver solicitudes',
-        icon: 'fa-inbox',
-        class: ''
-    },
-    /*{
-        path: '/solicitudes',
-        group: 'SOLICITUDES',
-        module: 'solicitudes',
-        action: 'list',
-        title: 'Aceptadas',
+        title: 'Nuevas',
         icon: 'fa-inbox',
         class: ''
     },
     {
-        path: '/solicitudes',
+        path: '/solicitudes/validacion',
         group: 'SOLICITUDES',
         module: 'solicitudes',
         action: 'list',
         title: 'En validación de documentos',
-        icon: 'fa-inbox',
+        icon: 'fa-list-check',
         class: ''
     },
     {
-        path: '/solicitudes',
+        path: '/solicitudes/pendiente',
         group: 'SOLICITUDES',
         module: 'solicitudes',
         action: 'list',
         title: 'Pendiente de documentación',
-        icon: 'fa-inbox',
+        icon: 'fa-clock',
         class: ''
     },
     {
-        path: '/solicitudes',
+        path: '/solicitudes/calificacion',
         group: 'SOLICITUDES',
         module: 'solicitudes',
         action: 'list',
         title: 'Calificación de área técnica',
-        icon: 'fa-inbox',
+        icon: 'fa-clipboard-check',
         class: ''
     },
     {
-        path: '/solicitudes',
+        path: '/solicitudes/inspeccion',
         group: 'SOLICITUDES',
         module: 'solicitudes',
         action: 'list',
         title: 'En inspección fisica',
-        icon: 'fa-inbox',
+        icon: 'fa-file-invoice',
         class: ''
-    },*/
+    },
+    {
+        path: '/solicitudes/pago',
+        group: 'SOLICITUDES',
+        module: 'solicitudes',
+        action: 'list',
+        title: 'Pendiente de pago',
+        icon: 'fa-cart-shopping',
+        class: ''
+    },
+    {
+        path: '/solicitudes/pagado',
+        group: 'SOLICITUDES',
+        module: 'solicitudes',
+        action: 'list',
+        title: 'Pagado',
+        icon: 'fa-money-bill',
+        class: ''
+    },
+    {
+        path: '/solicitudes/impresion',
+        group: 'SOLICITUDES',
+        module: 'solicitudes',
+        action: 'list',
+        title: 'Impresión de documento',
+        icon: 'fa-print',
+        class: ''
+    },
+    {
+        path: '/solicitudes/firma',
+        group: 'SOLICITUDES',
+        module: 'solicitudes',
+        action: 'list',
+        title: 'En firma',
+        icon: 'fa-file-pen',
+        class: ''
+    },
+    {
+        path: '/solicitudes/digitalizacion',
+        group: 'SOLICITUDES',
+        module: 'solicitudes',
+        action: 'list',
+        title: 'Digitalización',
+        icon: 'fa-laptop-file',
+        class: ''
+    },
+    {
+        path: '/solicitudes/ventanilla',
+        group: 'SOLICITUDES',
+        module: 'solicitudes',
+        action: 'list',
+        title: 'En ventanilla',
+        icon: 'fa-window-restore',
+        class: ''
+    },
+    {
+        path: '/solicitudes/entregados',
+        group: 'SOLICITUDES',
+        module: 'solicitudes',
+        action: 'list',
+        title: 'Entregados',
+        icon: 'fa-file-import',
+        class: ''
+    },
+    {
+        path: '/solicitudes/prevencion',
+        group: 'SOLICITUDES',
+        module: 'solicitudes',
+        action: 'list',
+        title: 'Prevención',
+        icon: 'fa-triangle-exclamation',
+        class: ''
+    },
+    {
+        path: '/solicitudes/cancelados',
+        group: 'SOLICITUDES',
+        module: 'solicitudes',
+        action: 'list',
+        title: 'Cancelados',
+        icon: 'fa-ban',
+        class: ''
+    },
     {
         path: '/dependencias',
         group: 'ADMINISTRACIÓN',

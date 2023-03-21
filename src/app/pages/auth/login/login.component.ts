@@ -4,7 +4,7 @@ import {UntypedFormBuilder, Validators} from "@angular/forms";
 import {UsersService} from "../../../services/users.service";
 import {MessageService} from "../../../services/messages.service";
 import {NgxSpinnerService} from "ngx-spinner";
-
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-login',
@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
     public loginForm: any;
 
     public loading = false;
+
+    public currentYear = moment().format('YYYY')
 
     constructor(
         private formBuilder: UntypedFormBuilder,

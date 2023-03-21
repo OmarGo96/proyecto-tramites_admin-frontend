@@ -19,8 +19,8 @@ export class RequestsService {
         this.headers = new HttpHeaders().set('Authorization', this.token);
     }
 
-    public getRecords(): Observable <any> {
-        return this.httpClient.get(`${this.urlApi}/todas_solicitudes`, { headers: this.headers });
+    public getRecords(data: any): Observable <any> {
+        return this.httpClient.post(`${this.urlApi}/todas_solicitudes`, data, { headers: this.headers });
     }
     public getRecord(id: any): Observable <any> {
         return this.httpClient.get(`${this.urlApi}/solicitud-detalle/${id}`, {headers: this.headers});
