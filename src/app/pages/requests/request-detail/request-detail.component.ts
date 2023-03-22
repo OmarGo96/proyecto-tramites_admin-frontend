@@ -94,6 +94,7 @@ export class RequestDetailComponent implements OnInit {
             next: res => {
                 this.spinner.hide();
                 this.request = res.solicitud;
+                console.log(this.request);
                 const estatusSolicitud = this.request.estatus_solicitud_id;
                 this.reqWithDocuments = res.requisitos.filter((req: any) => req.Requisito.Documento);
                 this.reqRejected = res.requisitos.filter((req: any) => req.Requisito.Documento.estatus === -1);
