@@ -1,7 +1,7 @@
 <aside class="pt-16 w-72 h-full">
     <div class="h-full overflow-y-auto py-4 px-4 bg-white">
         <div class="text-center mt-4 mb-8">
-            <h1 class="text-sm uppercase font-bold label-section">Welcome, {{ user.nombre }}</h1>
+            <h1 class="text-sm uppercase font-bold label-section">Bienvenido, {{ user.nombre }}</h1>
             <p class="text-xs text-slate-400">@{{ user.usuario }}</p>
         </div>
         <ul class="space-y-1.5 text-sm">
@@ -12,7 +12,7 @@
                         <!--
                             Se debe agregar el modulo de permisos *appPermissionModule="{module: value.module, action: value.action}"
                         -->
-                        <a [routerLink]="[value.path]"
+                        <a [routerLink]="[value.path]" [routerLinkActive]="['bg-slate-200']"
                            class="flex items-center p-2 font-normal text-gray-500 rounded-lg hover:bg-slate-200 duration-200">
                             <i class="fa-solid {{value.icon}}"></i>
                             <span class="flex-1 ml-3 whitespace-nowrap">{{ value.title }}</span>
@@ -21,14 +21,14 @@
                 </div>
             </div>
 
-            <h3 class="uppercase text-xs font-bold label-section px-2.5 pt-2">Sesión</h3>
+            <!--<h3 class="uppercase text-xs font-bold label-section px-2.5 pt-2">Sesión</h3>
             <li>
                 <a (click)="logout()"
                    class="flex items-center p-2 font-normal text-gray-500 rounded-lg hover:bg-slate-200 duration-200 hover:cursor-pointer">
                     <i class="fa-solid fa-right-from-bracket"></i>
                     <span class="flex-1 ml-3 whitespace-nowrap">Salir</span>
                 </a>
-            </li>
+            </li>-->
         </ul>
     </div>
 </aside>
