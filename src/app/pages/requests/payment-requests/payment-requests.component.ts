@@ -6,6 +6,7 @@ import {RequestsService} from "../../../services/requests.service";
 import {MessageService} from "../../../services/messages.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {MatTableDataSource} from "@angular/material/table";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-payment-requests',
@@ -25,15 +26,17 @@ export class PaymentRequestsComponent implements OnInit {
     constructor(
         private requestsService: RequestsService,
         private messagesService: MessageService,
+        private router: Router,
         private spinner: NgxSpinnerService
     ) {
+
     }
 
     ngOnInit(): void {
         this.getRequests();
     }
 
-    getRequests(){
+    getRequests() {
         this.spinner.show();
         const data = {
             estatus: '10'
@@ -52,11 +55,11 @@ export class PaymentRequestsComponent implements OnInit {
         });
     }
 
-    updateRequest(solicitudId: any){
+    updateRequest(solicitudId: any) {
         this.spinner.show();
         const data = {
             estatus_solicitud_id: '12',
-            solicitud_id: solicitudId.toString() ,
+            solicitud_id: solicitudId.toString(),
         };
         this.requestsService.updateRecord(data).subscribe({
             next: res => {
@@ -70,10 +73,9 @@ export class PaymentRequestsComponent implements OnInit {
         })
     }
 
-    applyFilter(event: Event) {
+    applyFilter(event: Event
+    ) {
         const filterValue = (event.target as HTMLInputElement).value;
         this.dataSource.filter = filterValue.trim().toLowerCase();
     }
-
-
 }

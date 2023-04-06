@@ -35,6 +35,11 @@ export const RequestsStatus = [
         styles: 'bg-indigo-200 text-indigo-800'
     },
     {
+        name: 'Validación de pago',
+        value: 20,
+        styles: 'bg-indigo-200 text-indigo-800'
+    },
+    {
         name: 'Pagado',
         value: 11,
         styles: 'bg-green-200 text-green-800'
@@ -45,6 +50,7 @@ export const RequestsStatus = [
         value: 16,
         styles: 'bg-sky-200 text-sky-800'
     },
+
     {
         name: 'En firma',
         value: 8,

@@ -9,11 +9,11 @@ import {MatTableDataSource} from "@angular/material/table";
 import {Router} from "@angular/router";
 
 @Component({
-    selector: 'app-to-deliver-requests',
-    templateUrl: './to-deliver-requests.component.html',
-    styleUrls: ['./to-deliver-requests.component.css']
+    selector: 'app-payment-validate',
+    templateUrl: './payment-validate.component.html',
+    styleUrls: ['./payment-validate.component.css']
 })
-export class ToDeliverRequestsComponent implements OnInit {
+export class PaymentValidateComponent implements OnInit {
 
     public dataSource: any;
     public displayedColumns: string[] = ['folio', 'tramite', 'creado', 'estatus', 'accion'];
@@ -22,6 +22,7 @@ export class ToDeliverRequestsComponent implements OnInit {
     @ViewChild(MatSort) sort: MatSort;
 
     public statuses = RequestsStatus;
+
 
     constructor(
         private requestsService: RequestsService,
@@ -38,7 +39,7 @@ export class ToDeliverRequestsComponent implements OnInit {
     getRequests(){
         this.spinner.show();
         const data = {
-            estatus: '9'
+            estatus: '20'
         }
         this.requestsService.getRecords(data).subscribe({
             next: res => {
@@ -58,6 +59,5 @@ export class ToDeliverRequestsComponent implements OnInit {
         const filterValue = (event.target as HTMLInputElement).value;
         this.dataSource.filter = filterValue.trim().toLowerCase();
     }
-
 
 }

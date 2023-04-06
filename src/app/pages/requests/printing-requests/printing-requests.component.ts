@@ -6,6 +6,7 @@ import {RequestsService} from "../../../services/requests.service";
 import {MessageService} from "../../../services/messages.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {MatTableDataSource} from "@angular/material/table";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-printing-requests',
@@ -25,6 +26,7 @@ export class PrintingRequestsComponent implements OnInit {
     constructor(
         private requestsService: RequestsService,
         private messagesService: MessageService,
+        private router: Router,
         private spinner: NgxSpinnerService
     ) {
     }

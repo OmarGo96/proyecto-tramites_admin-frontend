@@ -28,23 +28,30 @@ import { ToDeliverRequestsComponent } from './requests/to-deliver-requests/to-de
 import { DeliveredRequestsComponent } from './requests/delivered-requests/delivered-requests.component';
 import { PreventRequestsComponent } from './requests/prevent-requests/prevent-requests.component';
 import { CancelledRequestsComponent } from './requests/cancelled-requests/cancelled-requests.component';
+import { PaymentValidateComponent } from './requests/payment-validate/payment-validate.component';
 
 const routes: Routes = [
-    {path: 'solicitudes/nuevas', component: SentRequestsComponent},
-    {path: 'solicitudes/validacion', component: RequestsValidationComponent},
-    {path: 'solicitudes/pendiente', component: PendingRequestsComponent},
-    {path: 'solicitudes/calificacion', component: QualificationRequestsComponent},
-    {path: 'solicitudes/inspeccion', component: InspectionRequestsComponent},
-    {path: 'solicitudes/pago', component: PaymentRequestsComponent},
-    {path: 'solicitudes/pagado', component: PaidRequestsComponent},
-    {path: 'solicitudes/impresion', component: PrintingRequestsComponent},
-    {path: 'solicitudes/firma', component: SigningRequestsComponent},
-    {path: 'solicitudes/digitalizacion', component: DigitizationRequestsComponent},
-    {path: 'solicitudes/ventanilla', component: ToDeliverRequestsComponent},
-    {path: 'solicitudes/entregados', component: ToDeliverRequestsComponent},
-    {path: 'solicitudes/prevencion', component: PreventRequestsComponent},
-    {path: 'solicitudes/cancelados', component: CancelledRequestsComponent},
-    {path: 'solicitud/:id', component: RequestDetailComponent},
+
+    {
+        path: 'solicitudes',
+        // canActivate: [AuthGuard],
+        children: [
+            {
+                path: '',
+                children: [
+                    {
+                        path: '',
+                        loadChildren: () => import('../pages/requests/requests.module').then(m => m.RequestsModule)
+                    }
+                ]
+            },
+            {
+                path: '',
+                redirectTo: 'solicitudes/nuevas',
+                pathMatch: 'full'
+            }
+        ]
+    },
     {path: 'dependencias', component: DependenciesComponent},
     {path: 'tramites/:uuid', component: ServicesComponent},
     {path: 'servicio/:uuid', component: ServicesDetailComponent},
@@ -63,21 +70,6 @@ const routes: Routes = [
         ProfileComponent,
         UsersComponent,
         RequestsComponent,
-        RequestDetailComponent,
-        SentRequestsComponent,
-        RequestsValidationComponent,
-        PendingRequestsComponent,
-        QualificationRequestsComponent,
-        InspectionRequestsComponent,
-        PaymentRequestsComponent,
-        PaidRequestsComponent,
-        PrintingRequestsComponent,
-        SigningRequestsComponent,
-        DigitizationRequestsComponent,
-        ToDeliverRequestsComponent,
-        DeliveredRequestsComponent,
-        PreventRequestsComponent,
-        CancelledRequestsComponent
     ],
     imports: [
         CommonModule,

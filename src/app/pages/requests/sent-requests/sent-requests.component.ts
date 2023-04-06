@@ -6,6 +6,7 @@ import {RequestsService} from "../../../services/requests.service";
 import {MessageService} from "../../../services/messages.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {MatTableDataSource} from "@angular/material/table";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-sent-requests',
@@ -25,6 +26,7 @@ export class SentRequestsComponent implements OnInit {
     constructor(
         private requestsService: RequestsService,
         private messagesService: MessageService,
+        private router: Router,
         private spinner: NgxSpinnerService
     ) {
     }
@@ -61,7 +63,6 @@ export class SentRequestsComponent implements OnInit {
         this.requestsService.updateRecord(data).subscribe({
             next: res => {
                 this.spinner.hide();
-                console.log('La solicitud se abrio y paso a estatus "Revision"');
             },
             error: err => {
                 this.spinner.hide();

@@ -107,6 +107,15 @@ export const ROUTES = [
         class: ''
     },
     {
+        path: '/solicitudes/validacion-pago',
+        group: 'SOLICITUDES',
+        module: 'solicitudes',
+        action: 'list',
+        title: 'Validación de pago',
+        icon: 'fa-comment-dollar',
+        class: ''
+    },
+    {
         path: '/solicitudes/pagado',
         group: 'SOLICITUDES',
         module: 'solicitudes',

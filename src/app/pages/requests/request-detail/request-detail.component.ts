@@ -14,6 +14,7 @@ import {MessagesModalComponent} from "../../../layouts/modals/messages-modal/mes
 import {MatDialog} from "@angular/material/dialog";
 import {NgxSpinnerService} from "ngx-spinner";
 import {MensajesService} from "../../../services/mensajes.service";
+import {RequestsStatus} from "../../../const/status";
 
 @Component({
     selector: 'app-request-detail',
@@ -28,6 +29,8 @@ export class RequestDetailComponent implements OnInit {
     public requeriments: any;
     public reqWithDocuments: any;
     public reqRejected: any;
+    public reqAccepted: any;
+    public paymentDocsAccepted: any;
     public statuses: any;
     public messages: any;
     public histories: any;
@@ -37,6 +40,9 @@ export class RequestDetailComponent implements OnInit {
 
     public dataSource: any;
     public displayedColumns: string[] = ['requisito', 'archivo', 'accion'];
+
+    // Constants
+    public estatuses = RequestsStatus;
 
 
     /* Banderas */
@@ -93,12 +99,18 @@ export class RequestDetailComponent implements OnInit {
         this.requestsService.getRecord(id).subscribe({
             next: res => {
                 this.spinner.hide();
+
                 this.request = res.solicitud;
-                console.log(this.request);
-                const estatusSolicitud = this.request.estatus_solicitud_id;
-                this.reqWithDocuments = res.requisitos.filter((req: any) => req.Requisito.Documento);
-                this.reqRejected = res.requisitos.filter((req: any) => req.Requisito.Documento.estatus === -1);
                 this.requeriments = res.requisitos;
+
+                console.log(this.request);
+
+                this.reqWithDocuments = this.requeriments.filter((req: any) => req.Requisito.Documento);
+                this.reqRejected = this.requeriments.filter((req: any) => req.Requisito.Documento.estatus === -1);
+                this.reqAccepted = this.requeriments.filter((req: any) => req.Requisito.Documento.estatus === 1);
+                this.paymentDocsAccepted = this.request.DocumentosPago.filter((req: any) => req.estatus === 1);
+
+
                 this.dataSource = new MatTableDataSource(res.requisitos);
 
                 this.getHistory(res.solicitud.id);
@@ -107,6 +119,7 @@ export class RequestDetailComponent implements OnInit {
                 this.initMessageForm();
                 this.initSolicitudForm();
 
+                const estatusSolicitud = this.request.estatus_solicitud_id;
                 if (estatusSolicitud === 3 || estatusSolicitud === 7){
                     this.solicitudForm.disable();
                     this.disabledButton = true;
@@ -132,7 +145,7 @@ export class RequestDetailComponent implements OnInit {
                 this.spinner.hide();
                 this.messagesService.printStatus(res.message, 'success');
                 setTimeout(() => {
-                    this.router.navigate(['solicitudes']);
+                    this.getId();
                 }, 2500);
             },
             error: err => {
@@ -167,7 +180,28 @@ export class RequestDetailComponent implements OnInit {
         this.requestsService.updateEstatusRecord(documentId, data).subscribe({
                 next: res => {
                     this.spinner.hide();
-                    this.openSnackBar(estatus === 1 ? 'Se acepto el documento' : estatus === 3 ? 'El archivo no es requerido' : 'Se rechazo el documento', '')
+                    // this.openSnackBar(estatus === 1 ? 'Se acepto el documento' : estatus === 3 ? 'El archivo no es requerido' : 'Se rechazo el documento', '')
+                    this.getId();
+                },
+                error: err => {
+                    this.spinner.hide();
+                    this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+                }
+            }
+        );
+    }
+
+    acceptOrDenyPaymentDocs(estatus: any, documentId: any){
+        this.spinner.show();
+        let data = {
+            'documentacion_pago_id': documentId.toString(),
+            'estatus': estatus.toString()
+        };
+
+        this.requestsService.updateEstatusPaymentDoc(documentId, data).subscribe({
+                next: res => {
+                    this.spinner.hide();
+                    // this.openSnackBar(estatus === 1 ? 'Se acepto el documento' : estatus === 3 ? 'El archivo no es requerido' : 'Se rechazo el documento', '')
                     this.getId();
                 },
                 error: err => {
@@ -202,7 +236,6 @@ export class RequestDetailComponent implements OnInit {
         this.statusesService.getEstatusById(this.request.servicio_id, this.request.estatus_solicitud_id).subscribe({
             next: res => {
                 this.statuses = res.estatuses;
-                console.log(this.statuses);
             },
             error: err => {
                 this.messagesService.printStatusArrayNew(err.error.errors, 'error');
