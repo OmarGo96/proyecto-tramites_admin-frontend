@@ -27,7 +27,7 @@
                     </ng-template>
 
                     <div class="overflow-hidden bg-white mt-10 rounded-2xl border">
-                        <div class="px-4 py-5 sm:px-6 flex justify-between">
+                        <div class="px-4 py-5 sm:px-6 flex items-center justify-between">
                             <!-- Pasos del trámite -->
                             <ol class=" items-center w-full space-y-4 sm:flex sm:space-x-8 sm:space-y-0">
                                 <li class="flex items-center space-x-2.5"
@@ -65,6 +65,11 @@
                                 </li>
                             </ol>
 
+                            <div class="mr-5">
+                                <button mat-flat-button color="primary" (click)="downloadZip()" class="rounded-md">
+                                    <i class="fa-solid fa-file-zipper"></i> Descargar ZIP
+                                </button>
+                            </div>
                             <!-- Form para actualizar estatus -->
                             <form [formGroup]="solicitudForm" class="flex justify-between items-center"
                                   *ngIf="(reqChecked.length === reqWithDocuments.length && request.DocumentosPago.length === paymentDocs.length) && (request.estatus_solicitud_id !== 10 && request.estatus_solicitud_id !== 5 && request.estatus_solicitud_id !== 21)">
