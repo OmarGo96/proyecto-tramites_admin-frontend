@@ -1,25 +1,46 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {UsersService} from "../../services/users.service";
+import {RequestsService} from "../../services/requests.service";
+import {RequestsStatus} from "../../const/status";
 
 @Component({
     selector: 'app-sidebar',
     templateUrl: './sidebar.component.html',
     styleUrls: ['./sidebar.component.css']
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit, AfterViewInit {
 
     public menuItems: any;
     public menu: any;
     public user: any;
 
+    public badges: any;
+
+    public statuses = RequestsStatus;
+
     constructor(
-        private usersService: UsersService
+        private usersService: UsersService,
+        private requestsService: RequestsService,
     ) {
     }
 
     ngOnInit(): void {
         this.user = this.usersService.getIdentity();
+
         this.setMenuItem();
+
+    }
+
+    ngAfterViewInit(){
+        this.requestsService.getBadges().subscribe({
+            next: res => {
+                this.badges = res.badges;
+                console.log(this.badges);
+            },
+            error: err => {
+                console.log(err);
+            }
+        });
     }
 
     setMenuItem(){
@@ -41,7 +62,11 @@ export class SidebarComponent implements OnInit {
                 this.menu[i].module = this.menu[i].values[j].module;
             }
         }
+
+
     }
+
+
 
     logout(): void {
         this.usersService.logout();
@@ -53,6 +78,7 @@ export class SidebarComponent implements OnInit {
 
 export const ROUTES = [
     {
+        id: 2,
         path: '/solicitudes/nuevas',
         group: 'SOLICITUDES',
         module: 'solicitudes',
@@ -62,33 +88,37 @@ export const ROUTES = [
         class: ''
     },
     {
+        id: 12,
         path: '/solicitudes/validacion',
         group: 'SOLICITUDES',
         module: 'solicitudes',
         action: 'list',
-        title: 'En validación de documentos',
+        title: 'Valid. de documentos',
         icon: 'fa-list-check',
         class: ''
     },
     {
+        id: 5,
         path: '/solicitudes/pendiente',
         group: 'SOLICITUDES',
         module: 'solicitudes',
         action: 'list',
-        title: 'Pendiente de documentación',
+        title: 'Pend. documentación',
         icon: 'fa-clock',
         class: ''
     },
     {
+        id: 14,
         path: '/solicitudes/calificacion',
         group: 'SOLICITUDES',
         module: 'solicitudes',
         action: 'list',
-        title: 'Calificación de área técnica',
+        title: 'Área técnica',
         icon: 'fa-clipboard-check',
         class: ''
     },
     {
+        id: 15,
         path: '/solicitudes/inspeccion',
         group: 'SOLICITUDES',
         module: 'solicitudes',
@@ -98,6 +128,7 @@ export const ROUTES = [
         class: ''
     },
     {
+        id: 10,
         path: '/solicitudes/pago',
         group: 'SOLICITUDES',
         module: 'solicitudes',
@@ -107,6 +138,7 @@ export const ROUTES = [
         class: ''
     },
     {
+        id: 20,
         path: '/solicitudes/validacion-pago',
         group: 'SOLICITUDES',
         module: 'solicitudes',
@@ -116,6 +148,17 @@ export const ROUTES = [
         class: ''
     },
     {
+        id: 21,
+        path: '/solicitudes/doc-pendiente',
+        group: 'SOLICITUDES',
+        module: 'solicitudes',
+        action: 'list',
+        title: 'Pend. doc. pago',
+        icon: 'fa-clock',
+        class: ''
+    },
+    {
+        id: 11,
         path: '/solicitudes/pagado',
         group: 'SOLICITUDES',
         module: 'solicitudes',
@@ -125,6 +168,17 @@ export const ROUTES = [
         class: ''
     },
     {
+        id: 19,
+        path: '/solicitudes/elaboracion',
+        group: 'SOLICITUDES',
+        module: 'solicitudes',
+        action: 'list',
+        title: 'Elaboración documento',
+        icon: 'fa-file-waveform',
+        class: ''
+    },
+    {
+        id: 16,
         path: '/solicitudes/impresion',
         group: 'SOLICITUDES',
         module: 'solicitudes',
@@ -134,6 +188,7 @@ export const ROUTES = [
         class: ''
     },
     {
+        id: 8,
         path: '/solicitudes/firma',
         group: 'SOLICITUDES',
         module: 'solicitudes',
@@ -143,6 +198,7 @@ export const ROUTES = [
         class: ''
     },
     {
+        id: 17,
         path: '/solicitudes/digitalizacion',
         group: 'SOLICITUDES',
         module: 'solicitudes',
@@ -152,6 +208,7 @@ export const ROUTES = [
         class: ''
     },
     {
+        id: 9,
         path: '/solicitudes/ventanilla',
         group: 'SOLICITUDES',
         module: 'solicitudes',
@@ -161,6 +218,7 @@ export const ROUTES = [
         class: ''
     },
     {
+        id: 18,
         path: '/solicitudes/entregados',
         group: 'SOLICITUDES',
         module: 'solicitudes',
@@ -170,6 +228,7 @@ export const ROUTES = [
         class: ''
     },
     {
+        id: 6,
         path: '/solicitudes/prevencion',
         group: 'SOLICITUDES',
         module: 'solicitudes',
@@ -179,6 +238,7 @@ export const ROUTES = [
         class: ''
     },
     {
+        id: 7,
         path: '/solicitudes/cancelados',
         group: 'SOLICITUDES',
         module: 'solicitudes',
@@ -188,6 +248,7 @@ export const ROUTES = [
         class: ''
     },
     {
+        id: null,
         path: '/dependencias',
         group: 'ADMINISTRACIÓN',
         module: 'dependencias',
@@ -197,6 +258,7 @@ export const ROUTES = [
         class: ''
     },
     {
+        id: null,
         path: '/usuarios',
         group: 'ADMINISTRACIÓN',
         module: 'usuarios',
@@ -206,6 +268,7 @@ export const ROUTES = [
         class: ''
     },
     {
+        id: null,
         path: '/documentos',
         group: 'ADMINISTRACIÓN',
         module: 'documentos',

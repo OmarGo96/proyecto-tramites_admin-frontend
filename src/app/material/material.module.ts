@@ -20,6 +20,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatExpansionModule} from "@angular/material/expansion";
+import {MatBadgeModule} from "@angular/material/badge";
 
 @NgModule({
     declarations: [],
@@ -43,7 +44,8 @@ import {MatExpansionModule} from "@angular/material/expansion";
         MatSelectModule,
         MatCheckboxModule,
         MatTabsModule,
-        MatExpansionModule
+        MatExpansionModule,
+        MatBadgeModule
     ],
     exports: [
         MatToolbarModule,
@@ -65,7 +67,8 @@ import {MatExpansionModule} from "@angular/material/expansion";
         MatInputModule,
         MatCheckboxModule,
         MatTabsModule,
-        MatExpansionModule
+        MatExpansionModule,
+        MatBadgeModule
     ]
 })
 export class MaterialModule {

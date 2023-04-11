@@ -9,11 +9,11 @@ import {MatTableDataSource} from "@angular/material/table";
 import {Router} from "@angular/router";
 
 @Component({
-    selector: 'app-sent-requests',
-    templateUrl: './sent-requests.component.html',
-    styleUrls: ['./sent-requests.component.css']
+    selector: 'app-elaboration-requests',
+    templateUrl: './elaboration-requests.component.html',
+    styleUrls: ['./elaboration-requests.component.css']
 })
-export class SentRequestsComponent implements OnInit {
+export class ElaborationRequestsComponent implements OnInit {
 
     public dataSource: any;
     public displayedColumns: string[] = ['folio', 'tramite', 'creado', 'estatus', 'accion'];
@@ -32,14 +32,13 @@ export class SentRequestsComponent implements OnInit {
     }
 
     ngOnInit(): void {
-
-        this.getRequests();
+        this.getServices();
     }
 
-    getRequests(){
+    getServices(){
         this.spinner.show();
         const data = {
-            estatus: '2'
+            estatus: '19'
         }
         this.requestsService.getRecords(data).subscribe({
             next: res => {
@@ -64,6 +63,7 @@ export class SentRequestsComponent implements OnInit {
         this.requestsService.updateRecord(data).subscribe({
             next: res => {
                 this.spinner.hide();
+                console.log('La solicitud se abrio y paso a estatus "Revision"');
             },
             error: err => {
                 this.spinner.hide();

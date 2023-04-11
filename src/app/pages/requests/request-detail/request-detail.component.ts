@@ -30,13 +30,16 @@ export class RequestDetailComponent implements OnInit {
     public reqWithDocuments: any;
     public reqRejected: any;
     public reqAccepted: any;
-    public paymentDocsAccepted: any;
+    public reqChecked: any;
+    public paymentDocs: any;
     public statuses: any;
     public messages: any;
     public histories: any;
     public messageForm: any;
     public selectedFile: any;
     public file: any;
+
+    public files: File[] = [];
 
     public dataSource: any;
     public displayedColumns: string[] = ['requisito', 'archivo', 'accion'];
@@ -103,13 +106,13 @@ export class RequestDetailComponent implements OnInit {
                 this.request = res.solicitud;
                 this.requeriments = res.requisitos;
 
-                console.log(this.request);
+                console.log(this.requeriments);
 
-                this.reqWithDocuments = this.requeriments.filter((req: any) => req.Requisito.Documento);
-                this.reqRejected = this.requeriments.filter((req: any) => req.Requisito.Documento.estatus === -1);
-                this.reqAccepted = this.requeriments.filter((req: any) => req.Requisito.Documento.estatus === 1);
-                this.paymentDocsAccepted = this.request.DocumentosPago.filter((req: any) => req.estatus === 1);
-
+                this.reqWithDocuments = this.requeriments.filter((req: any) => req.Requisito.Documento); // requisitos con documentos
+                this.reqChecked = this.requeriments.filter((req: any) => req.Requisito.Documento.estatus === -1 || req.Requisito.Documento.estatus === 1 || req.Requisito.Documento.estatus === 3);
+                this.reqRejected = this.requeriments.filter((req: any) => req.Requisito.Documento.estatus === -1); // requisitos rechazados
+                this.reqAccepted = this.requeriments.filter((req: any) => req.Requisito.Documento.estatus === 1); // requisitos aceptados
+                this.paymentDocs = this.request.DocumentosPago.filter((req: any) => req.estatus === 1 || req.estatus === -1);
 
                 this.dataSource = new MatTableDataSource(res.requisitos);
 
@@ -349,5 +352,13 @@ export class RequestDetailComponent implements OnInit {
                 this.messagesService.printStatusArrayNew(err.error.errors, 'error');
             }
         })
+    }
+
+    onSelect(event: any) {
+        this.files.push(...event.addedFiles);
+    }
+
+    onRemove(event: any) {
+        this.files.splice(this.files.indexOf(event), 1);
     }
 }

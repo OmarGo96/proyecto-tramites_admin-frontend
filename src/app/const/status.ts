@@ -35,8 +35,19 @@ export const RequestsStatus = [
         styles: 'bg-indigo-200 text-indigo-800'
     },
     {
+        name: 'Elaboración de documento',
+        value: 19,
+        styles: 'bg-indigo-200 text-indigo-800'
+    },
+    {
         name: 'Validación de pago',
         value: 20,
+        styles: 'bg-indigo-200 text-indigo-800'
+    },
+
+    {
+        name: 'Pendiente documentación de pago',
+        value: 21,
         styles: 'bg-indigo-200 text-indigo-800'
     },
     {

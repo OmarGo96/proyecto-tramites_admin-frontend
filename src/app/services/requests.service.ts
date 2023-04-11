@@ -45,4 +45,8 @@ export class RequestsService {
     public getMessages(id: any): Observable <any> {
         return this.httpClient.get(`${this.urlApi}/solicitud/messages/${id}`, {headers: this.headers});
     }
+
+    public getBadges(): Observable <any> {
+        return this.httpClient.get(`${this.urlApi}/solicitudes/badges/count`, {headers: this.headers});
+    }
 }

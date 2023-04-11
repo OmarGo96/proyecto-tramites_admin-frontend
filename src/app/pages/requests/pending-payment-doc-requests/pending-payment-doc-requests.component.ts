@@ -4,16 +4,16 @@ import {MatSort} from "@angular/material/sort";
 import {RequestsStatus} from "../../../const/status";
 import {RequestsService} from "../../../services/requests.service";
 import {MessageService} from "../../../services/messages.service";
+import {Router} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
 import {MatTableDataSource} from "@angular/material/table";
-import {Router} from "@angular/router";
 
 @Component({
-    selector: 'app-sent-requests',
-    templateUrl: './sent-requests.component.html',
-    styleUrls: ['./sent-requests.component.css']
+    selector: 'app-pending-payment-doc-requests',
+    templateUrl: './pending-payment-doc-requests.component.html',
+    styleUrls: ['./pending-payment-doc-requests.component.css']
 })
-export class SentRequestsComponent implements OnInit {
+export class PendingPaymentDocRequestsComponent implements OnInit {
 
     public dataSource: any;
     public displayedColumns: string[] = ['folio', 'tramite', 'creado', 'estatus', 'accion'];
@@ -32,14 +32,13 @@ export class SentRequestsComponent implements OnInit {
     }
 
     ngOnInit(): void {
-
         this.getRequests();
     }
 
     getRequests(){
         this.spinner.show();
         const data = {
-            estatus: '2'
+            estatus: '7'
         }
         this.requestsService.getRecords(data).subscribe({
             next: res => {
@@ -53,23 +52,6 @@ export class SentRequestsComponent implements OnInit {
                 this.messagesService.printStatusArrayNew(err.error.errors, 'error');
             }
         });
-    }
-
-    updateRequest(solicitudId: any){
-        this.spinner.show();
-        const data = {
-            estatus_solicitud_id: '12',
-            solicitud_id: solicitudId.toString() ,
-        };
-        this.requestsService.updateRecord(data).subscribe({
-            next: res => {
-                this.spinner.hide();
-            },
-            error: err => {
-                this.spinner.hide();
-                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
-            }
-        })
     }
 
     applyFilter(event: Event) {

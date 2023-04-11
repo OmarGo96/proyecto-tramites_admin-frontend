@@ -20,6 +20,9 @@ import {LayoutsModule} from "../../layouts/layouts.module";
 import {RequestDetailComponent} from "./request-detail/request-detail.component";
 import {MaterialModule} from "../../material/material.module";
 import {ReactiveFormsModule} from "@angular/forms";
+import { ElaborationRequestsComponent } from './elaboration-requests/elaboration-requests.component';
+import { PendingPaymentDocRequestsComponent } from './pending-payment-doc-requests/pending-payment-doc-requests.component';
+import {NgxDropzoneModule} from "ngx-dropzone";
 
 const routes: Routes = [
     {
@@ -33,6 +36,8 @@ const routes: Routes = [
     {path: 'pago', component: PaymentRequestsComponent},
     {path: 'validacion-pago', component: PaymentValidateComponent},
     {path: 'pagado', component: PaidRequestsComponent},
+    {path: 'elaboracion', component: ElaborationRequestsComponent},
+    {path: 'doc-pendiente', component: PendingPaymentDocRequestsComponent},
     {path: 'impresion', component: PrintingRequestsComponent},
     {path: 'firma', component: SigningRequestsComponent},
     {path: 'digitalizacion', component: DigitizationRequestsComponent},
@@ -65,14 +70,17 @@ const routes: Routes = [
         DeliveredRequestsComponent,
         PreventRequestsComponent,
         CancelledRequestsComponent,
-        RequestDetailComponent
+        RequestDetailComponent,
+        ElaborationRequestsComponent,
+        PendingPaymentDocRequestsComponent
     ],
     imports: [
         CommonModule,
         MaterialModule,
         ReactiveFormsModule,
         RouterModule.forChild(routes),
-        LayoutsModule
+        LayoutsModule,
+        NgxDropzoneModule
     ]
 })
 export class RequestsModule {
