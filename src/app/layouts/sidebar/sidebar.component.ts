@@ -35,7 +35,6 @@ export class SidebarComponent implements OnInit, AfterViewInit {
         this.requestsService.getBadges().subscribe({
             next: res => {
                 this.badges = res.badges;
-                console.log(this.badges);
             },
             error: err => {
                 console.log(err);
