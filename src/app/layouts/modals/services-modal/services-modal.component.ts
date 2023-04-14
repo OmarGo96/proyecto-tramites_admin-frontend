@@ -5,6 +5,7 @@ import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 import {MessageService} from "src/app/services/messages.service";
 import {ServicesService} from "../../../services/services.service";
 import {getLocaleFirstDayOfWeek} from "@angular/common";
+import {DialogRef} from "@angular/cdk/dialog";
 
 @Component({
     selector: 'app-services-modal',
@@ -24,7 +25,7 @@ export class ServicesModalComponent implements OnInit {
         private servicesService: ServicesService,
         private messagesService: MessageService,
         private formBuilder: UntypedFormBuilder,
-        public matDialog: MatDialog,
+        public dialogRef: DialogRef,
     ) {
     }
 
@@ -77,7 +78,7 @@ export class ServicesModalComponent implements OnInit {
                 this.loading = false;
                 this.messagesService.printStatus(res.message, 'success')
                 setTimeout(()=>{
-                    this.matDialog.closeAll();
+                    this.dialogRef.close(true);
                 }, 2500);
             },
             error: err => {
@@ -95,7 +96,7 @@ export class ServicesModalComponent implements OnInit {
                 this.loading = false;
                 this.messagesService.printStatus(res.message, 'success')
                 setTimeout(()=>{
-                    this.matDialog.closeAll();
+                    this.dialogRef.close(true);
                 }, 2500);
             },
             error: err => {

@@ -329,6 +329,31 @@ export class RequestDetailComponent implements OnInit {
         return new Blob([ia], {type: mimeString});
     }
 
+    uploadFiles() {
+        this.files.forEach(file => {
+            this.createDocuments(file);
+        });
+    }
+
+    createDocuments(file: any) {
+        this.spinner.show();
+        let formData = new FormData()
+        formData.append('file', file);
+        this.documentsService.digitalizarDocumento(this.request.id.toString(), formData).subscribe({
+            next: res => {
+                this.spinner.hide();
+                this.messagesService.printStatus(res.message, 'success');
+                setTimeout(() => {
+                    this.getId()
+                }, 1000);
+            },
+            error: err => {
+                this.spinner.hide();
+                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+            }
+        })
+    }
+
     seeDocument() {
         if (this.file) {
             let url = URL.createObjectURL(this.file)

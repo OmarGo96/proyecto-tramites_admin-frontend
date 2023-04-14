@@ -1,4 +1,5 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, DoCheck, OnChanges, OnInit} from '@angular/core';
+import {RequestsService} from "../../services/requests.service";
 
 @Component({
     selector: 'app-base',
@@ -8,8 +9,11 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 export class BaseComponent implements OnInit, AfterViewInit {
 
     public isMobile: boolean;
+    public badges: any;
 
-    constructor() {
+    constructor(
+        private requestsService: RequestsService,
+    ) {
     }
 
     ngOnInit(): void {

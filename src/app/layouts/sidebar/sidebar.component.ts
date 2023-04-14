@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {UsersService} from "../../services/users.service";
 import {RequestsService} from "../../services/requests.service";
 import {RequestsStatus} from "../../const/status";
@@ -8,13 +8,13 @@ import {RequestsStatus} from "../../const/status";
     templateUrl: './sidebar.component.html',
     styleUrls: ['./sidebar.component.css']
 })
-export class SidebarComponent implements OnInit, AfterViewInit {
+export class SidebarComponent implements OnInit {
 
     public menuItems: any;
     public menu: any;
     public user: any;
 
-    public badges: any;
+    @Input() badges: any;
 
     public statuses = RequestsStatus;
 
@@ -26,12 +26,11 @@ export class SidebarComponent implements OnInit, AfterViewInit {
 
     ngOnInit(): void {
         this.user = this.usersService.getIdentity();
-
         this.setMenuItem();
-
+        // this.getBadges();
     }
 
-    ngAfterViewInit(){
+    getBadges(){
         this.requestsService.getBadges().subscribe({
             next: res => {
                 this.badges = res.badges;

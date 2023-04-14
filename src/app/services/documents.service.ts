@@ -31,4 +31,8 @@ export class DocumentsService {
     public downloadZip(id: any): Observable<any> {
         return this.httpClient.get(`${this.urlApi}/solicitud/get-documents-zip/${id}`, { responseType: 'blob', headers: this.headers });
     }
+
+    public digitalizarDocumento(requestId: any, data: any): Observable<any> {
+        return this.httpClient.post(`${this.urlApi}/solicitud/documento-digital/${requestId}`, data, {headers: this.headers})
+    }
 }

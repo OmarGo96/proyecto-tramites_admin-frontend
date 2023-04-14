@@ -66,7 +66,8 @@
                             </ol>
 
                             <div class="mr-5">
-                                <button mat-flat-button color="primary" (click)="downloadZip()" class="rounded-md">
+                                <button mat-flat-button color="primary" (click)="downloadZip()" class="rounded-md"
+                                        *ngIf="request.estatus_solicitud_id === 1 || request.estatus_solicitud_id === 2 || request.estatus_solicitud_id === 12 || request.estatus_solicitud_id === 5">
                                     <i class="fa-solid fa-file-zipper"></i> Descargar ZIP
                                 </button>
                             </div>
@@ -219,7 +220,7 @@
                                         <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
                                     </ngx-dropzone-preview>
                                 </ngx-dropzone>
-                                <button mat-flat-button color="success">
+                                <button mat-flat-button (click)="uploadFiles()" color="success">
                                     Digitalizar documento
                                 </button>
                             </div>
@@ -246,6 +247,46 @@
                                            *ngIf="status.value === request.estatus_solicitud_id">
                                             La solicitud esta en estatus: <b>{{status.name}}</b>
                                         </p>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                        <ng-container *ngIf="request.estatus_solicitud_id === 9">
+                            <div class="w-full mx-auto block p-10 text-center space-y-3">
+                                <i class="fa-solid fa-circle-check fa-5x text-emerald-600"></i>
+                                <div>
+                                    <p class="font-medium text-lg">El trámite esta listo para entregar</p>
+                                    <ng-container *ngFor="let status of estatuses">
+                                        <p
+                                            *ngIf="status.value === request.estatus_solicitud_id">
+                                            Mantengase en contacto con el contribuyente
+                                        </p>
+                                        <p
+                                            *ngIf="status.value === request.estatus_solicitud_id">
+                                            La solicitud esta en estatus: <b>{{status.name}}</b>
+                                        </p>
+
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                        <ng-container *ngIf="request.estatus_solicitud_id === 18">
+                            <div class="w-full mx-auto block p-10 text-center space-y-3">
+                                <i class="fa-solid fa-circle-check fa-5x text-emerald-600"></i>
+                                <div>
+                                    <p class="font-medium text-lg">El trámite se finalizo con éxito</p>
+                                    <ng-container *ngFor="let status of estatuses">
+                                        <p
+                                            *ngIf="status.value === request.estatus_solicitud_id">
+                                            Mantengase en contacto con el contribuyente
+                                        </p>
+                                        <p
+                                            *ngIf="status.value === request.estatus_solicitud_id">
+                                            La solicitud esta en estatus: <b>{{status.name}}</b>
+                                        </p>
+
                                     </ng-container>
                                 </div>
                             </div>

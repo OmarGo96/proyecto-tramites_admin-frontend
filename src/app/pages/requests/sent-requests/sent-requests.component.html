@@ -88,7 +88,6 @@
 
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                         <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
-                        &lt;!&ndash; Row shown when there is no matching data. &ndash;&gt;
                         <tr class="mat-row" *matNoDataRow>
                             <td class="mat-cell" [colSpan]="displayedColumns.length">
                                 <div class="flex flex-col text-center p-12 space-y-4">

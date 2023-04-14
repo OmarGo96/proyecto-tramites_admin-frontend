@@ -96,7 +96,7 @@ export class ServicesComponent implements OnInit {
         const dialogRef = this.dialog.open(ServicesModalComponent, config);
 
         dialogRef.afterClosed().subscribe(res => {
-            console.log('The dialog was closed');
+            this.getUuid();
         });
     }
 
@@ -111,7 +111,7 @@ export class ServicesComponent implements OnInit {
         const dialogRef = this.dialog.open(RequirementsModalComponent, config);
 
         dialogRef.afterClosed().subscribe(res => {
-            console.log('The dialog was closed');
+            this.getUuid();
         });
     }
 }
