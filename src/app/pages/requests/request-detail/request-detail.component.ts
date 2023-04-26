@@ -32,6 +32,7 @@ export class RequestDetailComponent implements OnInit {
     public reqAccepted: any;
     public reqChecked: any;
     public paymentDocs: any;
+    public anuenciaDoc = false;
     public statuses: any;
     public messages: any;
     public histories: any;
@@ -106,13 +107,16 @@ export class RequestDetailComponent implements OnInit {
                 this.request = res.solicitud;
                 this.requeriments = res.requisitos;
 
-                console.log(this.requeriments);
+                console.log(this.request);
 
                 this.reqWithDocuments = this.requeriments.filter((req: any) => req.Requisito.Documento); // requisitos con documentos
                 this.reqChecked = this.requeriments.filter((req: any) => req.Requisito.Documento && (req.Requisito.Documento.estatus === -1 || req.Requisito.Documento.estatus === 1 || req.Requisito.Documento.estatus === 3));
                 this.reqRejected = this.requeriments.filter((req: any) => req.Requisito.Documento && req.Requisito.Documento.estatus === -1); // requisitos rechazados
                 this.reqAccepted = this.requeriments.filter((req: any) => req.Requisito.Documento && req.Requisito.Documento.estatus === 1); // requisitos aceptados
                 this.paymentDocs = this.request.DocumentosPago.filter((req: any) => req.estatus === 1 || req.estatus === -1);
+                this.anuenciaDoc = this.request.DocumentoAnuencia && (this.request.DocumentoAnuencia.status === 1 || this.request.DocumentoAnuencia.status === -1);
+
+                console.log(this.anuenciaDoc);
 
                 this.dataSource = new MatTableDataSource(res.requisitos);
 
@@ -173,6 +177,21 @@ export class RequestDetailComponent implements OnInit {
         });
     }
 
+    openAnuenciaDocument(requestId: any) {
+        this.spinner.show();
+        this.documentsService.getAnuenciaDocument(requestId).subscribe({
+            next: res => {
+                this.spinner.hide();
+                let url = URL.createObjectURL(res);
+                window.open(url, '_blank');
+            },
+            error: err => {
+                this.spinner.hide();
+                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+            }
+        });
+    }
+
     acceptOrDenyDocument(estatus: any, documentId: any) {
         this.spinner.show();
         let data = {
@@ -204,7 +223,25 @@ export class RequestDetailComponent implements OnInit {
         this.requestsService.updateEstatusPaymentDoc(documentId, data).subscribe({
                 next: res => {
                     this.spinner.hide();
-                    // this.openSnackBar(estatus === 1 ? 'Se acepto el documento' : estatus === 3 ? 'El archivo no es requerido' : 'Se rechazo el documento', '')
+                    this.getId();
+                },
+                error: err => {
+                    this.spinner.hide();
+                    this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+                }
+            }
+        );
+    }
+
+    acceptOrDenyAnuenciaDocs(estatus: any, documentId: any){
+        this.spinner.show();
+        let data = {
+            'estatus': estatus.toString()
+        };
+
+        this.requestsService.updateEstatusAnuenciaDoc(documentId, data).subscribe({
+                next: res => {
+                    this.spinner.hide();
                     this.getId();
                 },
                 error: err => {

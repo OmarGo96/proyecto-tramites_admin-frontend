@@ -35,4 +35,8 @@ export class DocumentsService {
     public digitalizarDocumento(requestId: any, data: any): Observable<any> {
         return this.httpClient.post(`${this.urlApi}/solicitud/documento-digital/${requestId}`, data, {headers: this.headers})
     }
+
+    public getAnuenciaDocument(requestId: any): Observable<any> {
+        return this.httpClient.get(`${this.urlApi}/solicitud/documento-anuencia/${requestId}`, { responseType: 'blob' });
+    }
 }

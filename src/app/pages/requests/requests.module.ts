@@ -23,6 +23,8 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { ElaborationRequestsComponent } from './elaboration-requests/elaboration-requests.component';
 import { PendingPaymentDocRequestsComponent } from './pending-payment-doc-requests/pending-payment-doc-requests.component';
 import {NgxDropzoneModule} from "ngx-dropzone";
+import { ConsentGenerationComponent } from './consent-generation/consent-generation.component';
+import { ConsentValidationComponent } from './consent-validation/consent-validation.component';
 
 const routes: Routes = [
     {
@@ -36,6 +38,8 @@ const routes: Routes = [
     {path: 'pago', component: PaymentRequestsComponent},
     {path: 'validacion-pago', component: PaymentValidateComponent},
     {path: 'pagado', component: PaidRequestsComponent},
+    {path: 'pendiente-anuencia', component: ConsentGenerationComponent},
+    {path: 'validacion-anuencia', component: ConsentValidationComponent},
     {path: 'elaboracion', component: ElaborationRequestsComponent},
     {path: 'doc-pendiente', component: PendingPaymentDocRequestsComponent},
     {path: 'impresion', component: PrintingRequestsComponent},
@@ -72,7 +76,9 @@ const routes: Routes = [
         CancelledRequestsComponent,
         RequestDetailComponent,
         ElaborationRequestsComponent,
-        PendingPaymentDocRequestsComponent
+        PendingPaymentDocRequestsComponent,
+        ConsentGenerationComponent,
+        ConsentValidationComponent
     ],
     imports: [
         CommonModule,

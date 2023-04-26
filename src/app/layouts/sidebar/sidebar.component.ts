@@ -166,6 +166,26 @@ export const ROUTES = [
         class: ''
     },
     {
+        id: 22,
+        path: '/solicitudes/pendiente-anuencia',
+        group: 'SOLICITUDES',
+        module: 'solicitudes',
+        action: 'list',
+        title: 'Pend. anuencia prot. civil',
+        icon: 'fa-fire-extinguisher',
+        class: ''
+    },
+    {
+        id: 22,
+        path: '/solicitudes/validacion-anuencia',
+        group: 'SOLICITUDES',
+        module: 'solicitudes',
+        action: 'list',
+        title: 'Validación de anuencia',
+        icon: 'fa-person-circle-check',
+        class: ''
+    },
+    {
         id: 19,
         path: '/solicitudes/elaboracion',
         group: 'SOLICITUDES',
