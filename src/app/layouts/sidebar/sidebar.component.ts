@@ -277,6 +277,16 @@ export const ROUTES = [
     },
     {
         id: null,
+        path: '/requisitos',
+        group: 'ADMINISTRACIÓN',
+        module: 'requisitos',
+        action: 'list',
+        title: 'Requisitos',
+        icon: 'fa-list-check',
+        class: ''
+    },
+    {
+        id: null,
         path: '/usuarios',
         group: 'ADMINISTRACIÓN',
         module: 'usuarios',

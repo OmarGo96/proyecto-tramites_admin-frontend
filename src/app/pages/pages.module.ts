@@ -29,6 +29,7 @@ import { DeliveredRequestsComponent } from './requests/delivered-requests/delive
 import { PreventRequestsComponent } from './requests/prevent-requests/prevent-requests.component';
 import { CancelledRequestsComponent } from './requests/cancelled-requests/cancelled-requests.component';
 import { PaymentValidateComponent } from './requests/payment-validate/payment-validate.component';
+import { RequerimentsComponent } from './requeriments/requeriments.component';
 
 const routes: Routes = [
 
@@ -53,6 +54,7 @@ const routes: Routes = [
         ]
     },
     {path: 'dependencias', component: DependenciesComponent},
+    {path: 'requisitos', component: RequerimentsComponent},
     {path: 'tramites/:uuid', component: ServicesComponent},
     {path: 'servicio/:uuid', component: ServicesDetailComponent},
     {path: 'usuarios', component: UsersComponent},
@@ -70,6 +72,7 @@ const routes: Routes = [
         ProfileComponent,
         UsersComponent,
         RequestsComponent,
+        RequerimentsComponent,
     ],
     imports: [
         CommonModule,
