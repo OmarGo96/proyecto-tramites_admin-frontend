@@ -127,7 +127,7 @@ export class RequirementsModalComponent implements OnInit {
 
     getRequirements() {
         const serviceUuid = this.data.serviceUuid;
-        this.requirementsService.getRecords(serviceUuid).subscribe({
+        this.requirementsService.getRequerimentsByService(serviceUuid).subscribe({
             next: res => {
                 this.spinner.hide();
                 this.dataSource = new MatTableDataSource(res.requerimientos);

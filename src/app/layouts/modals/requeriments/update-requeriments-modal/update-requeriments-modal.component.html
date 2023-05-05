@@ -1,0 +1,37 @@
+<h2 mat-dialog-title>Actualizar Requisito</h2>
+<mat-dialog-content>
+    <form [formGroup]="requirementsForm">
+        <div>
+            <mat-label class="block text-sm font-medium text-slate-700">
+                Nombre del Requisito
+            </mat-label>
+            <mat-form-field appearance="outline" class="w-full">
+                <input matInput formControlName="nombre">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-label class="block text-sm font-medium text-slate-700">
+                Tipo de Documento
+            </mat-label>
+            <mat-form-field appearance="outline" class="w-full">
+                <mat-select formControlName="tipos_documentos_id" placeholder="Seleccionar tipo de documento">
+                    <mat-option *ngFor="let document of documentTypes"
+                                [value]="document.id">{{ document.nombre }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-label class="block text-sm font-medium text-slate-700">Descripción</mat-label>
+            <mat-form-field class="example-full-width" appearance="outline">
+                <textarea matInput formControlName="descripcion"></textarea>
+            </mat-form-field>
+        </div>
+        <div class="space-x-3">
+            <button mat-flat-button color="success" (click)="updateRequirement()">
+                <i class="fa-solid fa-arrows-rotate"></i>
+                Actualizar requisito
+            </button>
+        </div>
+    </form>
+</mat-dialog-content>

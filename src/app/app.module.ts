@@ -9,6 +9,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import localeEsMX from '@angular/common/locales/es-MX';
 import {NgxSpinnerModule} from "ngx-spinner";
 import {JwtInterceptor} from "./interceptors/jwt.interceptor";
+import {NgSelectModule} from "@ng-select/ng-select";
 
 registerLocaleData(localeEsMX, 'mx');
 
@@ -24,6 +25,7 @@ registerLocaleData(localeEsMX, 'mx');
         NgxSpinnerModule.forRoot({ type: 'ball-beat' }),
         LayoutsModule,
         BrowserAnimationsModule,
+        NgSelectModule
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     providers: [

@@ -11,6 +11,9 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
 import {NgxSpinnerService} from "ngx-spinner";
+import {
+    LinkRequerimentsModalComponent
+} from "../../layouts/modals/requeriments/link-requeriments-modal/link-requeriments-modal.component";
 
 @Component({
     selector: 'app-services',
@@ -23,7 +26,7 @@ export class ServicesComponent implements OnInit {
     public services: any;
 
     public dataSource: any;
-    public displayedColumns: string[] = ['tramite', 'requisitos', 'costo', 'accion'];
+    public displayedColumns: string[] = ['tramite', 'costo', 'requisitos', 'accion'];
     public expandedElement: any;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -100,15 +103,15 @@ export class ServicesComponent implements OnInit {
         });
     }
 
-    openRequirementsDialog(serviceUuid: any): void {
+    openRequirementsDialog(service: any): void {
         const config = {
             width: '100%',
             data: {
-                serviceUuid
+                service
             },
         }
 
-        const dialogRef = this.dialog.open(RequirementsModalComponent, config);
+        const dialogRef = this.dialog.open(LinkRequerimentsModalComponent, config);
 
         dialogRef.afterClosed().subscribe(res => {
             this.getUuid();

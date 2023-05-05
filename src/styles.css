@@ -29,15 +29,28 @@ body { margin: 0; }
 }
 /* End SweetAlert2 Custom */
 
+/* Buttons Custom */
+button{
+    @apply rounded-md !important;
+}
+/* End BUttons Custom */
+
 /* MatTables Custom */
 .mat-table{
     font-family: 'Inter var' !important;
 }
 
-th.mat-header-cell, td.mat-cell{
+/*th.mat-header-cell, td.mat-cell{
     @apply whitespace-nowrap pl-5 !important;
-}
+}*/
 /* End MatTables Custom */
+
+/* MatDialog Custom */
+.mat-dialog-container{
+    font-family: 'Inter var' !important;
+    border-radius: 0.8rem !important;
+}
+/* End MatDialog Custom */
 
 /* Primary Button Styling */
 

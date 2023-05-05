@@ -27,11 +27,23 @@ export class RequerimentsService {
         return this.httpClient.put(`${this.urlApi}/requerimientos/${requirementId}`, data, { headers: this.headers })
     }
 
-    public getRecords(serviceUuid: any): Observable <any> {
-        return this.httpClient.get(`${this.urlApi}/requerimientos/${serviceUuid}`, { headers: this.headers });
+    public getRequeriments(): Observable <any> {
+        return this.httpClient.get(`${this.urlApi}/requerimientos`);
     }
 
+    public activeInactiveRequeriment(requerimentUuid: any, data: any): Observable<any>{
+        return this.httpClient.patch(`${this.urlApi}/requerimientos/${requerimentUuid}`, data);
+    }
+
+    public getRequerimentsByService(serviceUuid: any): Observable <any> {
+        return this.httpClient.get(`${this.urlApi}/requerimientos-servicio/${serviceUuid}`, { headers: this.headers });
+    }
+
+    /*public getRequerimentsByService(serviceUuid: any): Observable <any> {
+        return this.httpClient.get(`${this.urlApi}/requerimientos/${serviceUuid}`, { headers: this.headers });
+    }*/
+
     public deleteRecord(requerimentUuid: any): Observable <any> {
-        return this.httpClient.delete(`${this.urlApi}/requerimientos/${requerimentUuid}`, { headers: this.headers });
+        return this.httpClient.delete(`${this.urlApi}/requerimientos/${requerimentUuid}`);
     }
 }

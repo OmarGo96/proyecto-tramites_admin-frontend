@@ -17,6 +17,12 @@ import {NgxDropzoneModule} from "ngx-dropzone";
 import { RequestHistoryModalComponent } from './modals/request-history-modal/request-history-modal.component';
 import { MessagesModalComponent } from './modals/messages-modal/messages-modal.component';
 import { UsersModalComponent } from './modals/users-modal/users-modal.component';
+import { CreateRequerimentsModalComponent } from './modals/requeriments/create-requeriments-modal/create-requeriments-modal.component';
+import { UpdateRequerimentsModalComponent } from './modals/requeriments/update-requeriments-modal/update-requeriments-modal.component';
+import {
+    LinkRequerimentsModalComponent
+} from "./modals/requeriments/link-requeriments-modal/link-requeriments-modal.component";
+import {NgSelectModule} from "@ng-select/ng-select";
 
 @NgModule({
     declarations: [
@@ -32,14 +38,18 @@ import { UsersModalComponent } from './modals/users-modal/users-modal.component'
         UploadModalComponent,
         RequestHistoryModalComponent,
         MessagesModalComponent,
-        UsersModalComponent
+        UsersModalComponent,
+        CreateRequerimentsModalComponent,
+        UpdateRequerimentsModalComponent,
+        LinkRequerimentsModalComponent
     ],
     imports: [
         CommonModule,
         MaterialModule,
         RouterModule,
         ReactiveFormsModule,
-        NgxDropzoneModule
+        NgxDropzoneModule,
+        NgSelectModule
     ],
     exports: [
         ExcerptPipe,
