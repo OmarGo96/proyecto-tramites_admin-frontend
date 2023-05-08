@@ -9,6 +9,7 @@ import {MatSelect} from "@angular/material/select";
 import {RequestsStatus} from "../../../../const/status";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
+import {FormBuilder} from "@angular/forms";
 
 @Component({
     selector: 'app-link-requeriments-modal',
@@ -32,6 +33,7 @@ export class LinkRequerimentsModalComponent implements OnInit {
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
         private requerimentsService: RequerimentsService,
+        private formBuilder: FormBuilder,
         private messagesService: MessageService,
         private router: Router,
         private spinner: NgxSpinnerService,
@@ -41,7 +43,7 @@ export class LinkRequerimentsModalComponent implements OnInit {
 
     ngOnInit(): void {
         this.service = this.data.service;
-        this.getRequeriments();
+        // this.getRequeriments();
         this.getRequerimentsByService();
     }
 
@@ -50,15 +52,19 @@ export class LinkRequerimentsModalComponent implements OnInit {
         this.requerimentsService.getRequerimentsByService(this.service.uuid).subscribe({
             next: res => {
                 this.spinner.hide();
-                this.dataSource = new MatTableDataSource(res.solicitudes);
+                this.dataSource = new MatTableDataSource(res.requerimientos);
                 this.dataSource.paginator = this.paginator;
                 this.dataSource.sort = this.sort;
             },
             error: err => {
                 this.spinner.hide();
-                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+                this.messagesService.errorAlert(err.error.errors);
             }
         });
+    }
+
+    assignRequeriment(){
+
     }
 
     getRequeriments(){

@@ -39,6 +39,10 @@ export class RequerimentsService {
         return this.httpClient.get(`${this.urlApi}/requerimientos-servicio/${serviceUuid}`, { headers: this.headers });
     }
 
+    public assignRequeriment(data: any): Observable <any> {
+        return this.httpClient.post(`${this.urlApi}/requerimiento/assign`, data)
+    }
+
     /*public getRequerimentsByService(serviceUuid: any): Observable <any> {
         return this.httpClient.get(`${this.urlApi}/requerimientos/${serviceUuid}`, { headers: this.headers });
     }*/
