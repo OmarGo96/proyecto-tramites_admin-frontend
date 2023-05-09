@@ -287,6 +287,10 @@
                                         <div class="border-b flex flex-col px-5 py-5">
                                             <dt class="mb-1 text-md">
                                                 Documentación Complementaria
+                                                <i class="fa-solid fa-circle-check text-emerald-600"
+                                                   *ngIf="request.DocumentosComplementarios && request.DocumentosComplementarios.status === 1"></i>
+                                                <i class="fa-solid fa-circle-xmark text-red-600"
+                                                   *ngIf="request.DocumentosComplementarios && request.DocumentosComplementarios.status === -1"></i>
                                             </dt>
                                             <dd class="flex items-center justify-between items-center font-medium text-gray-500">
                                                 <div class="flex space-x-2">
@@ -299,7 +303,7 @@
                                                         </a>
                                                     </div>
                                                     <mat-radio-group required
-                                                                     *ngIf="request.DocumentosComplementarios.status === 0 || request.DocumentosComplementarios.status === 1">
+                                                                     *ngIf="request.DocumentosComplementarios.status === 0 || request.DocumentosComplementarios.status === 1 || request.DocumentosComplementarios.status === -1">
                                                         <mat-radio-button value="1"
                                                                           [checked]="(request.DocumentosComplementarios.status === 1)"
                                                                           color="primary" class="mr-3 text-xs"

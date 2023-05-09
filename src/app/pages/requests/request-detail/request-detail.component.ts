@@ -105,9 +105,8 @@ export class RequestDetailComponent implements OnInit {
                 this.spinner.hide();
 
                 this.request = res.solicitud;
-                this.requeriments = res.requisitos;
-
                 console.log(this.request);
+                this.requeriments = res.requisitos;
 
                 this.reqWithDocuments = this.requeriments.filter((req: any) => req.Requisito.Documento); // requisitos con documentos
                 this.reqChecked = this.requeriments.filter((req: any) => req.Requisito.Documento && (req.Requisito.Documento.estatus === -1 || req.Requisito.Documento.estatus === 1 || req.Requisito.Documento.estatus === 3));
@@ -115,8 +114,6 @@ export class RequestDetailComponent implements OnInit {
                 this.reqAccepted = this.requeriments.filter((req: any) => req.Requisito.Documento && req.Requisito.Documento.estatus === 1); // requisitos aceptados
                 this.paymentDocs = this.request.DocumentosPago.filter((req: any) => req.estatus === 1 || req.estatus === -1);
                 this.anuenciaDoc = this.request.DocumentoAnuencia && (this.request.DocumentoAnuencia.status === 1 || this.request.DocumentoAnuencia.status === -1);
-
-                console.log(this.anuenciaDoc);
 
                 this.dataSource = new MatTableDataSource(res.requisitos);
 
