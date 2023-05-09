@@ -18,12 +18,14 @@ import {FormBuilder} from "@angular/forms";
 })
 export class LinkRequerimentsModalComponent implements OnInit {
 
+    public assignRequerimentForm: any;
+
     public requeriments: any;
 
     public service: any
 
     public dataSource: any;
-    public displayedColumns: string[] = ['nombre', 'accion'];
+    public displayedColumns: string[] = ['nombre', 'obligatorio','original', 'no_copias', 'fecha_alta'];
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
@@ -43,8 +45,19 @@ export class LinkRequerimentsModalComponent implements OnInit {
 
     ngOnInit(): void {
         this.service = this.data.service;
-        // this.getRequeriments();
+        this.getRequeriments();
+        this.initAssignRequerimentForm();
         this.getRequerimentsByService();
+    }
+
+    initAssignRequerimentForm(){
+        this.assignRequerimentForm = this.formBuilder.group({
+            servicio_uuid: [this.service.uuid],
+            requisito_id: [''],
+            no_copias: [''],
+            original: [''],
+            obligatorio: ['']
+        })
     }
 
     getRequerimentsByService(){
@@ -64,7 +77,19 @@ export class LinkRequerimentsModalComponent implements OnInit {
     }
 
     assignRequeriment(){
-
+        this.spinner.show();
+        const data = this.assignRequerimentForm.value;
+        this.requerimentsService.assignRequeriment(data).subscribe({
+            next: res => {
+                this.spinner.hide();
+                this.messagesService.printStatus(res.message, 'success');
+                this.getRequerimentsByService();
+            },
+            error: err => {
+                this.spinner.hide();
+                this.messagesService.errorAlert(err.error.errors);
+            }
+        })
     }
 
     getRequeriments(){
@@ -73,13 +98,11 @@ export class LinkRequerimentsModalComponent implements OnInit {
             next: res => {
                 this.spinner.hide();
                 this.requeriments = res.requerimientos;
-                console.log(this.requeriments);
             },
             error: err => {
-                console.log(err);
+                this.spinner.hide();
+                this.messagesService.errorAlert(err.error.errors);
             }
         });
     }
-
-    protected readonly RequestsStatus = RequestsStatus;
 }

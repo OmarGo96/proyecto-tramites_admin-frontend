@@ -43,36 +43,48 @@
                                 </li>
                                 <li class="flex items-center space-x-2.5"
                                     [ngClass]="request.estatus_solicitud_id === 10 || request.estatus_solicitud_id === 20? 'text-blue-600' : 'text-gray-300'">
-                                <span
-                                    class="flex items-center justify-center w-8 h-8 border rounded-full shrink-0"
-                                    [ngClass]="request.estatus_solicitud_id === 10 || request.estatus_solicitud_id === 20 ? 'border-blue-600' : 'border-gray-300'">
-                                    2
-                                </span>
+                                    <span
+                                        class="flex items-center justify-center w-8 h-8 border rounded-full shrink-0"
+                                        [ngClass]="request.estatus_solicitud_id === 10 || request.estatus_solicitud_id === 20 ? 'border-blue-600' : 'border-gray-300'">
+                                        2
+                                    </span>
                                     <span>
-                                    <p class="text-sm">Validación de pago</p>
-                                </span>
+                                        <p class="text-sm">Validación de pago</p>
+                                    </span>
                                 </li>
-                                <li class="flex items-center space-x-2.5"
+                                <li class="flex items-center space-x-2.5" *ngIf="request.servicio_id === 6 || request.servicio_id === 7"
                                     [ngClass]="request.estatus_solicitud_id === 23 ? 'text-blue-600' : 'text-gray-300'">
-                                <span
-                                    class="flex items-center justify-center w-8 h-8 border rounded-full shrink-0"
-                                    [ngClass]="request.estatus_solicitud_id === 23 ? 'border-blue-600' : 'border-gray-300'">
-                                    3
-                                </span>
+                                    <span
+                                        class="flex items-center justify-center w-8 h-8 border rounded-full shrink-0"
+                                        [ngClass]="request.estatus_solicitud_id === 23 ? 'border-blue-600' : 'border-gray-300'">
+                                        3
+                                    </span>
                                     <span>
-                                    <p class="text-sm">Anuencia de protección civil</p>
-                                </span>
+                                        <p class="text-sm">Anuencia de protección civil</p>
+                                    </span>
+                                </li>
+
+                                <li class="flex items-center space-x-2.5" *ngIf="request.servicio_id === 15"
+                                    [ngClass]="request.estatus_solicitud_id === 25 ? 'text-blue-600' : 'text-gray-300'">
+                                    <span
+                                        class="flex items-center justify-center w-8 h-8 border rounded-full shrink-0"
+                                        [ngClass]="request.estatus_solicitud_id === 25 ? 'border-blue-600' : 'border-gray-300'">
+                                        3
+                                    </span>
+                                    <span>
+                                        <p class="text-sm">Documentación complementaria</p>
+                                    </span>
                                 </li>
                                 <li class="flex items-center space-x-2.5"
                                     [ngClass]="request.estatus_solicitud_id === 17 ? 'text-blue-600' : 'text-gray-300'">
-                                <span
-                                    class="flex items-center justify-center w-8 h-8 border rounded-full shrink-0"
-                                    [ngClass]="request.estatus_solicitud_id === 17 ? 'border-blue-600' : 'border-gray-300'">
-                                    4
-                                </span>
+                                    <span
+                                        class="flex items-center justify-center w-8 h-8 border rounded-full shrink-0"
+                                        [ngClass]="request.estatus_solicitud_id === 17 ? 'border-blue-600' : 'border-gray-300'">
+                                        4
+                                    </span>
                                     <span>
-                                    <p class="text-sm">Digitalización de documento</p>
-                                </span>
+                                        <p class="text-sm">Digitalización de documento</p>
+                                    </span>
                                 </li>
                             </ol>
 
@@ -84,7 +96,7 @@
                             </div>
                             <!-- Form para actualizar estatus -->
                             <form [formGroup]="solicitudForm" class="flex justify-between items-center"
-                                  *ngIf="(reqChecked && reqChecked.length === reqWithDocuments.length && request.DocumentosPago.length === paymentDocs.length) && (request.estatus_solicitud_id !== 10 && request.estatus_solicitud_id !== 5 && request.estatus_solicitud_id !== 21 && request.estatus_solicitud_id !== 22) || (request.DocumentoAnuencia && anuenciaDoc)">
+                                  *ngIf="(reqChecked && reqChecked.length === reqWithDocuments.length && request.DocumentosPago.length === paymentDocs.length) && (request.estatus_solicitud_id !== 10 && request.estatus_solicitud_id !== 5 && request.estatus_solicitud_id !== 21 && request.estatus_solicitud_id !== 22 && request.estatus_solicitud_id !== 24) || (request.DocumentoAnuencia && anuenciaDoc)">
                                 <mat-form-field appearance="legacy" class="w-full mr-5">
                                     <mat-label>Selecciona estatus</mat-label>
                                     <mat-select formControlName="estatus_solicitud_id">
@@ -267,6 +279,62 @@
                             </div>
                         </ng-container>
 
+                        <!-- Validación complementaria -->
+                        <ng-container *ngIf="request.estatus_solicitud_id === 25">
+                            <div class="border-t border-gray-200">
+                                <dl class="pb-5 text-gray-900">
+                                    <ng-container *ngIf="request.DocumentosComplementarios">
+                                        <div class="border-b flex flex-col px-5 py-5">
+                                            <dt class="mb-1 text-md">
+                                                Documentación Complementaria
+                                            </dt>
+                                            <dd class="flex items-center justify-between items-center font-medium text-gray-500">
+                                                <div class="flex space-x-2">
+                                                    <div class="mr-4">
+                                                        <i class="fa-solid fa-file-pdf text-blue-600"></i>
+                                                        <a (click)="openDocument(request.DocumentosComplementarios.id)"
+                                                           class="text-xs text-blue-600 hover:underline hover:cursor-pointer"
+                                                           *ngIf="request.DocumentosComplementarios">
+                                                            Ver adjunto
+                                                        </a>
+                                                    </div>
+                                                    <mat-radio-group required
+                                                                     *ngIf="request.DocumentosComplementarios.status === 0 || request.DocumentosComplementarios.status === 1">
+                                                        <mat-radio-button value="1"
+                                                                          [checked]="(request.DocumentosComplementarios.status === 1)"
+                                                                          color="primary" class="mr-3 text-xs"
+                                                                          (click)="acceptOrDenyComplementaryDocs(1, request.DocumentosComplementarios.id)">
+                                                            Aceptar
+                                                        </mat-radio-button>
+                                                        <mat-radio-button value="-1"
+                                                                          [checked]="(request.DocumentosComplementarios.status === -1)"
+                                                                          color="primary" class="mr-3 text-xs"
+                                                                          (click)="acceptOrDenyComplementaryDocs(-1, request.DocumentosComplementarios.id)">
+                                                            Rechazar
+                                                        </mat-radio-button>
+                                                    </mat-radio-group>
+
+                                                    <span *ngIf="request.DocumentosComplementarios.status === 1"
+                                                          class="bg-green-200 items-center text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">
+                                                        <i class="fa-solid fa-circle-check"></i>
+                                                        Aceptado
+                                                    </span>
+                                                </div>
+                                            </dd>
+                                        </div>
+                                    </ng-container>
+                                </dl>
+                            </div>
+
+                            <!--<div class="px-4 pb-4 text-right"
+                                 *ngIf="request.estatus_solicitud_id === 10 && request.DocumentosPago.length === paymentDocs.length">
+                                <button mat-flat-button (click)="validatePayment('20')" class="rounded-md"
+                                        color="success">
+                                    Validar pago
+                                </button>
+                            </div>-->
+                        </ng-container>
+
 
                         <!-- Digitalización de documento -->
                         <ng-container *ngIf="request.estatus_solicitud_id === 17">
@@ -310,14 +378,24 @@
                             <div class="w-full mx-auto block p-10 text-center space-y-3">
                                 <i class="fa-solid fa-user-clock fa-5x text-slate-600"></i>
                                 <div>
-                                    <p class="font-medium text-lg">La solicitud esta en en proceso Anuencia de Protección Civil por el
-                                        contribuyente</p>
+                                    <p class="font-medium text-lg">La solicitud esta en en proceso Anuencia de
+                                        Protección Civil por el contribuyente</p>
                                 </div>
                             </div>
                         </ng-container>
 
                         <ng-container
-                            *ngIf="request.estatus_solicitud_id === 11 || request.estatus_solicitud_id === 19 || request.estatus_solicitud_id === 16 || request.estatus_solicitud_id === 8">
+                            *ngIf="request.estatus_solicitud_id === 24">
+                            <div class="w-full mx-auto block p-10 text-center space-y-3">
+                                <i class="fa-solid fa-user-clock fa-5x text-slate-600"></i>
+                                <div>
+                                    <p class="font-medium text-lg">El contribuyente esta subiendo la documentación complementaria</p>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                        <ng-container
+                            *ngIf="request.estatus_solicitud_id === 11 || request.estatus_solicitud_id === 19 || request.estatus_solicitud_id === 15 || request.estatus_solicitud_id === 16 || request.estatus_solicitud_id === 8">
                             <div class="w-full mx-auto block p-10 text-center space-y-3">
                                 <i class="fa-solid fa-circle-right fa-5x text-slate-600"></i>
                                 <div>

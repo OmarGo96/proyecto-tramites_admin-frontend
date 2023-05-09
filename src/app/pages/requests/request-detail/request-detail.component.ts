@@ -233,6 +233,25 @@ export class RequestDetailComponent implements OnInit {
         );
     }
 
+    acceptOrDenyComplementaryDocs(estatus: any, documentId: any){
+        this.spinner.show();
+        let data = {
+            'status': estatus.toString()
+        };
+
+        this.requestsService.updateEstatusComplementaryDoc(documentId, data).subscribe({
+                next: res => {
+                    this.spinner.hide();
+                    this.getId();
+                },
+                error: err => {
+                    this.spinner.hide();
+                    this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+                }
+            }
+        );
+    }
+
     acceptOrDenyAnuenciaDocs(estatus: any, documentId: any){
         this.spinner.show();
         let data = {

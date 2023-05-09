@@ -38,6 +38,10 @@ export class RequestsService {
         return this.httpClient.put(`${this.urlApi}/validar_documentacion_pago/${id}`, data, {headers: this.headers});
     }
 
+    public updateEstatusComplementaryDoc(id: any, data: any): Observable <any> {
+        return this.httpClient.put(`${this.urlApi}/validar-documento-complementario/${id}`, data, {headers: this.headers});
+    }
+
     public updateEstatusAnuenciaDoc(docAnuenciaId: any, data: any): Observable <any> {
         return this.httpClient.put(`${this.urlApi}/solicitud/validar-anuencia/${docAnuenciaId}`, data, {headers: this.headers});
     }
