@@ -112,7 +112,7 @@ export class RequestDetailComponent implements OnInit {
                 this.reqChecked = this.requeriments.filter((req: any) => req.Requisito.Documento && (req.Requisito.Documento.estatus === -1 || req.Requisito.Documento.estatus === 1 || req.Requisito.Documento.estatus === 3));
                 this.reqRejected = this.requeriments.filter((req: any) => req.Requisito.Documento && req.Requisito.Documento.estatus === -1); // requisitos rechazados
                 this.reqAccepted = this.requeriments.filter((req: any) => req.Requisito.Documento && req.Requisito.Documento.estatus === 1); // requisitos aceptados
-                this.paymentDocs = this.request.DocumentosPago.filter((req: any) => req.estatus === 1 || req.estatus === -1);
+                this.paymentDocs = this.request.DocumentosPago.filter((req: any) => req.status === 1 || req.status === -1);
                 this.anuenciaDoc = this.request.DocumentoAnuencia && (this.request.DocumentoAnuencia.status === 1 || this.request.DocumentoAnuencia.status === -1);
 
                 this.dataSource = new MatTableDataSource(res.requisitos);
@@ -214,10 +214,30 @@ export class RequestDetailComponent implements OnInit {
         this.spinner.show();
         let data = {
             'documentacion_pago_id': documentId.toString(),
-            'estatus': estatus.toString()
+            'status': estatus.toString()
         };
 
         this.requestsService.updateEstatusPaymentDoc(documentId, data).subscribe({
+                next: res => {
+                    this.spinner.hide();
+                    this.getId();
+                },
+                error: err => {
+                    this.spinner.hide();
+                    this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+                }
+            }
+        );
+    }
+
+    acceptOrDenyAnuenciatDocs(estatus: any, documentId: any){
+        this.spinner.show();
+        let data = {
+            'documentacion_anuencia_id': documentId.toString(),
+            'status': estatus.toString()
+        };
+
+        this.requestsService.updateEstatusAnuenciaDoc(documentId, data).subscribe({
                 next: res => {
                     this.spinner.hide();
                     this.getId();

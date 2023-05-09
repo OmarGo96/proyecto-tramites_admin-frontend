@@ -197,22 +197,22 @@
                                                         </a>
                                                     </div>
                                                     <mat-radio-group required
-                                                                     *ngIf="document.estatus === 0 || document.estatus -1">
+                                                                     *ngIf="document.status === 0 || document.status -1">
                                                         <mat-radio-button value="1"
-                                                                          [checked]="(document.estatus === 1)"
+                                                                          [checked]="(document.status === 1)"
                                                                           color="primary" class="mr-3 text-xs"
                                                                           (click)="acceptOrDenyPaymentDocs(1, document.id)">
                                                             Aceptar
                                                         </mat-radio-button>
                                                         <mat-radio-button value="-1"
-                                                                          [checked]="(document.estatus === -1)"
+                                                                          [checked]="(document.status === -1)"
                                                                           color="primary" class="mr-3 text-xs"
                                                                           (click)="acceptOrDenyPaymentDocs(-1, document.id)">
                                                             Rechazar
                                                         </mat-radio-button>
                                                     </mat-radio-group>
 
-                                                    <span *ngIf="document.estatus === 1"
+                                                    <span *ngIf="document.status === 1"
                                                           class="bg-green-200 items-center text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">
                                                         <i class="fa-solid fa-circle-check"></i>
                                                         Aceptado
@@ -237,40 +237,42 @@
                         <ng-container *ngIf="request.estatus_solicitud_id === 23">
                             <div class="border-t border-gray-200">
                                 <dl class="pb-5 text-gray-900">
-                                    <ng-container *ngIf="request.DocumentoAnuencia">
+                                    <ng-container *ngFor="let document of request.DocumentosAnuencia">
                                         <div class="border-b flex flex-col px-5 py-5">
                                             <dt class="mb-1 text-md">
-                                                ANUENCIA DE PROTECCIÓN CIVIL
-                                                <i class="fa-solid fa-circle-check text-emerald-600"
-                                                   *ngIf="request.DocumentoAnuencia.status === 1"></i>
-                                                <i class="fa-solid fa-circle-xmark text-red-600"
-                                                   *ngIf="request.DocumentoAnuencia.status === -1"></i>
+                                                {{ document.Documentacion.nombre_otro }}
                                             </dt>
                                             <dd class="flex items-center justify-between items-center font-medium text-gray-500">
                                                 <div class="flex space-x-2">
                                                     <div class="mr-4">
                                                         <i class="fa-solid fa-file-pdf text-blue-600"></i>
-                                                        <a (click)="openAnuenciaDocument(request.DocumentoAnuencia.solicitud_id)"
+                                                        <a (click)="openDocument(document.Documentacion.id)"
                                                            class="text-xs text-blue-600 hover:underline hover:cursor-pointer"
-                                                           *ngIf="request.DocumentoAnuencia">
+                                                           *ngIf="document.Documentacion">
                                                             Ver adjunto
                                                         </a>
                                                     </div>
-                                                    <mat-radio-group required>
+                                                    <mat-radio-group required
+                                                                     *ngIf="document.status === 0 || document.status -1">
                                                         <mat-radio-button value="1"
-                                                                          [checked]="(request.DocumentoAnuencia.status === 1)"
+                                                                          [checked]="(document.status === 1)"
                                                                           color="primary" class="mr-3 text-xs"
-                                                                          (click)="acceptOrDenyAnuenciaDocs(1, request.DocumentoAnuencia.id)">
+                                                                          (click)="acceptOrDenyAnuenciatDocs(1, document.id)">
                                                             Aceptar
                                                         </mat-radio-button>
                                                         <mat-radio-button value="-1"
-                                                                          [checked]="(request.DocumentoAnuencia.status === -1)"
+                                                                          [checked]="(document.status === -1)"
                                                                           color="primary" class="mr-3 text-xs"
-                                                                          (click)="acceptOrDenyAnuenciaDocs(-1, request.DocumentoAnuencia.id)">
+                                                                          (click)="acceptOrDenyAnuenciatDocs(-1, document.id)">
                                                             Rechazar
                                                         </mat-radio-button>
                                                     </mat-radio-group>
 
+                                                    <span *ngIf="document.status === 1"
+                                                          class="bg-green-200 items-center text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">
+                                                        <i class="fa-solid fa-circle-check"></i>
+                                                        Aceptado
+                                                    </span>
                                                 </div>
                                             </dd>
                                         </div>
