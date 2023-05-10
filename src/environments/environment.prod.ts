@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  urlApi: 'https://development.ismx.com.mx:8000/api',
+  urlApi: 'http://189.240.200.7:8028/api',
 };
