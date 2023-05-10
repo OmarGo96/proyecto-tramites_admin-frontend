@@ -25,6 +25,8 @@ import { PendingPaymentDocRequestsComponent } from './pending-payment-doc-reques
 import {NgxDropzoneModule} from "ngx-dropzone";
 import { ConsentGenerationComponent } from './consent-generation/consent-generation.component';
 import { ConsentValidationComponent } from './consent-validation/consent-validation.component';
+import { ComplementaryDocsRequestComponent } from './complementary-docs-request/complementary-docs-request.component';
+import { ComplementaryDocsValidationComponent } from './complementary-docs-validation/complementary-docs-validation.component';
 
 const routes: Routes = [
     {
@@ -40,6 +42,8 @@ const routes: Routes = [
     {path: 'pagado', component: PaidRequestsComponent},
     {path: 'pendiente-anuencia', component: ConsentGenerationComponent},
     {path: 'validacion-anuencia', component: ConsentValidationComponent},
+    {path: 'documentacion-complementaria', component: ComplementaryDocsRequestComponent},
+    {path: 'validacion-documentacion-complementaria', component: ComplementaryDocsValidationComponent},
     {path: 'elaboracion', component: ElaborationRequestsComponent},
     {path: 'doc-pendiente', component: PendingPaymentDocRequestsComponent},
     {path: 'impresion', component: PrintingRequestsComponent},
@@ -78,7 +82,9 @@ const routes: Routes = [
         ElaborationRequestsComponent,
         PendingPaymentDocRequestsComponent,
         ConsentGenerationComponent,
-        ConsentValidationComponent
+        ConsentValidationComponent,
+        ComplementaryDocsRequestComponent,
+        ComplementaryDocsValidationComponent
     ],
     imports: [
         CommonModule,

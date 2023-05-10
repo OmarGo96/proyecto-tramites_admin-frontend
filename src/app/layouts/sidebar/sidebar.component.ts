@@ -176,13 +176,33 @@ export const ROUTES = [
         class: ''
     },
     {
-        id: 22,
+        id: 23,
         path: '/solicitudes/validacion-anuencia',
         group: 'SOLICITUDES',
         module: 'solicitudes',
         action: 'list',
         title: 'Validación de anuencia',
         icon: 'fa-person-circle-check',
+        class: ''
+    },
+    {
+        id: 24,
+        path: '/solicitudes/documentacion-complementaria',
+        group: 'SOLICITUDES',
+        module: 'solicitudes',
+        action: 'list',
+        title: 'Documentación complementaria',
+        icon: 'fa-file',
+        class: ''
+    },
+    {
+        id: 25,
+        path: '/solicitudes/validacion-documentacion-complementaria',
+        group: 'SOLICITUDES',
+        module: 'solicitudes',
+        action: 'list',
+        title: 'Val. de doc. complementaria',
+        icon: 'fa-file-circle-check',
         class: ''
     },
     {

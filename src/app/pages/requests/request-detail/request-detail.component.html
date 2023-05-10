@@ -32,14 +32,14 @@
                             <ol class=" items-center w-full space-y-4 sm:flex sm:space-x-8 sm:space-y-0">
                                 <li class="flex items-center space-x-2.5"
                                     [ngClass]="request.estatus_solicitud_id === 1 || request.estatus_solicitud_id === 2 || request.estatus_solicitud_id === 12 || request.estatus_solicitud_id === 5 ? 'text-blue-600' : 'text-gray-300'">
-                                <span
-                                    class="flex items-center justify-center w-8 h-8 border rounded-full shrink-0"
-                                    [ngClass]="request.estatus_solicitud_id === 1 || request.estatus_solicitud_id === 2 || request.estatus_solicitud_id === 12 || request.estatus_solicitud_id === 5 ? 'border-blue-600' : 'border-gray-300'">
-                                    1
-                                </span>
+                                    <span
+                                        class="flex items-center justify-center w-8 h-8 border rounded-full shrink-0"
+                                        [ngClass]="request.estatus_solicitud_id === 1 || request.estatus_solicitud_id === 2 || request.estatus_solicitud_id === 12 || request.estatus_solicitud_id === 5 ? 'border-blue-600' : 'border-gray-300'">
+                                        1
+                                    </span>
                                     <span>
-                                    <p class="text-sm">Revisión de requisitos</p>
-                                </span>
+                                        <p class="text-sm">Revisión de requisitos</p>
+                                    </span>
                                 </li>
                                 <li class="flex items-center space-x-2.5"
                                     [ngClass]="request.estatus_solicitud_id === 10 || request.estatus_solicitud_id === 20? 'text-blue-600' : 'text-gray-300'">
@@ -75,6 +75,17 @@
                                         <p class="text-sm">Documentación complementaria</p>
                                     </span>
                                 </li>
+                                <!--<li class="flex items-center space-x-2.5"
+                                    [ngClass]="request.estatus_solicitud_id === 17 ? 'text-blue-600' : 'text-gray-300'">
+                                    <span
+                                        class="flex items-center justify-center w-8 h-8 border rounded-full shrink-0"
+                                        [ngClass]="request.estatus_solicitud_id === 17 ? 'border-blue-600' : 'border-gray-300'">
+                                        4
+                                    </span>
+                                    <span>
+                                        <p class="text-sm">Pase caja</p>
+                                    </span>
+                                </li>-->
                                 <li class="flex items-center space-x-2.5"
                                     [ngClass]="request.estatus_solicitud_id === 17 ? 'text-blue-600' : 'text-gray-300'">
                                     <span
