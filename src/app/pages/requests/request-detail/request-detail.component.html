@@ -5,6 +5,7 @@
                 <div>
                     <div class="text-3xl font-semibold tracking-tight leading-8">Trámite
                         de: {{ request.Servicio.nombre }}</div>
+
                     <div class="font-medium tracking-tight text-slate-500">
                         Se creo el: <b>{{ request.fecha_alta | date: 'longDate' }}</b>
                     </div>
@@ -16,6 +17,9 @@
                                 <span class="whitespace-nowrap text-xs">{{status.name}}</span>
                             </span>
                         </ng-container>
+                    </div>
+                    <div class="font-medium tracking-tight text-slate-500">
+                        Folio de la solicitud: <b>{{ request.folio }}</b>
                     </div>
                 </div>
             </div>
