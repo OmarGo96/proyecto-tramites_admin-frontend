@@ -51,6 +51,11 @@ export const RequestsStatus = [
         styles: 'bg-indigo-200 text-indigo-800'
     },
     {
+        name: 'Generación de pase a caja',
+        value: 26,
+        styles: 'bg-indigo-200 text-indigo-800'
+    },
+    {
         name: 'Pagado',
         value: 11,
         styles: 'bg-green-200 text-green-800'

@@ -126,6 +126,16 @@ export const ROUTES = [
         class: ''
     },
     {
+        id: 26,
+        path: '/solicitudes/pase-caja',
+        group: 'SOLICITUDES',
+        module: 'solicitudes',
+        action: 'list',
+        title: 'Generación pase a caja',
+        icon: 'fa-receipt',
+        class: ''
+    },
+    {
         id: 10,
         path: '/solicitudes/pago',
         group: 'SOLICITUDES',

@@ -39,4 +39,8 @@ export class DocumentsService {
     public getAnuenciaDocument(requestId: any): Observable<any> {
         return this.httpClient.get(`${this.urlApi}/solicitud/documento-anuencia/${requestId}`, { responseType: 'blob' });
     }
+
+    public generarPaseCaja(requestId: any, data: any): Observable<any> {
+        return this.httpClient.post(`${this.urlApi}/solicitud/pase-caja/${requestId}`, data, {headers: this.headers})
+    }
 }

@@ -15,6 +15,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {NgxSpinnerService} from "ngx-spinner";
 import {MensajesService} from "../../../services/mensajes.service";
 import {RequestsStatus} from "../../../const/status";
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-request-detail',
@@ -24,6 +25,7 @@ import {RequestsStatus} from "../../../const/status";
 export class RequestDetailComponent implements OnInit {
 
     public solicitudForm: any;
+    public paseCajaForm: any;
 
     public request: any;
     public requeriments: any;
@@ -53,6 +55,10 @@ export class RequestDetailComponent implements OnInit {
     public loading = false;
     public disabledButton = false;
 
+    public currentDate: any
+    public fechaVencimiento: any
+    public minDate = moment().format();
+
     constructor(
         private requestsService: RequestsService,
         private documentsService: DocumentsService,
@@ -71,6 +77,7 @@ export class RequestDetailComponent implements OnInit {
 
     ngOnInit(): void {
         this.getId();
+        this.initPaseCajaForm();
     }
 
     getId() {
@@ -98,6 +105,16 @@ export class RequestDetailComponent implements OnInit {
         });
     }
 
+    initPaseCajaForm(){
+        this.paseCajaForm = this.formBuilder.group({
+            folio: [''],
+            cantidad_pagar: [''],
+            vigencia: [''],
+            grupo_tramite_id: [''],
+            tramite_id: ['']
+        });
+    }
+
     getSolicitud(id: any) {
         this.spinner.show();
         this.requestsService.getRecord(id).subscribe({
@@ -105,7 +122,15 @@ export class RequestDetailComponent implements OnInit {
                 this.spinner.hide();
 
                 this.request = res.solicitud;
+
+                this.currentDate = moment(new Date).format('YYYY-MM-DD');
+                if (this.request.PaseCaja){
+                    this.fechaVencimiento = moment(this.request.PaseCaja.fecha_vencimiento).format('YYYY-MM-DD');
+                }
+
+                console.log(this.currentDate, this.fechaVencimiento);
                 console.log(this.request);
+
                 this.requeriments = res.requisitos;
 
                 this.reqWithDocuments = this.requeriments.filter((req: any) => req.Requisito.Documento); // requisitos con documentos
@@ -135,8 +160,6 @@ export class RequestDetailComponent implements OnInit {
             }
         });
     }
-
-
 
     updateRequest(){
         this.spinner.show();
@@ -419,6 +442,60 @@ export class RequestDetailComponent implements OnInit {
                 setTimeout(() => {
                     this.getId()
                 }, 1000);
+            },
+            error: err => {
+                this.spinner.hide();
+                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+            }
+        })
+    }
+
+    enviarPaseCaja() {
+        this.files.forEach(file => {
+            this.createPaseCaja(file);
+        });
+    }
+
+    createPaseCaja(file: any) {
+        this.spinner.show();
+        let formData = new FormData();
+        const folio = this.paseCajaForm.value.folio;
+        const cantidad_pagar  = this.paseCajaForm.value.cantidad_pagar;
+        const vigencia   = this.paseCajaForm.value.vigencia;
+
+
+        formData.append('file', file);
+        formData.append('folio', folio);
+        formData.append('cantidad_pagar', cantidad_pagar);
+        formData.append('vigencia', vigencia);
+        formData.append('grupo_tramite_id', this.request.Servicio.grupo_tramite_id.toString());
+        formData.append('tramite_id', this.request.Servicio.tramite_id.toString());
+
+        this.documentsService.generarPaseCaja(this.request.id.toString(), formData).subscribe({
+            next: res => {
+                this.messagesService.printStatus(res.message, 'success');
+                setTimeout(() => {
+                    this.updateStatus(10);
+                }, 1000);
+            },
+            error: err => {
+                this.spinner.hide();
+                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+            }
+        })
+    }
+
+    updateStatus(status: any){
+        const data = {
+            estatus_solicitud_id: status.toString(),
+            solicitud_id: this.request.id.toString()
+        };
+        this.requestsService.updateRecord(data).subscribe({
+            next: res => {
+                this.spinner.hide();
+                setTimeout(() => {
+                    this.getId();
+                }, 2500);
             },
             error: err => {
                 this.spinner.hide();

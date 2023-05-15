@@ -27,6 +27,7 @@ import { ConsentGenerationComponent } from './consent-generation/consent-generat
 import { ConsentValidationComponent } from './consent-validation/consent-validation.component';
 import { ComplementaryDocsRequestComponent } from './complementary-docs-request/complementary-docs-request.component';
 import { ComplementaryDocsValidationComponent } from './complementary-docs-validation/complementary-docs-validation.component';
+import { CheckoutGenerationComponent } from './checkout-generation/checkout-generation.component';
 
 const routes: Routes = [
     {
@@ -37,6 +38,7 @@ const routes: Routes = [
     {path: 'pendiente', component: PendingRequestsComponent},
     {path: 'calificacion', component: QualificationRequestsComponent},
     {path: 'inspeccion', component: InspectionRequestsComponent},
+    {path: 'pase-caja', component: CheckoutGenerationComponent},
     {path: 'pago', component: PaymentRequestsComponent},
     {path: 'validacion-pago', component: PaymentValidateComponent},
     {path: 'pagado', component: PaidRequestsComponent},
@@ -84,7 +86,8 @@ const routes: Routes = [
         ConsentGenerationComponent,
         ConsentValidationComponent,
         ComplementaryDocsRequestComponent,
-        ComplementaryDocsValidationComponent
+        ComplementaryDocsValidationComponent,
+        CheckoutGenerationComponent
     ],
     imports: [
         CommonModule,

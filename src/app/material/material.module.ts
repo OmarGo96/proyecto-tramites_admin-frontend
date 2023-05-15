@@ -22,6 +22,7 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatBadgeModule} from "@angular/material/badge";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatNativeDateModule} from "@angular/material/core";
 
 @NgModule({
     declarations: [],
@@ -47,7 +48,8 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
         MatTabsModule,
         MatExpansionModule,
         MatBadgeModule,
-        MatSlideToggleModule
+        MatSlideToggleModule,
+        MatNativeDateModule
     ],
     exports: [
         MatToolbarModule,
@@ -71,8 +73,12 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
         MatTabsModule,
         MatExpansionModule,
         MatBadgeModule,
-        MatSlideToggleModule
-    ]
+        MatSlideToggleModule,
+        MatNativeDateModule
+    ],
+    providers: [
+        MatDatepickerModule,
+    ],
 })
 export class MaterialModule {
 }

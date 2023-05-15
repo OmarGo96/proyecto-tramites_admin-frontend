@@ -72,7 +72,7 @@ const routes: Routes = [
         ProfileComponent,
         UsersComponent,
         RequestsComponent,
-        RequerimentsComponent,
+        RequerimentsComponent
     ],
     imports: [
         CommonModule,
