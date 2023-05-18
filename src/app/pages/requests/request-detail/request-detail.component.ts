@@ -122,14 +122,12 @@ export class RequestDetailComponent implements OnInit {
                 this.spinner.hide();
 
                 this.request = res.solicitud;
+                console.log(this.request);
 
                 this.currentDate = moment(new Date).format('YYYY-MM-DD');
                 if (this.request.PaseCaja){
                     this.fechaVencimiento = moment(this.request.PaseCaja.fecha_vencimiento).format('YYYY-MM-DD');
                 }
-
-                console.log(this.currentDate, this.fechaVencimiento);
-                console.log(this.request);
 
                 this.requeriments = res.requisitos;
 

@@ -21,6 +21,9 @@
                     <div class="font-medium tracking-tight text-slate-500">
                         Folio de la solicitud: <b>{{ request.folio }}</b>
                     </div>
+                    <div class="font-medium tracking-tight text-slate-500" *ngIf="request.servicio_id === 7">
+                        Número de Licencia de Funcionamiento: <b>{{ request.LicenciaFuncionamiento.licencia_funcionamiento_id }}</b>
+                    </div>
                 </div>
             </div>
 
@@ -119,15 +122,13 @@
                                                *ngIf="requeriment.Requisito.Documento && requeriment.Requisito.Documento.estatus === -1"></i>
                                         </dt>
                                         <dd class="font-medium text-gray-500">
-                                            <div class="flex flex-1 items-center">
-                                                <div class="mr-4">
-                                                    <button mat-stroked-button color="primary"
-                                                            (click)="openDocument(requeriment.Requisito.Documento.Documentacion.id)"
-                                                            class="px-3 py-2 text-xs font-medium rounded-md"
-                                                            *ngIf="requeriment.Requisito.Documento">
-                                                        Ver adjunto
-                                                    </button>
-                                                </div>
+                                            <div class="flex items-center">
+                                                <button mat-stroked-button color="primary"
+                                                        (click)="openDocument(requeriment.Requisito.Documento.Documentacion.id)"
+                                                        class="mr-4 px-3 py-2 text-xs font-medium rounded-md"
+                                                        *ngIf="requeriment.Requisito.Documento">
+                                                    Ver adjunto
+                                                </button>
                                                 <mat-radio-group required
                                                                  *ngIf="requeriment.Requisito.Documento && request.estatus_solicitud_id !== 5">
                                                     <mat-radio-button value="1"
@@ -277,16 +278,16 @@
                                         <div class="border-b flex flex-col px-5 py-5">
                                             <dt class="mb-1 text-md">
                                                 Documentación Complementaria
-                                                <i class="fa-solid fa-circle-check text-emerald-600"
-                                                   *ngIf="request.DocumentosComplementarios && request.DocumentosComplementarios.status === 1"></i>
+                                                <!--<i class="fa-solid fa-circle-check text-emerald-600"
+                                                   *ngIf="request.DocumentosComplementarios && request.DocumentosComplementarios.status !== -1"></i>
                                                 <i class="fa-solid fa-circle-xmark text-red-600"
-                                                   *ngIf="request.DocumentosComplementarios && request.DocumentosComplementarios.status === -1"></i>
+                                                   *ngIf="request.DocumentosComplementarios && request.DocumentosComplementarios.status !== 1"></i>-->
                                             </dt>
-                                            <dd class="flex items-center justify-between items-center font-medium text-gray-500">
+                                            <dd class="flex items-center justify-between font-medium text-gray-500">
                                                 <div class="flex space-x-2">
                                                     <div class="mr-4">
                                                         <i class="fa-solid fa-file-pdf text-blue-600"></i>
-                                                        <a (click)="openDocument(request.DocumentosComplementarios.id)"
+                                                        <a (click)="openDocument(request.DocumentosComplementarios.Documentacion.id)"
                                                            class="text-xs text-blue-600 hover:underline hover:cursor-pointer"
                                                            *ngIf="request.DocumentosComplementarios">
                                                             Ver adjunto
@@ -348,7 +349,7 @@
                                                     Importe de pase a caja
                                                 </mat-label>
                                                 <mat-form-field appearance="outline">
-                                                    <input matInput formControlName="cantidad_pagar">
+                                                    <input matInput currencyMask formControlName="cantidad_pagar">
                                                 </mat-form-field>
                                             </div>
                                             <div>

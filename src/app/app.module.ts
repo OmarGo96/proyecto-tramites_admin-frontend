@@ -10,6 +10,7 @@ import localeEsMX from '@angular/common/locales/es-MX';
 import {NgxSpinnerModule} from "ngx-spinner";
 import {JwtInterceptor} from "./interceptors/jwt.interceptor";
 import {NgSelectModule} from "@ng-select/ng-select";
+import {CurrencyMaskModule} from "ng2-currency-mask";
 
 registerLocaleData(localeEsMX, 'mx');
 
@@ -25,6 +26,7 @@ registerLocaleData(localeEsMX, 'mx');
         NgxSpinnerModule.forRoot({ type: 'ball-beat' }),
         LayoutsModule,
         BrowserAnimationsModule,
+        CurrencyMaskModule,
         NgSelectModule
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],

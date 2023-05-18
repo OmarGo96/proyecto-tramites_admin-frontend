@@ -28,6 +28,7 @@ import { ConsentValidationComponent } from './consent-validation/consent-validat
 import { ComplementaryDocsRequestComponent } from './complementary-docs-request/complementary-docs-request.component';
 import { ComplementaryDocsValidationComponent } from './complementary-docs-validation/complementary-docs-validation.component';
 import { CheckoutGenerationComponent } from './checkout-generation/checkout-generation.component';
+import {CurrencyMaskModule} from "ng2-currency-mask";
 
 const routes: Routes = [
     {
@@ -95,7 +96,8 @@ const routes: Routes = [
         ReactiveFormsModule,
         RouterModule.forChild(routes),
         LayoutsModule,
-        NgxDropzoneModule
+        NgxDropzoneModule,
+        CurrencyMaskModule
     ]
 })
 export class RequestsModule {

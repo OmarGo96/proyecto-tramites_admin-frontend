@@ -19,18 +19,22 @@ import {FormBuilder} from "@angular/forms";
 export class LinkRequerimentsModalComponent implements OnInit {
 
     public assignRequerimentForm: any;
+    public updateRequerimentForm: any;
 
     public requeriments: any;
 
     public service: any
 
     public dataSource: any;
-    public displayedColumns: string[] = ['nombre', 'obligatorio','original', 'no_copias', 'fecha_alta'];
+    public displayedColumns: string[] = ['nombre', 'obligatorio', 'original', 'no_copias', 'fecha_alta', 'accion'];
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
-    @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
+    @ViewChild('singleSelect', {static: true}) singleSelect: MatSelect;
+
+    public editingRequeriment: boolean;
+    public requerimientoServicioId: any;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
@@ -50,17 +54,30 @@ export class LinkRequerimentsModalComponent implements OnInit {
         this.getRequerimentsByService();
     }
 
-    initAssignRequerimentForm(){
+    initAssignRequerimentForm() {
         this.assignRequerimentForm = this.formBuilder.group({
             servicio_uuid: [this.service.uuid],
             requisito_id: [''],
             no_copias: [''],
             original: [''],
             obligatorio: ['']
-        })
+        });
     }
 
-    getRequerimentsByService(){
+    initUpdateRequerimentForm(requeriment: any){
+        console.log(requeriment);
+        this.requerimientoServicioId = requeriment.id;
+        this.updateRequerimentForm = this.formBuilder.group({
+            servicio_uuid: [this.service.uuid],
+            requisito_id: [{value: requeriment.Requisito.id, disabled: true}],
+            no_copias: [requeriment.no_copias],
+            original: [requeriment.original.toString()],
+            obligatorio: [requeriment.obligatorio.toString()]
+        });
+
+    }
+
+    getRequerimentsByService() {
         this.spinner.show();
         this.requerimentsService.getRequerimentsByService(this.service.uuid).subscribe({
             next: res => {
@@ -76,23 +93,66 @@ export class LinkRequerimentsModalComponent implements OnInit {
         });
     }
 
-    assignRequeriment(){
+    assignRequeriment() {
         this.spinner.show();
         const data = this.assignRequerimentForm.value;
+        console.log(data);
         this.requerimentsService.assignRequeriment(data).subscribe({
             next: res => {
                 this.spinner.hide();
                 this.messagesService.printStatus(res.message, 'success');
                 this.getRequerimentsByService();
+                this.assignRequerimentForm.reset();
             },
             error: err => {
                 this.spinner.hide();
                 this.messagesService.errorAlert(err.error.errors);
             }
-        })
+        });
     }
 
-    getRequeriments(){
+    updateRequeriment(){
+        this.spinner.show();
+        const data = this.updateRequerimentForm.value;
+        this.requerimentsService.updateRequeriment(this.requerimientoServicioId, data).subscribe({
+            next: res => {
+                this.spinner.hide();
+                this.messagesService.printStatus(res.message, 'success');
+                this.getRequerimentsByService();
+                this.initAssignRequerimentForm()
+                this.updateRequerimentForm = false;
+                this.updateRequerimentForm.reset()
+            },
+            error: err => {
+                this.spinner.hide();
+                this.messagesService.errorAlert(err.error.errors);
+            }
+        });
+    }
+
+    unlinkRequeriment(requeriment: any) {
+        this.messagesService.confirmDelete('¿Estás seguro de devincular este requisito?')
+            .then((result: any) => {
+                if (result.isConfirmed) {
+                    this.spinner.show();
+                    this.requerimientoServicioId = requeriment.id;
+                    this.requerimentsService.unlinkRequeriment(this.requerimientoServicioId).subscribe({
+                        next: res => {
+                            this.spinner.hide();
+                            this.messagesService.printStatus(res.message, 'success');
+                            this.getRequerimentsByService();
+                        },
+                        error: err => {
+                            this.spinner.hide();
+                            this.messagesService.errorAlert(err.error.errors);
+                        }
+                    });
+                }
+            });
+    }
+
+
+    getRequeriments() {
         this.spinner.show();
         this.requerimentsService.getRequeriments().subscribe({
             next: res => {
