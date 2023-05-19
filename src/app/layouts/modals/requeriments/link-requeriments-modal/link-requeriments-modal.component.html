@@ -7,7 +7,7 @@
             </ng-template>
 
             <form *ngIf="!updateRequerimentForm" [formGroup]="assignRequerimentForm" class="flex flex-row space-x-3 py-5">
-                <div class="flex-none w-1/4">
+                <div class="flex-none w-1/2">
                     <mat-label class="block text-sm font-medium text-slate-700">
                         Requisitos
                     </mat-label>
@@ -53,7 +53,7 @@
             </form>
 
             <form *ngIf="updateRequerimentForm" [formGroup]="updateRequerimentForm" class="flex flex-row space-x-3 py-5">
-                <div class="flex-none w-1/4">
+                <div class="flex-none w-1/2">
                     <mat-label class="block text-sm font-medium text-slate-700">
                         Requisitos
                     </mat-label>
@@ -181,7 +181,7 @@
                     </tr>
                 </table>
             </div>
-            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+            <mat-paginator [pageSizeOptions]="[20, 50, 100]" aria-label="Select page of users"></mat-paginator>
         </mat-tab>
         <!--<mat-tab label="Requisitos por etapa">
             <ng-template mat-tab-label>

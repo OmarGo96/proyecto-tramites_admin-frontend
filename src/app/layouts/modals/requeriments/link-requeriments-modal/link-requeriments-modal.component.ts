@@ -102,7 +102,7 @@ export class LinkRequerimentsModalComponent implements OnInit {
                 this.spinner.hide();
                 this.messagesService.printStatus(res.message, 'success');
                 this.getRequerimentsByService();
-                this.assignRequerimentForm.reset();
+                this.initAssignRequerimentForm();
             },
             error: err => {
                 this.spinner.hide();
