@@ -1,50 +1,64 @@
 <h2 mat-dialog-title>Trámites y Servicios</h2>
 <form [formGroup]="servicesForm" (submit)="editing ? updateService() : createService()">
     <mat-dialog-content class="p-8">
-        <div class="mb-3">
-            <label class="block mb-1 text-sm font-medium text-gray-600">Nombre del Trámite</label>
-            <input type="text" formControlName="nombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+        <div>
+            <mat-label class="block text-sm font-medium text-slate-700">Nombre del trámite</mat-label>
+            <mat-form-field appearance="outline">
+                <input matInput formControlName="nombre">
+            </mat-form-field>
         </div>
-        <div class="grid gap-y-3 gap-x-5 mb-3 lg:grid-cols-2">
-
+        <div class="grid gap-x-3 mb-3 lg:grid-cols-2">
             <div>
-                <label class="block mb-1 text-sm font-medium text-gray-600">Clave</label>
-                <input type="text" formControlName="clave" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-            </div>
-            <div>
-                <label class="block mb-1 text-sm font-medium text-gray-600">Costo</label>
-                <input type="email" formControlName="costo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-            </div>
-            <div>
-                <label class="block mb-1 text-sm font-medium text-gray-600">Vigencia</label>
-                <input type="text" formControlName="vigencia" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                <mat-label class="block text-sm font-medium text-slate-700">Clave</mat-label>
+                <mat-form-field appearance="outline">
+                    <input matInput formControlName="clave">
+                </mat-form-field>
             </div>
             <div>
-                <label class="block mb-1 text-sm font-medium text-gray-600">Tiempo</label>
-                <input type="tel" formControlName="tiempo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                <mat-label class="block text-sm font-medium text-slate-700">Costo</mat-label>
+                <mat-form-field appearance="outline">
+                    <input matInput formControlName="costo">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-label class="block text-sm font-medium text-slate-700">Vigencia</mat-label>
+                <mat-form-field appearance="outline">
+                    <input matInput formControlName="vigencia">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-label class="block text-sm font-medium text-slate-700">Tiempo</mat-label>
+                <mat-form-field appearance="outline">
+                    <input matInput formControlName="tiempo">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-label class="block text-sm font-medium text-slate-700">Documento Expedido</mat-label>
+                <mat-form-field appearance="outline">
+                    <input matInput formControlName="documento_expedido">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-label class="block text-sm font-medium text-slate-700">Tipo de Documento</mat-label>
+                <mat-form-field appearance="outline">
+                    <mat-select formControlName="tipo_documento_id">
+                        <mat-option *ngFor="let documentType of documentTypes" value="{{ documentType.id }}">{{ documentType.nombre }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
         </div>
-        <div class="mb-3">
-            <label class="block mb-1 text-sm font-medium text-gray-600">Documento Expedido</label>
-            <input type="text" formControlName="documento_expedido" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-        </div>
-        <div class="mb-3">
-            <label class="block mb-1 text-sm font-medium text-gray-600">Descripción</label>
-            <textarea rows="4" formControlName="descripcion" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300"></textarea>
-        </div>
 
-
-        <div class="flex">
-            <div class="flex items-center mr-4">
-                <input id="active" type="checkbox" formControlName="activo" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="active" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Activo</label>
-            </div>
-            <div class="flex items-center mr-4">
-                <input id="online" type="checkbox" formControlName="en_linea" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                <label for="online" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">En línea</label>
-            </div>
+        <div>
+            <mat-label class="block text-sm font-medium text-slate-700">Descripción</mat-label>
+            <mat-form-field class="example-full-width" appearance="outline">
+                <textarea matInput formControlName="descripcion"></textarea>
+            </mat-form-field>
         </div>
 
+        <div class="space-x-3">
+            <mat-checkbox class="example-margin" formControlName="activo">Activo</mat-checkbox>
+            <mat-checkbox class="example-margin" formControlName="en_linea">En línea</mat-checkbox>
+        </div>
 
     </mat-dialog-content>
     <mat-dialog-actions align="end">

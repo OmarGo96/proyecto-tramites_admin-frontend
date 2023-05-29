@@ -175,7 +175,7 @@
                                             <dt class="mb-1 text-md">
                                                 {{ document.Documentacion.nombre_otro }}
                                             </dt>
-                                            <dd class="flex items-center justify-between items-center font-medium text-gray-500">
+                                            <dd class="flex items-center justify-between font-medium text-gray-500">
                                                 <div class="flex space-x-2">
                                                     <div class="mr-4">
                                                         <i class="fa-solid fa-file-pdf text-blue-600"></i>
@@ -185,8 +185,7 @@
                                                             Ver adjunto
                                                         </a>
                                                     </div>
-                                                    <mat-radio-group required
-                                                                     *ngIf="document.status === 0 || document.status -1">
+                                                    <mat-radio-group required>
                                                         <mat-radio-button value="1"
                                                                           [checked]="(document.status === 1)"
                                                                           color="primary" class="mr-3 text-xs"

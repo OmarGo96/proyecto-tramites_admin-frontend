@@ -68,7 +68,7 @@ export class UsersService {
 
     public getRol() {
         let rol: any;
-        const rolFromSessionStorage = localStorage.getItem('rol');
+        const rolFromSessionStorage = sessionStorage.getItem('rol');
 
         if (rolFromSessionStorage !== null) {
             rol = rolFromSessionStorage;

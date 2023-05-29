@@ -61,7 +61,6 @@ export class SidebarComponent implements OnInit {
             }
         }
 
-
     }
 
 
@@ -83,7 +82,8 @@ export const ROUTES = [
         action: 'list',
         title: 'Nuevas',
         icon: 'fa-inbox',
-        class: ''
+        class: '',
+        rol: ['1', '2', '3']
     },
     {
         id: 12,
@@ -93,7 +93,8 @@ export const ROUTES = [
         action: 'list',
         title: 'Valid. de documentos',
         icon: 'fa-list-check',
-        class: ''
+        class: '',
+        rol: ['1', '2', '3']
     },
     {
         id: 5,
@@ -103,7 +104,8 @@ export const ROUTES = [
         action: 'list',
         title: 'Pend. documentación',
         icon: 'fa-clock',
-        class: ''
+        class: '',
+        rol: ['1', '2', '3']
     },
     {
         id: 14,
@@ -113,7 +115,8 @@ export const ROUTES = [
         action: 'list',
         title: 'Área técnica',
         icon: 'fa-clipboard-check',
-        class: ''
+        class: '',
+        rol: ['1', '2', '3']
     },
     {
         id: 15,
@@ -123,7 +126,8 @@ export const ROUTES = [
         action: 'list',
         title: 'En inspección fisica',
         icon: 'fa-file-invoice',
-        class: ''
+        class: '',
+        rol: ['1', '2', '3']
     },
     {
         id: 26,
@@ -133,7 +137,8 @@ export const ROUTES = [
         action: 'list',
         title: 'Generación pase a caja',
         icon: 'fa-receipt',
-        class: ''
+        class: '',
+        rol: ['1', '2', '3']
     },
     {
         id: 10,
@@ -143,7 +148,8 @@ export const ROUTES = [
         action: 'list',
         title: 'Pendiente de pago',
         icon: 'fa-cart-shopping',
-        class: ''
+        class: '',
+        rol: ['1', '2', '3']
     },
     {
         id: 20,
@@ -153,7 +159,8 @@ export const ROUTES = [
         action: 'list',
         title: 'Validación de pago',
         icon: 'fa-comment-dollar',
-        class: ''
+        class: '',
+        rol: ['1', '2', '3']
     },
     {
         id: 21,
@@ -163,7 +170,8 @@ export const ROUTES = [
         action: 'list',
         title: 'Pend. doc. pago',
         icon: 'fa-clock',
-        class: ''
+        class: '',
+        rol: ['1', '2', '3']
     },
     {
         id: 11,
@@ -173,7 +181,8 @@ export const ROUTES = [
         action: 'list',
         title: 'Pagado',
         icon: 'fa-money-bill',
-        class: ''
+        class: '',
+        rol: ['1', '2', '3']
     },
     {
         id: 22,
@@ -183,7 +192,8 @@ export const ROUTES = [
         action: 'list',
         title: 'Pend. anuencia prot. civil',
         icon: 'fa-fire-extinguisher',
-        class: ''
+        class: '',
+        rol: ['1', '2', '3']
     },
     {
         id: 23,
@@ -193,7 +203,8 @@ export const ROUTES = [
         action: 'list',
         title: 'Validación de anuencia',
         icon: 'fa-person-circle-check',
-        class: ''
+        class: '',
+        rol: ['1', '2', '3']
     },
     {
         id: 24,
@@ -203,7 +214,8 @@ export const ROUTES = [
         action: 'list',
         title: 'Documentación complementaria',
         icon: 'fa-file',
-        class: ''
+        class: '',
+        rol: ['1', '2', '3']
     },
     {
         id: 25,
@@ -213,7 +225,8 @@ export const ROUTES = [
         action: 'list',
         title: 'Val. de doc. complementaria',
         icon: 'fa-file-circle-check',
-        class: ''
+        class: '',
+        rol: ['1', '2', '3']
     },
     {
         id: 19,
@@ -223,7 +236,8 @@ export const ROUTES = [
         action: 'list',
         title: 'Elaboración documento',
         icon: 'fa-file-waveform',
-        class: ''
+        class: '',
+        rol: ['1', '2', '3']
     },
     {
         id: 16,
@@ -233,7 +247,8 @@ export const ROUTES = [
         action: 'list',
         title: 'Impresión de documento',
         icon: 'fa-print',
-        class: ''
+        class: '',
+        rol: ['1', '2', '3']
     },
     {
         id: 8,
@@ -243,7 +258,8 @@ export const ROUTES = [
         action: 'list',
         title: 'En firma',
         icon: 'fa-file-pen',
-        class: ''
+        class: '',
+        rol: ['1', '2', '3']
     },
     {
         id: 17,
@@ -253,7 +269,8 @@ export const ROUTES = [
         action: 'list',
         title: 'Digitalización',
         icon: 'fa-laptop-file',
-        class: ''
+        class: '',
+        rol: ['1', '2', '3']
     },
     {
         id: 9,
@@ -263,7 +280,8 @@ export const ROUTES = [
         action: 'list',
         title: 'En ventanilla',
         icon: 'fa-window-restore',
-        class: ''
+        class: '',
+        rol: ['1', '2', '3']
     },
     {
         id: 18,
@@ -273,7 +291,8 @@ export const ROUTES = [
         action: 'list',
         title: 'Entregados',
         icon: 'fa-file-import',
-        class: ''
+        class: '',
+        rol: ['1', '2', '3']
     },
     {
         id: 6,
@@ -283,7 +302,8 @@ export const ROUTES = [
         action: 'list',
         title: 'Prevención',
         icon: 'fa-triangle-exclamation',
-        class: ''
+        class: '',
+        rol: ['1', '2', '3']
     },
     {
         id: 7,
@@ -293,7 +313,8 @@ export const ROUTES = [
         action: 'list',
         title: 'Cancelados',
         icon: 'fa-ban',
-        class: ''
+        class: '',
+        rol: ['1', '2', '3']
     },
     {
         id: null,
@@ -303,7 +324,8 @@ export const ROUTES = [
         action: 'list',
         title: 'Dependencias',
         icon: 'fa-building-flag',
-        class: ''
+        class: '',
+        rol: ['1']
     },
     {
         id: null,
@@ -313,7 +335,8 @@ export const ROUTES = [
         action: 'list',
         title: 'Requisitos',
         icon: 'fa-list-check',
-        class: ''
+        class: '',
+        rol: ['1']
     },
     {
         id: null,
@@ -323,7 +346,8 @@ export const ROUTES = [
         action: 'list',
         title: 'Usuarios',
         icon: 'fa-users',
-        class: ''
+        class: '',
+        rol: ['1', '2']
     },
     {
         id: null,
@@ -333,6 +357,7 @@ export const ROUTES = [
         action: 'list',
         title: 'Tipo de Documentos',
         icon: 'fa-file-export',
-        class: ''
+        class: '',
+        rol: ['1']
     }
 ];

@@ -27,4 +27,5 @@ export class DocumentTypesService {
     public getRecords(): Observable <any> {
         return this.httpClient.get(`${this.urlApi}/tipo_documentos`, { headers: this.headers });
     }
+
 }

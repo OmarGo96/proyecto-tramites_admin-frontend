@@ -46,12 +46,8 @@ export class LoginComponent implements OnInit {
             next: res => {
                 this.spinner.hide();
                 sessionStorage.setItem('token', res.token);
-                if (res.rol === 2) {
-                    this.getIdentity(res.token)
-                } else {
-                    sessionStorage.setItem('rol', res.rol)
-                    this.router.navigate(['dependencias']);
-                }
+                sessionStorage.setItem('rol', res.rol)
+                this.router.navigate(['dependencias']);
             },
             error: err => {
                 this.spinner.hide();

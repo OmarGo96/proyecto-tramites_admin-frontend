@@ -6,6 +6,8 @@ import {MessageService} from "src/app/services/messages.service";
 import {ServicesService} from "../../../services/services.service";
 import {getLocaleFirstDayOfWeek} from "@angular/common";
 import {DialogRef} from "@angular/cdk/dialog";
+import {NgxSpinnerService} from "ngx-spinner";
+import {DocumentTypesService} from "../../../services/document-types.service";
 
 @Component({
     selector: 'app-services-modal',
@@ -20,11 +22,15 @@ export class ServicesModalComponent implements OnInit {
     public loading = false;
     public editing = false;
 
+    public documentTypes: any;
+
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
         private servicesService: ServicesService,
         private messagesService: MessageService,
+        private documentTypesService: DocumentTypesService,
         private formBuilder: UntypedFormBuilder,
+        private spinner: NgxSpinnerService,
         public dialogRef: DialogRef,
     ) {
     }
@@ -35,7 +41,7 @@ export class ServicesModalComponent implements OnInit {
         } else {
             this.initCreateForm()
         }
-
+        this.getTypeDocuments();
     }
 
     initCreateForm(){
@@ -50,7 +56,8 @@ export class ServicesModalComponent implements OnInit {
             documento_expedido: ['', Validators.required],
             descripcion: ['', Validators.required],
             activo: ['', Validators.required],
-            en_linea: ['', Validators.required]
+            en_linea: ['', Validators.required],
+            tipo_documento_id: ['', Validators.required]
         })
     }
 
@@ -66,7 +73,8 @@ export class ServicesModalComponent implements OnInit {
             documento_expedido: this.data.service.documento_expedido,
             descripcion: this.data.service.descripcion,
             activo: this.data.service.activo,
-            en_linea: this.data.service.en_linea
+            en_linea: this.data.service.en_linea,
+            tipo_documento_id: ['', Validators.required]
         })
     }
 
@@ -101,6 +109,20 @@ export class ServicesModalComponent implements OnInit {
             },
             error: err => {
                 this.loading = false;
+                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+            }
+        });
+    }
+
+    getTypeDocuments() {
+        this.spinner.show();
+        this.documentTypesService.getRecords().subscribe({
+            next: res => {
+                this.spinner.hide();
+                this.documentTypes = res.documentos;
+            },
+            error: err => {
+                this.spinner.hide();
                 this.messagesService.printStatusArrayNew(err.error.errors, 'error');
             }
         });
