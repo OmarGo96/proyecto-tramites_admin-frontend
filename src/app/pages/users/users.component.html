@@ -18,9 +18,9 @@
                             <div>
                                 <mat-label class="block text-sm font-medium text-slate-700">Rol del usuario</mat-label>
                                 <mat-form-field appearance="outline" class="w-full">
-                                    <mat-select formControlName="rol" placeholder="Seleccionar rol">
-                                        <mat-option value="1">Revisor</mat-option>
-                                        <mat-option value="2">Administrador</mat-option>
+                                    <mat-select formControlName="role" placeholder="Seleccionar rol">
+                                        <mat-option value="3">Revisor</mat-option>
+                                        <mat-option value="2" *ngIf="['1'].includes(rol)">Administrador</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>

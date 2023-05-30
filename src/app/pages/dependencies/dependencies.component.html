@@ -38,7 +38,7 @@
                 </div>
 
                 <button mat-flat-button type="button" color="primary" class="rounded-md"
-                        (click)="openDialog()">
+                        *ngIf="['1'].includes(rol)" (click)="openDialog()">
                     <i class="fa-solid fa-building-flag"></i>&nbsp;Crear dirección
                 </button>
             </div>

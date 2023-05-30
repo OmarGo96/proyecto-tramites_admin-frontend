@@ -1,29 +1,51 @@
-<h3>Editar usuario</h3>
-<form [formGroup]="userForm" class="space-y-3">
-    <div>
-        <select formControlName="rol" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-            <option disabled>Seleccionar rol de usuario</option>
-            <option value="1">Revisor</option>
-            <option value="2">Administrador</option>
-        </select>
+<h3 mat-dialog-title>Editar usuario</h3>
+<form [formGroup]="userForm">
+    <div *ngIf="['1'].includes(rol)">
+        <mat-label class="block text-sm font-medium text-slate-700">Rol del usuario</mat-label>
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-select formControlName="role" placeholder="Seleccionar rol">
+                <mat-option value="3">Revisor</mat-option>
+                <mat-option value="2" *ngIf="['1'].includes(rol)">Administrador</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div *ngIf="['1'].includes(rol)">
+        <mat-label class="block text-sm font-medium text-slate-700">Dependencia</mat-label>
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-select formControlName="area_uuid" placeholder="Seleccionar dependencia">
+                <mat-option *ngFor="let dependency of dependencies" [value]="dependency.uuid">{{ dependency.nombre }}</mat-option>
+            </mat-select>
+        </mat-form-field>
     </div>
 
     <div>
-        <select formControlName="activo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-            <option disabled>Seleccionar estatus</option>
-            <option value="1">Activo</option>
-            <option value="-1">Inactivo</option>
-        </select>
+        <mat-label class="block text-sm font-medium text-slate-700">Activo</mat-label>
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-select formControlName="activo" placeholder="Seleccionar rol">
+                <mat-option value="1">Activo</mat-option>
+                <mat-option value="-1">Inactivo</mat-option>
+            </mat-select>
+        </mat-form-field>
     </div>
 
     <div>
-        <input type="text" formControlName="usuario" placeholder="Nombre de usuario" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+        <mat-label class="block text-sm font-medium text-slate-700">Nombre de usuario</mat-label>
+        <mat-form-field appearance="outline"  class="w-full">
+            <input matInput type="text" formControlName="usuario">
+        </mat-form-field>
     </div>
     <div>
-        <input type="text" formControlName="nombre" placeholder="Nombre(s)" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+        <mat-label class="block text-sm font-medium text-slate-700">Nombre(s)</mat-label>
+        <mat-form-field appearance="outline"  class="w-full">
+            <input matInput type="text" formControlName="nombre">
+        </mat-form-field>
     </div>
     <div>
-        <input type="text" formControlName="apellidos" placeholder="Apellidos" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+        <mat-label class="block text-sm font-medium text-slate-700">Apellidos</mat-label>
+        <mat-form-field appearance="outline"  class="w-full">
+            <input matInput type="text" formControlName="apellidos">
+        </mat-form-field>
     </div>
     <button mat-flat-button color="primary" class="w-full rounded-lg" (click)="updateUser()" [disabled]="userForm.invalid">
         Actualizar usuario

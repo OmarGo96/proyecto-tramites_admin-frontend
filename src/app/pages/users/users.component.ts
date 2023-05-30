@@ -27,6 +27,8 @@ export class UsersComponent implements OnInit {
     public usersForm: any;
     public dependencies: any;
 
+    public rol: any;
+
     constructor(
         private usersService: UsersService,
         private dependenciesService: DependenciesService,
@@ -38,6 +40,7 @@ export class UsersComponent implements OnInit {
     }
 
     async ngOnInit() {
+        this.rol = this.usersService.getRol();
         this.initCreateForm();
         await this.getAreas();
         this.getUsers();
@@ -46,7 +49,7 @@ export class UsersComponent implements OnInit {
     initCreateForm() {
         this.usersForm = this.formBuilder.group({
             area_uuid: ['', Validators.required],
-            rol: ['', Validators.required],
+            role: ['', Validators.required],
             nombre: ['', Validators.required],
             apellidos: ['', Validators.required],
             usuario: ['', Validators.required],
@@ -68,7 +71,7 @@ export class UsersComponent implements OnInit {
                 });
                 this.messagesService.printStatus(res.message, 'success');
                 setTimeout(() => {
-                    this.getUsers()
+                    location.reload();
                 }, 2500);
             },
             error: err => {

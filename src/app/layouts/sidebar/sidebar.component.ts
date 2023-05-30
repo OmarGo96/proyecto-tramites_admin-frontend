@@ -18,6 +18,8 @@ export class SidebarComponent implements OnInit {
 
     public statuses = RequestsStatus;
 
+    public rol: any;
+
     constructor(
         private usersService: UsersService,
         private requestsService: RequestsService,
@@ -25,7 +27,8 @@ export class SidebarComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.user = this.usersService.getIdentity();
+        this.rol = this.usersService.getRol();
+        this.user = sessionStorage.getItem('usuario');
         this.setMenuItem();
         // this.getBadges();
     }
@@ -74,17 +77,6 @@ export class SidebarComponent implements OnInit {
 
 
 export const ROUTES = [
-    {
-        id: null,
-        path: '/solicitudes/todas',
-        group: 'GENERAL',
-        module: 'dependencias',
-        action: 'list',
-        title: 'Todas las solicitudes',
-        icon: 'fa-list',
-        class: '',
-        rol: ['1', '2']
-    },
     {
         id: 2,
         path: '/solicitudes/nuevas',
@@ -326,49 +318,5 @@ export const ROUTES = [
         icon: 'fa-ban',
         class: '',
         rol: ['1', '2', '3']
-    },
-    {
-        id: null,
-        path: '/dependencias',
-        group: 'CONFIGURACIÓN',
-        module: 'dependencias',
-        action: 'list',
-        title: 'Dependencias',
-        icon: 'fa-building-flag',
-        class: '',
-        rol: ['1']
-    },
-    {
-        id: null,
-        path: '/requisitos',
-        group: 'CONFIGURACIÓN',
-        module: 'requisitos',
-        action: 'list',
-        title: 'Requisitos',
-        icon: 'fa-list-check',
-        class: '',
-        rol: ['1']
-    },
-    {
-        id: null,
-        path: '/usuarios',
-        group: 'CONFIGURACIÓN',
-        module: 'usuarios',
-        action: 'list',
-        title: 'Usuarios',
-        icon: 'fa-users',
-        class: '',
-        rol: ['1', '2']
-    },
-    {
-        id: null,
-        path: '/documentos',
-        group: 'CONFIGURACIÓN',
-        module: 'documentos',
-        action: 'list',
-        title: 'Tipo de Documentos',
-        icon: 'fa-file-export',
-        class: '',
-        rol: ['1']
     }
 ];

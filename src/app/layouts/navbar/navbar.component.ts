@@ -8,12 +8,15 @@ import {UsersService} from "../../services/users.service";
 })
 export class NavbarComponent implements OnInit {
 
+    public dependency: any;
+
     constructor(
         public usersService: UsersService
     ) {
     }
 
     ngOnInit(): void {
+        this.dependency = sessionStorage.getItem('dependencia');
     }
 
     logout(): void {

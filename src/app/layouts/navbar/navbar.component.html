@@ -11,6 +11,8 @@
             </div>
             <div *ngIf="usersService.getToken()"
                  class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+
+                <H1 class="text-sm uppercase font-bold text-white">{{ dependency }}</H1>
                 <div class="ml-3 relative">
                     <button mat-button [matMenuTriggerFor]="menu" class="text-white">
                         <i class="fa-solid fa-circle-user fa-xl"></i>

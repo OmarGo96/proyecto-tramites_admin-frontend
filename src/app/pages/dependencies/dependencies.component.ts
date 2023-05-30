@@ -8,6 +8,7 @@ import {NgxSpinnerService} from "ngx-spinner";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
+import {UsersService} from "../../services/users.service";
 
 @Component({
     selector: 'app-dependencies',
@@ -17,9 +18,11 @@ import {MatTableDataSource} from "@angular/material/table";
 export class DependenciesComponent implements OnInit {
 
     public dependencies: any;
+    public rol: any;
 
     constructor(
         private dependenciesService: DependenciesService,
+        private usersService: UsersService,
         private messagesService: MessageService,
         private router: Router,
         private spinner: NgxSpinnerService,
@@ -28,6 +31,7 @@ export class DependenciesComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.rol = this.usersService.getRol();
         this.getAreas();
     }
 

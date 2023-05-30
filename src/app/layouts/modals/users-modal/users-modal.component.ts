@@ -4,6 +4,7 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {UsersService} from "../../../services/users.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {MessageService} from "../../../services/messages.service";
+import {DependenciesService} from "../../../services/dependencies.service";
 
 @Component({
     selector: 'app-users-modal',
@@ -14,11 +15,14 @@ export class UsersModalComponent implements OnInit {
 
     public userForm: any;
     public user: any;
+    public rol: any;
+    public dependencies: any;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
         private formBuilder: FormBuilder,
         private usersService: UsersService,
+        private dependenciesService: DependenciesService,
         private spinner: NgxSpinnerService,
         private messagesService: MessageService,
         private dialog: MatDialog
@@ -26,17 +30,20 @@ export class UsersModalComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.rol = this.usersService.getRol();
         this.user = this.data.user;
         this.initUserForm();
+        this.getAreas();
     }
 
     initUserForm(){
         this.userForm = this.formBuilder.group({
-            rol: this.user && this.user.rol ? this.user.rol.toString() : [''],
+            role: this.user && this.user.rol ? this.user.rol.toString() : [''],
             nombre: this.user && this.user.nombre ? this.user.nombre : [''],
             apellidos: this.user && this.user.apellidos ? this.user.apellidos : [''],
             usuario: this.user && this.user.usuario ? this.user.usuario : [''],
-            activo: this.user && this.user.activo ? this.user.activo.toString() : ['']
+            activo: this.user && this.user.activo ? this.user.activo.toString() : [''],
+            area_uuid: this.user && this.user.Area ? this.user.Area.uuid: [''],
         })
     }
 
@@ -53,6 +60,20 @@ export class UsersModalComponent implements OnInit {
             error: err => {
                 this.spinner.hide();
                 this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+            }
+        });
+    }
+
+    getAreas(){
+        this.spinner.show();
+        this.dependenciesService.getRecords().subscribe({
+            next: res => {
+                this.spinner.hide();
+                this.dependencies = res.areas;
+            },
+            error: err => {
+                this.spinner.hide();
+                this.messagesService.errorAlert(err.error.errors);
             }
         });
     }

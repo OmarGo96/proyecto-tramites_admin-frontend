@@ -1,12 +1,24 @@
 <aside class="pt-16 w-72 h-full">
     <div class="h-full overflow-y-auto py-4 px-4 bg-white">
-        <!--<div class="text-center mt-4 mb-8">
-            <h1 class="text-sm uppercase font-bold label-section">Bienvenido, {{ user.nombre }}</h1>
-            <p class="text-xs text-slate-400">@{{ user.usuario }}</p>
-        </div>-->
+        <div class="text-center mt-4 mb-8">
+            <h1 class="text-sm uppercase font-bold label-section">Bienvenido, {{ user }}</h1>
+            <!--<p class="text-xs text-slate-400">@{{ user.usuario }}</p>-->
+        </div>
         <ul class="space-y-1.5 text-sm">
+            <div>
+                <h3 class="uppercase text-xs font-bold label-section px-2.5 pt-2">GENERAL</h3>
+                <li>
+                    <a [routerLink]="['solicitudes/todas']"
+                       class="flex items-center p-2 font-normal text-gray-500 rounded-lg hover:bg-slate-200 duration-200 hover:cursor-pointer">
+                        <i class="fa-solid fa-list"></i>
+                        <span class="flex-1 ml-3 whitespace-nowrap">Todas las solicitudes</span>
+                    </a>
+                </li>
+            </div>
             <div *ngFor="let item of menu" class="space-y-1.5">
-                <h3 class="uppercase text-xs font-bold label-section px-2.5 pt-2">{{ item.name }}</h3>
+                <h3 class="uppercase text-xs font-bold label-section px-2.5 pt-2">
+                    {{ item.name }}
+                </h3>
                 <div class="space-y-1">
                     <li *ngFor="let value of item.values">
                         <!--
@@ -29,14 +41,37 @@
                 </div>
             </div>
 
-            <!--<h3 class="uppercase text-xs font-bold label-section px-2.5 pt-2">Sesión</h3>
-            <li>
-                <a (click)="logout()"
-                   class="flex items-center p-2 font-normal text-gray-500 rounded-lg hover:bg-slate-200 duration-200 hover:cursor-pointer">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    <span class="flex-1 ml-3 whitespace-nowrap">Salir</span>
-                </a>
-            </li>-->
+            <div class="space-y-1.5" *ngIf="['1', '2'].includes(rol)">
+                <h3 class="uppercase text-xs font-bold label-section px-2.5 pt-2">CONFIGURACIÓN</h3>
+                <li *ngIf="['1', '2'].includes(rol)">
+                    <a [routerLink]="['dependencias']"
+                       class="flex items-center p-2 font-normal text-gray-500 rounded-lg hover:bg-slate-200 duration-200 hover:cursor-pointer">
+                        <i class="fa-solid fa-building-flag"></i>
+                        <span class="flex-1 ml-3 whitespace-nowrap">Dependencias</span>
+                    </a>
+                </li>
+                <li *ngIf="['1'].includes(rol)">
+                    <a [routerLink]="['requisitos']"
+                       class="flex items-center p-2 font-normal text-gray-500 rounded-lg hover:bg-slate-200 duration-200 hover:cursor-pointer">
+                        <i class="fa-solid fa-list-check"></i>
+                        <span class="flex-1 ml-3 whitespace-nowrap">Requisitos</span>
+                    </a>
+                </li>
+                <li *ngIf="['1', '2'].includes(rol)">
+                    <a [routerLink]="['usuarios']"
+                       class="flex items-center p-2 font-normal text-gray-500 rounded-lg hover:bg-slate-200 duration-200 hover:cursor-pointer">
+                        <i class="fa-solid fa-users"></i>
+                        <span class="flex-1 ml-3 whitespace-nowrap">Usuarios</span>
+                    </a>
+                </li>
+                <li *ngIf="['1'].includes(rol)">
+                    <a [routerLink]="['documentos']"
+                       class="flex items-center p-2 font-normal text-gray-500 rounded-lg hover:bg-slate-200 duration-200 hover:cursor-pointer">
+                        <i class="fa-solid fa-file-export"></i>
+                        <span class="flex-1 ml-3 whitespace-nowrap">Documentos</span>
+                    </a>
+                </li>
+            </div>
         </ul>
     </div>
 </aside>

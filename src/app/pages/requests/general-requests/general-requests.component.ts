@@ -27,6 +27,8 @@ export class GeneralRequestsComponent implements OnInit {
 
     public statuses = RequestsStatus;
 
+    public requests: any;
+
     constructor(
         private requestsService: RequestsService,
         private messagesService: MessageService,
@@ -42,8 +44,8 @@ export class GeneralRequestsComponent implements OnInit {
 
     initReportForm() {
         this.reportForm = this.formBuilder.group({
-            startDate: [moment().format('YYYY-MM-DD'), Validators.required],
-            endDate: [moment().format('YYYY-MM-DD'), Validators.required]
+            startDate: [moment().format(), Validators.required],
+            endDate: [moment().format(), Validators.required]
         });
 
         this.getRequests();
@@ -61,6 +63,8 @@ export class GeneralRequestsComponent implements OnInit {
                 this.dataSource = new MatTableDataSource(res.solicitudes);
                 this.dataSource.paginator = this.paginator;
                 this.dataSource.sort = this.sort;
+
+                this.requests = res.solicitudes;
             },
             error: err => {
                 this.spinner.hide();

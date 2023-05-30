@@ -37,7 +37,8 @@
                     </form>
                 </div>
                 <div class="flex space-x-3">
-                    <button mat-flat-button color="primary" (click)="downloadReport()">
+                    <button mat-flat-button color="primary" *ngIf="requests && requests.length >= 1"
+                            (click)="downloadReport()">
                         <i class="fa-solid fa-file-arrow-down"></i>
                         Descargar solicitudes
                     </button>

@@ -44,10 +44,13 @@ export class LoginComponent implements OnInit {
         const data = this.loginForm.value;
         this.usersService.login(data).subscribe({
             next: res => {
+                console.log(res);
                 this.spinner.hide();
                 sessionStorage.setItem('token', res.token);
-                sessionStorage.setItem('rol', res.rol)
-                this.router.navigate(['dependencias']);
+                sessionStorage.setItem('rol', res.rol);
+                sessionStorage.setItem('usuario', res.name);
+                sessionStorage.setItem('dependencia', res.dependencia);
+                this.router.navigate(['solicitudes/todas']);
             },
             error: err => {
                 this.spinner.hide();
