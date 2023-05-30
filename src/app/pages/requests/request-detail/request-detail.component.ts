@@ -459,7 +459,7 @@ export class RequestDetailComponent implements OnInit {
         let formData = new FormData();
         const folio = this.paseCajaForm.value.folio;
         const cantidad_pagar  = this.paseCajaForm.value.cantidad_pagar;
-        const vigencia   = this.paseCajaForm.value.vigencia;
+        const vigencia   = moment(this.paseCajaForm.value.vigencia).format('YYYY-MM-DD');
 
 
         formData.append('file', file);

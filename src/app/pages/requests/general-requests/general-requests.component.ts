@@ -44,33 +44,38 @@ export class GeneralRequestsComponent implements OnInit {
 
     initReportForm() {
         this.reportForm = this.formBuilder.group({
-            startDate: [moment().format(), Validators.required],
-            endDate: [moment().format(), Validators.required]
+            startDate: [moment().format('YYYY-MM-DD'), Validators.required],
+            endDate: [moment().format('YYYY-MM-DD'), Validators.required]
         });
 
         this.getRequests();
     }
 
     getRequests(){
-        this.spinner.show();
-        const data = {
-            startDate: moment(this.reportForm.value.startDate).format('YYYY-MM-DD'),
-            endDate: moment(this.reportForm.value.endDate).format('YYYY-MM-DD'),
-        };
-        this.requestsService.getAllRequests(data).subscribe({
-            next: res => {
-                this.spinner.hide();
-                this.dataSource = new MatTableDataSource(res.solicitudes);
-                this.dataSource.paginator = this.paginator;
-                this.dataSource.sort = this.sort;
+        if (this.reportForm.value.startDate && this.reportForm.value.endDate){
+            this.spinner.show();
+            const data = {
+                startDate: moment(this.reportForm.value.startDate).format('YYYY-MM-DD'),
+                endDate: moment(this.reportForm.value.endDate).format('YYYY-MM-DD'),
+            };
+            this.requestsService.getAllRequests(data).subscribe({
+                next: res => {
+                    this.spinner.hide();
+                    this.dataSource = new MatTableDataSource(res.solicitudes);
+                    this.dataSource.paginator = this.paginator;
+                    this.dataSource.sort = this.sort;
 
-                this.requests = res.solicitudes;
-            },
-            error: err => {
-                this.spinner.hide();
-                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
-            }
-        });
+                    this.requests = res.solicitudes;
+                },
+                error: err => {
+                    this.spinner.hide();
+                    this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+                }
+            });
+        } else {
+            this.messagesService.errorAlert([{message: 'El rango de fechas es incorrecto. Intente nueuvamente'}]);
+        }
+
     }
 
     downloadReport(){
