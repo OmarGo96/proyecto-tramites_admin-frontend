@@ -19,6 +19,10 @@ export class RequestsService {
         this.headers = new HttpHeaders().set('Authorization', this.token);
     }
 
+    public getAllRequests(data: any): Observable <any> {
+        return this.httpClient.post(`${this.urlApi}/reportes/generateByDateRange`, data, { headers: this.headers });
+    }
+
     public getRecords(data: any): Observable <any> {
         return this.httpClient.post(`${this.urlApi}/todas_solicitudes`, data, { headers: this.headers });
     }
@@ -56,5 +60,9 @@ export class RequestsService {
 
     public getBadges(): Observable <any> {
         return this.httpClient.get(`${this.urlApi}/solicitudes/badges/count`, {headers: this.headers});
+    }
+
+    public downloadReport(data: any): Observable <any> {
+        return this.httpClient.post(`${this.urlApi}/reportes/generateByDateRange/excel`, data, { headers: this.headers, responseType: 'blob' });
     }
 }

@@ -29,12 +29,11 @@ import { ComplementaryDocsRequestComponent } from './complementary-docs-request/
 import { ComplementaryDocsValidationComponent } from './complementary-docs-validation/complementary-docs-validation.component';
 import { CheckoutGenerationComponent } from './checkout-generation/checkout-generation.component';
 import {CurrencyMaskModule} from "ng2-currency-mask";
+import { GeneralRequestsComponent } from './general-requests/general-requests.component';
 
 const routes: Routes = [
-    {
-        path: 'nuevas', component: SentRequestsComponent,
-
-    },
+    {path: 'todas', component: GeneralRequestsComponent},
+    {path: 'nuevas', component: SentRequestsComponent},
     {path: 'validacion', component: RequestsValidationComponent},
     {path: 'pendiente', component: PendingRequestsComponent},
     {path: 'calificacion', component: QualificationRequestsComponent},
@@ -88,7 +87,8 @@ const routes: Routes = [
         ConsentValidationComponent,
         ComplementaryDocsRequestComponent,
         ComplementaryDocsValidationComponent,
-        CheckoutGenerationComponent
+        CheckoutGenerationComponent,
+        GeneralRequestsComponent
     ],
     imports: [
         CommonModule,

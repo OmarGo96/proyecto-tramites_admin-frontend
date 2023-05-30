@@ -75,6 +75,17 @@ export class SidebarComponent implements OnInit {
 
 export const ROUTES = [
     {
+        id: null,
+        path: '/solicitudes/todas',
+        group: 'GENERAL',
+        module: 'dependencias',
+        action: 'list',
+        title: 'Todas las solicitudes',
+        icon: 'fa-list',
+        class: '',
+        rol: ['1', '2']
+    },
+    {
         id: 2,
         path: '/solicitudes/nuevas',
         group: 'SOLICITUDES',
@@ -212,7 +223,7 @@ export const ROUTES = [
         group: 'SOLICITUDES',
         module: 'solicitudes',
         action: 'list',
-        title: 'Documentación complementaria',
+        title: 'Docu. complementaria',
         icon: 'fa-file',
         class: '',
         rol: ['1', '2', '3']
@@ -319,7 +330,7 @@ export const ROUTES = [
     {
         id: null,
         path: '/dependencias',
-        group: 'ADMINISTRACIÓN',
+        group: 'CONFIGURACIÓN',
         module: 'dependencias',
         action: 'list',
         title: 'Dependencias',
@@ -330,7 +341,7 @@ export const ROUTES = [
     {
         id: null,
         path: '/requisitos',
-        group: 'ADMINISTRACIÓN',
+        group: 'CONFIGURACIÓN',
         module: 'requisitos',
         action: 'list',
         title: 'Requisitos',
@@ -341,7 +352,7 @@ export const ROUTES = [
     {
         id: null,
         path: '/usuarios',
-        group: 'ADMINISTRACIÓN',
+        group: 'CONFIGURACIÓN',
         module: 'usuarios',
         action: 'list',
         title: 'Usuarios',
@@ -352,7 +363,7 @@ export const ROUTES = [
     {
         id: null,
         path: '/documentos',
-        group: 'ADMINISTRACIÓN',
+        group: 'CONFIGURACIÓN',
         module: 'documentos',
         action: 'list',
         title: 'Tipo de Documentos',
