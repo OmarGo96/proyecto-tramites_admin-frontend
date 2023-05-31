@@ -20,7 +20,7 @@ export class GeneralRequestsComponent implements OnInit {
     public reportForm: any;
 
     public dataSource: any;
-    public displayedColumns: string[] = ['folio', 'servicio', 'area', 'contribuyente', 'estatus', 'fecha_alta', 'fecha_envio'];
+    public displayedColumns: string[] = ['folio', 'servicio', 'licencia', 'area', 'contribuyente', 'estatus', 'fecha_alta', 'fecha_envio'];
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
@@ -60,6 +60,7 @@ export class GeneralRequestsComponent implements OnInit {
             };
             this.requestsService.getAllRequests(data).subscribe({
                 next: res => {
+                    console.log(res.solicitudes);
                     this.spinner.hide();
                     this.dataSource = new MatTableDataSource(res.solicitudes);
                     this.dataSource.paginator = this.paginator;
@@ -95,6 +96,11 @@ export class GeneralRequestsComponent implements OnInit {
                 this.messagesService.printStatusArrayNew(err.error.errors, 'error');
             }
         });
+    }
+
+    applyFilter(event: Event) {
+        const filterValue = (event.target as HTMLInputElement).value;
+        this.dataSource.filter = filterValue.trim().toLowerCase();
     }
 
 }

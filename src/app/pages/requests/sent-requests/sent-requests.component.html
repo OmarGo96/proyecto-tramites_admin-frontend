@@ -49,14 +49,14 @@
                             <th mat-header-cell *matHeaderCellDef>
                                 Trámite/Servicio
                             </th>
-                            <td mat-cell *matCellDef="let element">{{ element.Servicio.nombre }}</td>
+                            <td mat-cell *matCellDef="let element">{{ element.servicio }}</td>
                         </ng-container>
 
                         <ng-container matColumnDef="creado">
                             <th mat-header-cell *matHeaderCellDef>
                                 Fecha Creación
                             </th>
-                            <td mat-cell *matCellDef="let element">{{ element.fecha_alta | date:'medium':'UTC'}}</td>
+                            <td mat-cell *matCellDef="let element">{{ element.fecha_alta }}</td>
                         </ng-container>
 
                         <ng-container matColumnDef="estatus">

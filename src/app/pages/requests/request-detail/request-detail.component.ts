@@ -162,10 +162,9 @@ export class RequestDetailComponent implements OnInit {
     updateRequest(){
         this.spinner.show();
         const data = {
-            estatus_solicitud_id: this.solicitudForm.value.estatus_solicitud_id.toString(),
-            solicitud_id: this.solicitudForm.value.solicitud_id
+            estatus_solicitud_id: this.solicitudForm.value.estatus_solicitud_id.toString()
         };
-        this.requestsService.updateRecord(data).subscribe({
+        this.requestsService.updateRecord(data, this.solicitudForm.value.solicitud_id).subscribe({
             next: res => {
                 this.spinner.hide();
                 this.messagesService.printStatus(res.message, 'success');
@@ -288,45 +287,6 @@ export class RequestDetailComponent implements OnInit {
                 }
             }
         );
-    }
-
-    acceptOrDenyAnuenciaDocs(estatus: any, documentId: any){
-        this.spinner.show();
-        let data = {
-            'estatus': estatus.toString()
-        };
-
-        this.requestsService.updateEstatusAnuenciaDoc(documentId, data).subscribe({
-                next: res => {
-                    this.spinner.hide();
-                    this.getId();
-                },
-                error: err => {
-                    this.spinner.hide();
-                    this.messagesService.printStatusArrayNew(err.error.errors, 'error');
-                }
-            }
-        );
-    }
-
-    saveRequest(status: any){
-        this.solicitudForm.controls.estatus_solicitud_id.setValue(status);
-        this.solicitudForm.controls.solicitud_id.setValue(this.request.id.toString());
-        const data = this.solicitudForm.value;
-        this.requestsService.updateRecord(data).subscribe({
-            next: res => {
-                this.messagesService.printStatus(res.message, 'success');
-            },
-            error: err => {
-                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
-            }
-        })
-    }
-
-    openSnackBar(message: string, action: string) {
-        this._snackBar.open(message, action, {
-            duration: 2500
-        });
     }
 
     getStatuses(id: any){
@@ -485,10 +445,9 @@ export class RequestDetailComponent implements OnInit {
 
     updateStatus(status: any){
         const data = {
-            estatus_solicitud_id: status.toString(),
-            solicitud_id: this.request.id.toString()
+            estatus_solicitud_id: status.toString()
         };
-        this.requestsService.updateRecord(data).subscribe({
+        this.requestsService.updateRecord(data, this.request.id.toString()).subscribe({
             next: res => {
                 this.spinner.hide();
                 setTimeout(() => {

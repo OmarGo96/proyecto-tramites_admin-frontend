@@ -42,6 +42,7 @@ export class DeliveredRequestsComponent implements OnInit {
         }
         this.requestsService.getRecords(data).subscribe({
             next: res => {
+                console.log(res.solicitudes);
                 this.spinner.hide();
                 this.dataSource = new MatTableDataSource(res.solicitudes);
                 this.dataSource.paginator = this.paginator;

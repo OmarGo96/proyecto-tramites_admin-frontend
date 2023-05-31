@@ -57,10 +57,9 @@ export class QualificationRequestsComponent implements OnInit {
     updateRequest(solicitudId: any){
         this.spinner.show();
         const data = {
-            estatus_solicitud_id: '12',
-            solicitud_id: solicitudId.toString() ,
+            estatus_solicitud_id: '12'
         };
-        this.requestsService.updateRecord(data).subscribe({
+        this.requestsService.updateRecord(data, solicitudId.toString()).subscribe({
             next: res => {
                 this.spinner.hide();
                 console.log('La solicitud se abrio y paso a estatus "Revision"');
