@@ -16,7 +16,7 @@ import {Router} from "@angular/router";
 export class QualificationRequestsComponent implements OnInit {
 
     public dataSource: any;
-    public displayedColumns: string[] = ['folio', 'tramite', 'creado', 'estatus', 'accion'];
+    public displayedColumns: string[] = ['folio', 'servicio', 'licencia', 'area', 'contribuyente', 'creado', 'estatus', 'accion'];
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;

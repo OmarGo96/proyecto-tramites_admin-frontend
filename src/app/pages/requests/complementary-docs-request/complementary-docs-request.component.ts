@@ -16,7 +16,7 @@ import {MatTableDataSource} from "@angular/material/table";
 export class ComplementaryDocsRequestComponent implements OnInit {
 
     public dataSource: any;
-    public displayedColumns: string[] = ['folio', 'tramite', 'creado', 'estatus', 'accion'];
+    public displayedColumns: string[] = ['folio', 'servicio', 'licencia', 'area', 'contribuyente', 'creado', 'estatus', 'accion'];
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
