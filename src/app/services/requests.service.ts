@@ -65,4 +65,8 @@ export class RequestsService {
     public downloadReport(data: any): Observable <any> {
         return this.httpClient.post(`${this.urlApi}/reportes/generateByDateRange/excel`, data, { headers: this.headers, responseType: 'blob' });
     }
+
+    public validateFolio(data: any): Observable <any> {
+        return this.httpClient.post(`${this.urlApi}/solicitud/check/pase-caja`, data, { headers: this.headers });
+    }
 }

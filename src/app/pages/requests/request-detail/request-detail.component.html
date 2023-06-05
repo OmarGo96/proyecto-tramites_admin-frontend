@@ -334,13 +334,18 @@
                                 <dl class="pb-5 text-gray-900">
                                     <ng-container>
                                         <form [formGroup]="paseCajaForm" class="p-5 w-1/2">
-                                            <div>
-                                                <mat-label class="block text-sm font-medium text-slate-700">
-                                                    Folio de pase a caja
-                                                </mat-label>
-                                                <mat-form-field appearance="outline">
-                                                    <input matInput formControlName="folio">
-                                                </mat-form-field>
+                                            <div class="flex items-center space-x-3 w-full">
+                                                <div>
+                                                    <mat-label class="block text-sm font-medium text-slate-700">
+                                                        Folio de pase a caja
+                                                    </mat-label>
+                                                    <mat-form-field appearance="outline">
+                                                        <input matInput formControlName="folio">
+                                                    </mat-form-field>
+                                                </div>
+                                                <button mat-stroked-button color="primary" (click)="validateFolio()">
+                                                    <i class="fa-solid fa-check"></i> Validar folio
+                                                </button>
                                             </div>
                                             <div>
                                                 <mat-label class="block text-sm font-medium text-slate-700">

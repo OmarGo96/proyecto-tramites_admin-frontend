@@ -461,6 +461,27 @@ export class RequestDetailComponent implements OnInit {
         })
     }
 
+    validateFolio(){
+        this.spinner.show();
+        const data = {
+            folioPaseCaja: this.paseCajaForm.value.folio
+        }
+        this.requestsService.validateFolio(data).subscribe({
+            next: res => {
+                this.spinner.hide();
+                this.paseCajaForm.controls.cantidad_pagar.setValue(res.data.Importe);
+                this.paseCajaForm.controls.vigencia.setValue(res.data.SolicitudVencimientoFecha);
+
+                console.log(this.paseCajaForm.value);
+                console.log(res);
+            },
+            error: err => {
+                this.spinner.hide();
+                console.log(err);
+            }
+        })
+    }
+
     seeDocument() {
         if (this.file) {
             let url = URL.createObjectURL(this.file)

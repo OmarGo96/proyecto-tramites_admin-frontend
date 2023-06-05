@@ -35,7 +35,6 @@ const routes: Routes = [
 
     {
         path: 'solicitudes',
-        // canActivate: [AuthGuard],
         children: [
             {
                 path: '',

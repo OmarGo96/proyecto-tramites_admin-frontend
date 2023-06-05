@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit {
         const data = this.loginForm.value;
         this.usersService.login(data).subscribe({
             next: res => {
-                console.log(res);
                 this.spinner.hide();
                 sessionStorage.setItem('token', res.token);
                 sessionStorage.setItem('rol', res.rol);
