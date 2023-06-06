@@ -416,6 +416,10 @@ export class RequestDetailComponent implements OnInit {
 
     createPaseCaja(file: any) {
         this.spinner.show();
+
+        this.paseCajaForm.controls.cantidad_pagar.enable();
+        this.paseCajaForm.controls.vigencia.enable();
+
         let formData = new FormData();
         const folio = this.paseCajaForm.value.folio;
         const cantidad_pagar  = this.paseCajaForm.value.cantidad_pagar;
@@ -424,17 +428,16 @@ export class RequestDetailComponent implements OnInit {
 
         formData.append('file', file);
         formData.append('folio', folio);
-        formData.append('cantidad_pagar', cantidad_pagar);
-        formData.append('vigencia', vigencia);
+        formData.append('cantidad_pagar', cantidad_pagar.toString());
+        formData.append('vigencia', moment(vigencia).format('YYYY-MM-DD'));
         formData.append('grupo_tramite_id', this.request.Servicio.grupo_tramite_id.toString());
         formData.append('tramite_id', this.request.Servicio.tramite_id.toString());
 
         this.documentsService.generarPaseCaja(this.request.id.toString(), formData).subscribe({
             next: res => {
+                this.spinner.hide();
                 this.messagesService.printStatus(res.message, 'success');
-                setTimeout(() => {
-                    this.updateStatus(10);
-                }, 1000);
+                this.updateStatus(10);
             },
             error: err => {
                 this.spinner.hide();
@@ -444,6 +447,7 @@ export class RequestDetailComponent implements OnInit {
     }
 
     updateStatus(status: any){
+        this.spinner.show();
         const data = {
             estatus_solicitud_id: status.toString()
         };
@@ -469,15 +473,17 @@ export class RequestDetailComponent implements OnInit {
         this.requestsService.validateFolio(data).subscribe({
             next: res => {
                 this.spinner.hide();
-                this.paseCajaForm.controls.cantidad_pagar.setValue(res.data.Importe);
-                this.paseCajaForm.controls.vigencia.setValue(res.data.SolicitudVencimientoFecha);
 
-                console.log(this.paseCajaForm.value);
-                console.log(res);
+                this.messagesService.printStatus('El folio se encontró y validó correctamente.', 'success');
+                this.paseCajaForm.controls.cantidad_pagar.setValue(res.data.Importe);
+                this.paseCajaForm.controls.cantidad_pagar.disable();
+                this.paseCajaForm.controls.vigencia.setValue(res.data.SolicitudVencimientoFecha);
+                this.paseCajaForm.controls.vigencia.disable();
             },
             error: err => {
-                this.spinner.hide();
                 console.log(err);
+                this.spinner.hide();
+                this.messagesService.errorAlert(err.error.message);
             }
         })
     }
