@@ -39,6 +39,7 @@ export class DependenciesComponent implements OnInit {
         this.spinner.show();
         this.dependenciesService.getRecords().subscribe({
             next: res => {
+                console.log(res.areas);
                 this.spinner.hide();
                 this.dependencies = res.areas;
             },
@@ -49,18 +50,18 @@ export class DependenciesComponent implements OnInit {
         })
     }
 
-    openDialog(): void {
+    openDialog(area?:any): void {
         const config = {
             width: '50%',
             data: {
-                title: ''
+                area: area ? area : null
             },
         }
 
         const dialogRef = this.dialog.open(DependenciesModalComponent, config);
 
         dialogRef.afterClosed().subscribe(res => {
-            console.log('The dialog was closed');
+            this.getAreas();
         });
     }
 }

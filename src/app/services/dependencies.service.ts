@@ -30,4 +30,8 @@ export class DependenciesService {
     public createRecord(data: any): Observable <any> {
         return this.httpClient.post(`${this.urlApi}/areas`, data, { headers: this.headers })
     }
+
+    public updateArea(data: any, areaUuid: any): Observable <any> {
+        return this.httpClient.put(`${this.urlApi}/areas/${areaUuid}`, data, { headers: this.headers })
+    }
 }

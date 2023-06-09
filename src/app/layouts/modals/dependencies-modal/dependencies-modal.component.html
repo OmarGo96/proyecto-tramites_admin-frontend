@@ -1,49 +1,65 @@
 <h2 mat-dialog-title>Secretarías y Dependencias Municipales</h2>
-<form [formGroup]="dependenciesForm" (submit)="createDependency()">
+<form [formGroup]="dependenciesForm">
     <mat-dialog-content class="mat-typography">
-        <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Nombre de la dependencia</mat-label>
-            <input matInput formControlName="nombre">
-        </mat-form-field>
+        <div>
+            <mat-label class="block text-sm font-medium text-slate-700">Nombre de la dependencia</mat-label>
+            <mat-form-field appearance="outline" class="w-full">
+                <input matInput formControlName="nombre">
+            </mat-form-field>
+        </div>
         <div class="grid grid-cols-2 gap-3">
-            <mat-form-field appearance="outline">
-                <mat-label>Responsable</mat-label>
-                <input matInput formControlName="responsable">
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label>Correo electrónico</mat-label>
-                <input matInput formControlName="email" type="mail">
-            </mat-form-field>
+            <div>
+                <mat-label class="block text-sm font-medium text-slate-700">Responsable</mat-label>
+                <mat-form-field appearance="outline">
+                    <input matInput formControlName="responsable">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-label class="block text-sm font-medium text-slate-700">Correo electrónico</mat-label>
+                <mat-form-field appearance="outline">
+                    <input matInput formControlName="email" type="mail">
+                </mat-form-field>
+            </div>
         </div>
         <div class="grid grid-cols-3 gap-3">
-            <mat-form-field appearance="outline">
-                <mat-label>Horario</mat-label>
-                <input matInput formControlName="horario">
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label>Teléfono</mat-label>
-                <input matInput formControlName="telefono">
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label>Extensión</mat-label>
-                <input matInput formControlName="extension">
+            <div>
+                <mat-label class="block text-sm font-medium text-slate-700">Horario</mat-label>
+                <mat-form-field appearance="outline">
+                    <input matInput formControlName="horario">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-label class="block text-sm font-medium text-slate-700">Teléfono</mat-label>
+                <mat-form-field appearance="outline">
+                    <input matInput formControlName="telefono">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-label class="block text-sm font-medium text-slate-700">Extensión</mat-label>
+                <mat-form-field appearance="outline">
+                    <input matInput formControlName="extension">
+                </mat-form-field>
+            </div>
+        </div>
+        <div>
+            <mat-label class="block text-sm font-medium text-slate-700">Ubicación</mat-label>
+            <mat-form-field appearance="outline" class="w-full">
+                <input matInput formControlName="ubicacion">
             </mat-form-field>
         </div>
-        <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Ubicación</mat-label>
-            <input matInput formControlName="ubicacion">
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Descripción</mat-label>
-            <textarea matInput rows="4" formControlName="descripcion"></textarea>
-        </mat-form-field>
+        <div>
+            <mat-label class="block text-sm font-medium text-slate-700">Descripción</mat-label>
+            <mat-form-field appearance="outline" class="w-full">
+                <textarea matInput rows="4" formControlName="descripcion"></textarea>
+            </mat-form-field>
+        </div>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-        <button mat-button mat-dialog-close class="rounded-lg">
-            Cancel
-        </button>
-        <button type="submit" mat-flat-button color="primary" class="rounded-lg">
+        <button mat-flat-button color="success" (click)="createDependency()" *ngIf="!forUpdate">
             Agregar
+        </button>
+        <button mat-flat-button color="success" (click)="updateDependency()" *ngIf="forUpdate">
+            Actualizar
         </button>
     </mat-dialog-actions>
 </form>
