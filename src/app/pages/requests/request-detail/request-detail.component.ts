@@ -26,6 +26,7 @@ export class RequestDetailComponent implements OnInit {
 
     public solicitudForm: any;
     public paseCajaForm: any;
+    public visitForm: any;
 
     public request: any;
     public requeriments: any;
@@ -78,6 +79,7 @@ export class RequestDetailComponent implements OnInit {
     ngOnInit(): void {
         this.getId();
         this.initPaseCajaForm();
+        this.initVisitForm();
     }
 
     getId() {
@@ -88,6 +90,12 @@ export class RequestDetailComponent implements OnInit {
             error: err => {
                 console.log(err);
             }
+        });
+    }
+
+    initVisitForm() {
+        this.visitForm = this.formBuilder.group({
+            fecha_visita: ['', Validators.required],
         });
     }
 
@@ -171,6 +179,21 @@ export class RequestDetailComponent implements OnInit {
                 setTimeout(() => {
                     this.getId();
                 }, 2500);
+            },
+            error: err => {
+                this.spinner.hide();
+                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+            }
+        })
+    }
+
+    addVisitDate(){
+        this.spinner.show();
+        const data = this.visitForm.value;
+        this.requestsService.addVisit(data, this.request.id).subscribe({
+            next: res => {
+                this.spinner.hide();
+                this.messagesService.printStatus(res.message, 'success');
             },
             error: err => {
                 this.spinner.hide();

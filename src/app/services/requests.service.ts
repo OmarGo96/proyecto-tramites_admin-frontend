@@ -34,6 +34,10 @@ export class RequestsService {
         return this.httpClient.post(`${this.urlApi}/cambiar_solicitud_estatus/${solicitudId}`, data, { headers: this.headers });
     }
 
+    public addVisit(data: any, solicitudId: any): Observable <any> {
+        return this.httpClient.post(`${this.urlApi}/solicitud/fecha-visita/${solicitudId}`, data, { headers: this.headers });
+    }
+
     public updateEstatusRecord(id: any, data: any): Observable <any> {
         return this.httpClient.put(`${this.urlApi}/cambiar_estatus_documentacion/${id}`, data, {headers: this.headers});
     }
