@@ -79,7 +79,6 @@ export class RequestDetailComponent implements OnInit {
     ngOnInit(): void {
         this.getId();
         this.initPaseCajaForm();
-        this.initVisitForm();
     }
 
     getId() {
@@ -95,7 +94,7 @@ export class RequestDetailComponent implements OnInit {
 
     initVisitForm() {
         this.visitForm = this.formBuilder.group({
-            fecha_visita: ['', Validators.required],
+            fecha_visita: this.request.fecha_visita ? [{ value: moment(this.request.fecha_visita).format(), disabled: false}] : ['', Validators.required],
         });
     }
 
@@ -130,7 +129,6 @@ export class RequestDetailComponent implements OnInit {
                 this.spinner.hide();
 
                 this.request = res.solicitud;
-                console.log(this.request);
 
                 this.currentDate = moment(new Date).format('YYYY-MM-DD');
                 if (this.request.PaseCaja){
@@ -153,6 +151,7 @@ export class RequestDetailComponent implements OnInit {
                 this.getMessages(res.solicitud.id);
                 this.initMessageForm();
                 this.initSolicitudForm();
+                this.initVisitForm();
 
                 const estatusSolicitud = this.request.estatus_solicitud_id;
                 if (estatusSolicitud === 3 || estatusSolicitud === 7){
@@ -189,11 +188,14 @@ export class RequestDetailComponent implements OnInit {
 
     addVisitDate(){
         this.spinner.show();
-        const data = this.visitForm.value;
+        const data = {
+            fecha_visita: moment(this.visitForm.value.fecha_visita).utc().format('YYYY-MM-DD')
+        };
         this.requestsService.addVisit(data, this.request.id).subscribe({
             next: res => {
                 this.spinner.hide();
                 this.messagesService.printStatus(res.message, 'success');
+                this.getId();
             },
             error: err => {
                 this.spinner.hide();
