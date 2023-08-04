@@ -46,14 +46,14 @@
                                 </li>
 
                                 <li class="flex items-center space-x-2.5"
-                                    *ngIf="[15, 21, 22].includes(request.servicio_id)"
+                                    *ngIf="[15, 21, 22, 2].includes(request.servicio_id)"
                                     [ngClass]="request.estatus_solicitud_id === 25 ? 'text-blue-600' : 'text-gray-300'">
                                     <span>
                                         <p class="text-sm">Documentación complementaria</p>
                                     </span>
                                 </li>
                                 <li class="flex items-center space-x-2.5"
-                                    *ngIf="[15, 21, 22, 5, 13, 24].includes(request.servicio_id)"
+                                    *ngIf="[15, 21, 22, 5, 2, 3, 13, 24].includes(request.servicio_id)"
                                     [ngClass]="request.estatus_solicitud_id === 26 ? 'text-blue-600' : 'text-gray-300'">
                                     <span>
                                         <p class="text-sm">Pase a caja</p>
@@ -67,14 +67,21 @@
                                     </span>
                                 </li>
 
-                                <li class="flex items-center space-x-2.5"
+                                <li class="flex items-center space-x-2.5" *ngIf="[11].includes(request.servicio_id)"
                                     [ngClass]="request.estatus_solicitud_id === 27 || request.estatus_solicitud_id == 28 || request.estatus_solicitud_id == 29  ? 'text-blue-600' : 'text-gray-300'">
                                     <span>
                                         <p class="text-sm">Visita topográfica</p>
                                     </span>
                                 </li>
 
-                                <li class="flex items-center space-x-2.5"
+                                <li class="flex items-center space-x-2.5" *ngIf="[2].includes(request.servicio_id)"
+                                    [ngClass]="request.estatus_solicitud_id === 31 || request.estatus_solicitud_id === 32 ? 'text-blue-600' : 'text-gray-300'">
+                                    <span>
+                                        <p class="text-sm">Visita de valuación</p>
+                                    </span>
+                                </li>
+
+                                <li class="flex items-center space-x-2.5" *ngIf="[11].includes(request.servicio_id)"
                                     [ngClass]="request.estatus_solicitud_id === 30  ? 'text-blue-600' : 'text-gray-300'">
                                     <span>
                                         <p class="text-sm">Punto de distinción</p>
@@ -253,6 +260,63 @@
                                                     <form [formGroup]="visitForm">
                                                         <div>
                                                             <mat-label>Fecha de visita topográfica</mat-label>
+                                                            <mat-form-field appearance="outline">
+                                                                <input matInput [matDatepicker]="picker3"
+                                                                       (click)="picker3.open()" [min]="minDate"
+                                                                       formControlName="fecha_visita">
+                                                                <span matSuffix class="text-slate-400 text-sm">
+                                                                <i class="fa-solid fa-calendar"></i>&nbsp;
+                                                            </span>
+                                                                <mat-datepicker #picker3>
+                                                                    <mat-datepicker-actions>
+                                                                        <button mat-button matDatepickerCancel>
+                                                                            Cancelar
+                                                                        </button>
+                                                                        <button mat-raised-button color="primary"
+                                                                                matDatepickerApply>Aplicar
+                                                                        </button>
+                                                                    </mat-datepicker-actions>
+                                                                </mat-datepicker>
+                                                            </mat-form-field>
+                                                            <div>
+                                                                <button mat-flat-button color="primary"
+                                                                        (click)="addVisitDate()" class="rounded-md"
+                                                                        [disabled]="visitForm.invalid">
+                                                                    Agregar fecha
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </dd>
+                                    </div>
+                                </dl>
+                            </div>
+
+                            <!--<div class="px-4 pb-4 text-right"
+                                 *ngIf="request.estatus_solicitud_id === 10 && request.DocumentosPago.length === paymentDocs.length">
+                                <button mat-flat-button (click)="validatePayment('20')" class="rounded-md"
+                                        color="success">
+                                    Validar pago
+                                </button>
+                            </div>-->
+                        </ng-container>
+
+                        <!-- Visita valuación -->
+                        <ng-container *ngIf="request.estatus_solicitud_id === 31 && !request.fecha_visita">
+                            <div class="border-t border-gray-200">
+                                <dl class="pb-5 text-gray-900">
+                                    <div class="border-b flex flex-col px-5 py-5">
+                                        <!--<dt class="mb-1 text-md">
+                                            Fecha de Visita Topográfica
+                                        </dt>-->
+                                        <dd class="flex items-center justify-between font-medium text-gray-500">
+                                            <div class="flex space-x-2">
+                                                <div class="mr-4">
+                                                    <form [formGroup]="visitForm">
+                                                        <div>
+                                                            <mat-label>Fecha de visita para valuación</mat-label>
                                                             <mat-form-field appearance="outline">
                                                                 <input matInput [matDatepicker]="picker3"
                                                                        (click)="picker3.open()" [min]="minDate"
@@ -656,6 +720,18 @@
                                 <i class="fa-solid fa-user-clock fa-5x text-slate-600"></i>
                                 <div>
                                     <p class="font-medium text-lg">El contribuyente esta subiendo evidencia de los puntos de distinción</p>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                        <!-- Visita de valuacion -->
+                        <ng-container
+                            *ngIf="(request.estatus_solicitud_id === 31 || request.estatus_solicitud_id === 32) && request.fecha_visita ">
+                            <div class="w-full mx-auto block p-10 text-center space-y-3">
+                                <i class="fa-regular fa-clock fa-5x text-slate-500"></i>
+                                <div>
+                                    <p class="font-medium text-lg">La solicitud esta en Visita para Valuación</p>
+                                    <p>Fecha programada de la visita: <b>{{request.fecha_visita | date }}</b></p>
                                 </div>
                             </div>
                         </ng-container>
