@@ -149,7 +149,7 @@
                                         <dd class="font-medium text-gray-500">
                                             <div class="flex items-center">
                                                 <button mat-stroked-button color="primary"
-                                                        (click)="openDocument(requeriment.Requisito.Documento.Documentacion.id)"
+                                                        (click)="openDocument(requeriment.Requisito.Documento.Documentacion)"
                                                         class="mr-4 px-3 py-2 text-xs font-medium rounded-md"
                                                         *ngIf="requeriment.Requisito.Documento">
                                                     Ver adjunto
@@ -204,7 +204,7 @@
                                                 <div class="flex space-x-2">
                                                     <div class="mr-4">
                                                         <i class="fa-solid fa-file-pdf text-blue-600"></i>
-                                                        <a (click)="openDocument(document.Documentacion.id)"
+                                                        <a (click)="openPaymentDocument(document.Documentacion.id)"
                                                            class="text-xs text-blue-600 hover:underline hover:cursor-pointer"
                                                            *ngIf="document.Documentacion">
                                                             Ver adjunto
@@ -373,7 +373,7 @@
                                                 <div class="flex space-x-2">
                                                     <div class="mr-4">
                                                         <i class="fa-solid fa-file-pdf text-blue-600"></i>
-                                                        <a (click)="openDocument(document.Documentacion.id)"
+                                                        <a (click)="openAnuenciaDocument(document.Documentacion.id)"
                                                            class="text-xs text-blue-600 hover:underline hover:cursor-pointer"
                                                            *ngIf="document.Documentacion">
                                                             Ver adjunto
@@ -424,7 +424,7 @@
                                                 <div class="flex space-x-2">
                                                     <div class="mr-4">
                                                         <i class="fa-solid fa-file-pdf text-blue-600"></i>
-                                                        <a (click)="openDocument(request.DocumentosComplementarios.Documentacion.id)"
+                                                        <a (click)="openDocumentComplementary(request.DocumentosComplementarios.Documentacion.id)"
                                                            class="text-xs text-blue-600 hover:underline hover:cursor-pointer"
                                                            *ngIf="request.DocumentosComplementarios">
                                                             Ver adjunto
@@ -484,7 +484,7 @@
                                                 <div class="flex space-x-2">
                                                     <div class="mr-4">
                                                         <i class="fa-solid fa-file-pdf text-blue-600"></i>
-                                                        <a (click)="openDocument(request.DocumentosComplementarios.Documentacion.id)"
+                                                        <a (click)="openDocumentComplementary(request.DocumentosComplementarios.Documentacion.id)"
                                                            class="text-xs text-blue-600 hover:underline hover:cursor-pointer"
                                                            *ngIf="request.DocumentosComplementarios">
                                                             Ver adjunto
