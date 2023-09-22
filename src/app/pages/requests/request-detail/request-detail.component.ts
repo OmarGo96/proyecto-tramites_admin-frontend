@@ -189,7 +189,7 @@ export class RequestDetailComponent implements OnInit {
     addVisitDate(){
         this.spinner.show();
         const data = {
-            fecha_visita: moment(this.visitForm.value.fecha_visita).utc().format('YYYY-MM-DD')
+            fecha_visita: this.visitForm.value.fecha_visita
         };
         this.requestsService.addVisit(data, this.request.id).subscribe({
             next: res => {
