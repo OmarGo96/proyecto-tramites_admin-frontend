@@ -44,6 +44,7 @@ export class RequestDetailComponent implements OnInit {
     public file: any;
 
     public files: File[] = [];
+    public invoices: File[] = [];
 
     public dataSource: any;
     public displayedColumns: string[] = ['requisito', 'archivo', 'accion'];
@@ -129,6 +130,7 @@ export class RequestDetailComponent implements OnInit {
                 this.spinner.hide();
 
                 this.request = res.solicitud;
+                console.log(this.request);
 
                 this.currentDate = moment(new Date).format('YYYY-MM-DD');
                 if (this.request.PaseCaja){
@@ -583,5 +585,58 @@ export class RequestDetailComponent implements OnInit {
 
     onRemove(event: any) {
         this.files.splice(this.files.indexOf(event), 1);
+    }
+
+    onSelectPaymentInvoice(event: any) {
+        if (this.invoices.length >= 1){
+            this.messagesService.printStatus('Solo se puede adjuntar un documento a la vez', 'error');
+        } else {
+            this.invoices.push(...event.addedFiles);
+        }
+    }
+
+    onRemovePaymentInvoice(event: any) {
+        this.invoices.splice(this.invoices.indexOf(event), 1);
+    }
+
+    sendInvoiceFile() {
+        this.invoices.forEach(invoice => {
+            this.uploadInvoiceFile(invoice);
+        });
+    }
+
+    uploadInvoiceFile(invoice: any){
+        this.spinner.show();
+        let formData = new FormData()
+        formData.append('tipos_documentos_id', '24');
+        formData.append('tipo_documento', '0');
+        formData.append('vigencia_inicial', '');
+        formData.append('nombre_documento', `Recibo de pago solicitud: ${this.request.folio}`);
+        formData.append('vigencia_final', '');
+        formData.append('contribuyente_id', this.request.contribuyente_id);
+        formData.append('file', invoice);
+        this.documentsService.uploadInvoiceFile(formData).subscribe({
+            next: res => {
+                this.spinner.hide();
+                this.messagesService.printStatus(res.message, 'success');
+                this.updateReciboPago();
+            },
+            error: err => {
+                this.spinner.hide();
+                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+            }
+        })
+    }
+
+    updateReciboPago(){
+        this.requestsService.updateReciboPago(this.request.id).subscribe({
+            next: res => {
+                console.log(res);
+                this.getId();
+            },
+            error: err => {
+                console.log(err);
+            }
+        })
     }
 }

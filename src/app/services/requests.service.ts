@@ -73,4 +73,8 @@ export class RequestsService {
     public validateFolio(data: any): Observable <any> {
         return this.httpClient.post(`${this.urlApi}/solicitud/check/pase-caja`, data, { headers: this.headers });
     }
+
+    public updateReciboPago(solicitudId: any): Observable <any> {
+        return this.httpClient.put(`${this.urlApi}/solicitud/recibo-pago/${solicitudId}`, { headers: this.headers });
+    }
 }

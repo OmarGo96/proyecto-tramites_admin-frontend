@@ -43,4 +43,8 @@ export class DocumentsService {
     public generarPaseCaja(requestId: any, data: any): Observable<any> {
         return this.httpClient.post(`${this.urlApi}/solicitud/pase-caja/${requestId}`, data, {headers: this.headers})
     }
+
+    public uploadInvoiceFile(data: any): Observable<any> {
+        return this.httpClient.post(`${this.urlApi}/documentacion`, data, {headers: this.headers})
+    }
 }
