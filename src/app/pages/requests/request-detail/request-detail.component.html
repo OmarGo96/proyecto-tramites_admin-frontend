@@ -384,6 +384,63 @@
                             </div>-->
                         </ng-container>
 
+                        <!-- Inspección fisica -->
+                        <ng-container *ngIf="request.estatus_solicitud_id === 15 || request.estatus_solicitud_id === 35">
+                            <div class="border-t border-gray-200">
+                                <dl class="pb-5 text-gray-900">
+                                    <div class="border-b flex flex-col px-5 py-5">
+                                        <!--<dt class="mb-1 text-md">
+                                            Fecha de Visita Topográfica
+                                        </dt>-->
+                                        <dd class="flex items-center justify-between font-medium text-gray-500">
+                                            <div class="flex space-x-2">
+                                                <div class="mr-4">
+                                                    <form [formGroup]="visitForm">
+                                                        <div>
+                                                            <mat-label>Programar inspección fisica</mat-label>
+                                                            <mat-form-field appearance="outline">
+                                                                <input matInput [matDatepicker]="picker3"
+                                                                       (click)="picker3.open()" [min]="minDate"
+                                                                       formControlName="fecha_visita">
+                                                                <span matSuffix class="text-slate-400 text-sm">
+                                                                <i class="fa-solid fa-calendar"></i>&nbsp;
+                                                            </span>
+                                                                <mat-datepicker #picker3>
+                                                                    <mat-datepicker-actions>
+                                                                        <button mat-button matDatepickerCancel>
+                                                                            Cancelar
+                                                                        </button>
+                                                                        <button mat-raised-button color="primary"
+                                                                                matDatepickerApply>Aplicar
+                                                                        </button>
+                                                                    </mat-datepicker-actions>
+                                                                </mat-datepicker>
+                                                            </mat-form-field>
+                                                            <div>
+                                                                <button mat-flat-button color="primary"
+                                                                        (click)="addVisitDate()" class="rounded-md"
+                                                                        [disabled]="visitForm.invalid">
+                                                                    Agregar fecha
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </dd>
+                                    </div>
+                                </dl>
+                            </div>
+
+                            <!--<div class="px-4 pb-4 text-right"
+                                 *ngIf="request.estatus_solicitud_id === 10 && request.DocumentosPago.length === paymentDocs.length">
+                                <button mat-flat-button (click)="validatePayment('20')" class="rounded-md"
+                                        color="success">
+                                    Validar pago
+                                </button>
+                            </div>-->
+                        </ng-container>
+
                         <!-- Validación anuencia -->
                         <ng-container *ngIf="request.estatus_solicitud_id === 23">
                             <div class="border-t border-gray-200">
@@ -731,6 +788,7 @@
                             </div>
                         </ng-container>
 
+
                         <!-- Visita de valuacion -->
                         <ng-container
                             *ngIf="(request.estatus_solicitud_id === 31 || request.estatus_solicitud_id === 32) && request.fecha_visita ">
@@ -766,7 +824,7 @@
                         </ng-container>
 
                         <ng-container
-                            *ngIf="request.estatus_solicitud_id === 34 || request.estatus_solicitud_id === 11 || request.estatus_solicitud_id === 19 || request.estatus_solicitud_id === 15 || request.estatus_solicitud_id === 16 || request.estatus_solicitud_id === 8">
+                            *ngIf="request.estatus_solicitud_id === 34 || request.estatus_solicitud_id === 11 || request.estatus_solicitud_id === 19 || request.estatus_solicitud_id === 16 || request.estatus_solicitud_id === 8">
                             <div class="w-full mx-auto block p-10 text-center space-y-3">
                                 <i class="fa-solid fa-circle-right fa-5x text-slate-600"></i>
                                 <div>
