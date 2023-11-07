@@ -28,6 +28,8 @@ export class RequestDetailComponent implements OnInit {
     public paseCajaForm: any;
     public visitForm: any;
 
+    public isFolioValidate = false;
+
     public request: any;
     public requeriments: any;
     public reqWithDocuments: any;
@@ -503,6 +505,7 @@ export class RequestDetailComponent implements OnInit {
             next: res => {
                 this.spinner.hide();
                 this.messagesService.printStatus(res.message, 'success');
+                this.isFolioValidate = false;
                 this.updateStatus(10);
             },
             error: err => {
@@ -545,6 +548,7 @@ export class RequestDetailComponent implements OnInit {
                 this.paseCajaForm.controls.cantidad_pagar.disable();
                 this.paseCajaForm.controls.vigencia.setValue(res.data.SolicitudVencimientoFecha);
                 this.paseCajaForm.controls.vigencia.disable();
+                this.isFolioValidate = true;
             },
             error: err => {
                 console.log(err);
