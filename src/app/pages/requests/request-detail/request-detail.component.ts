@@ -277,6 +277,18 @@ export class RequestDetailComponent implements OnInit {
         });
     }
 
+    openGiroDocument(documentId: any) {
+        this.documentsService.getUserDocument(documentId).subscribe({
+            next: res => {
+                let url = URL.createObjectURL(res);
+                window.open(url, '_blank');
+            },
+            error: err => {
+                this.messagesService.printStatus('Algo salio mal al obtener el documento. Intente mas tarde.', 'warning');
+            }
+        });
+    }
+
     acceptOrDenyDocument(estatus: any, documentId: any) {
         this.spinner.show();
         let data = {
@@ -326,6 +338,26 @@ export class RequestDetailComponent implements OnInit {
         };
 
         this.requestsService.updateEstatusAnuenciaDoc(documentId, data).subscribe({
+                next: res => {
+                    this.spinner.hide();
+                    this.getId();
+                },
+                error: err => {
+                    this.spinner.hide();
+                    this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+                }
+            }
+        );
+    }
+
+    acceptOrDenyGiroDocs(estatus: any, documentId: any){
+        this.spinner.show();
+        let data = {
+            'documento_licencia_comercial_id': documentId.toString(),
+            'status': estatus.toString()
+        };
+
+        this.requestsService.updateEstatusGiroDoc(documentId, data).subscribe({
                 next: res => {
                     this.spinner.hide();
                     this.getId();

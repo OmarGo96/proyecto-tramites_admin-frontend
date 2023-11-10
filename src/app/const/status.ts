@@ -160,5 +160,20 @@ export const RequestsStatus = [
         name: 'Cambio de propietario aplicado',
         value: 34,
         styles: 'bg-indigo-200 text-indigo-800'
+    },
+    {
+        name: 'Calificación de expediente',
+        value: 37,
+        styles: 'bg-indigo-200 text-indigo-800'
+    },
+    {
+        name: 'Pendiente de licencia de uso de suelo',
+        value: 38,
+        styles: 'bg-indigo-200 text-indigo-800'
+    },
+    {
+        name: 'En validación de licencia de uso de suelo',
+        value: 39,
+        styles: 'bg-indigo-200 text-indigo-800'
     }
 ]

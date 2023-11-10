@@ -50,6 +50,10 @@ export class RequestsService {
         return this.httpClient.put(`${this.urlApi}/validar-documento-anuencia/${id}`, data, {headers: this.headers});
     }
 
+    public updateEstatusGiroDoc(id: any, data: any): Observable <any> {
+        return this.httpClient.put(`${this.urlApi}/validar-documento-licencia-comercial/${id}`, data, {headers: this.headers});
+    }
+
     public updateEstatusComplementaryDoc(id: any, data: any): Observable <any> {
         return this.httpClient.put(`${this.urlApi}/validar-documento-complementario/${id}`, data, {headers: this.headers});
     }
