@@ -119,7 +119,7 @@
                             </div>
                             <!-- Form para actualizar estatus -->
                             <form [formGroup]="solicitudForm" class="flex justify-between items-center"
-                                  *ngIf="(request.fecha_visita) || (reqChecked && reqChecked.length === reqWithDocuments.length && request.DocumentosPago.length === paymentDocs.length) && (request.estatus_solicitud_id !== 10 && request.estatus_solicitud_id !== 5 && request.estatus_solicitud_id !== 21 && request.estatus_solicitud_id !== 22 && request.estatus_solicitud_id !== 24 && request.estatus_solicitud_id !== 26  && request.estatus_solicitud_id !== 17 && request.estatus_solicitud_id !== 18) || (request.DocumentoAnuencia && anuenciaDoc)">
+                                  *ngIf="(request.fecha_visita) || (reqChecked && reqChecked.length === reqWithDocuments.length && request.DocumentosPago.length === paymentDocs.length || paymentDocsRejected.length >= 1 || (invoices.length === 1) ) && ![10, 5, 21, 22, 24, 26, 17, 18].includes(request.estatus_solicitud_id) || (request.DocumentoAnuencia && anuenciaDoc)">
                                 <mat-form-field appearance="legacy" class="w-full mr-5">
                                     <mat-label>Selecciona estatus</mat-label>
                                     <mat-select formControlName="estatus_solicitud_id">
@@ -242,7 +242,7 @@
                                         </div>
                                     </ng-container>
                                     <div class="p-5 w-1/2"
-                                         *ngIf="(request.DocumentosPago.length === paymentDocs.length) && (request.recibo_pago === 0)">
+                                         *ngIf="(request.DocumentosPago.length === paymentDocs.length && paymentDocsRejected.length === 0) && (request.recibo_pago === 0)">
                                         <mat-label>
                                             RECIBO DE PAGO
                                         </mat-label>

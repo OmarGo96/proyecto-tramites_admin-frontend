@@ -34,6 +34,7 @@ export class RequestDetailComponent implements OnInit {
     public requeriments: any;
     public reqWithDocuments: any;
     public reqRejected: any;
+    public paymentDocsRejected: any;
     public reqAccepted: any;
     public reqChecked: any;
     public paymentDocs: any;
@@ -146,6 +147,8 @@ export class RequestDetailComponent implements OnInit {
                 this.reqRejected = this.requeriments.filter((req: any) => req.Requisito.Documento && req.Requisito.Documento.estatus === -1); // requisitos rechazados
                 this.reqAccepted = this.requeriments.filter((req: any) => req.Requisito.Documento && req.Requisito.Documento.estatus === 1); // requisitos aceptados
                 this.paymentDocs = this.request.DocumentosPago.filter((req: any) => req.status === 1 || req.status === -1);
+                this.paymentDocsRejected = this.request.DocumentosPago.filter((req: any) => req.status === -1); // requisitos rechazados
+                console.log(this.paymentDocsRejected);
                 this.anuenciaDoc = this.request.DocumentoAnuencia && (this.request.DocumentoAnuencia.status === 1 || this.request.DocumentoAnuencia.status === -1);
 
                 this.dataSource = new MatTableDataSource(res.requisitos);
@@ -668,7 +671,7 @@ export class RequestDetailComponent implements OnInit {
         this.requestsService.updateReciboPago(this.request.id).subscribe({
             next: res => {
                 console.log(res);
-                this.getId();
+                this.updateStatus(11);
             },
             error: err => {
                 console.log(err);
