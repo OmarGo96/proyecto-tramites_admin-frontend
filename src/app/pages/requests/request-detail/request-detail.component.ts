@@ -193,10 +193,28 @@ export class RequestDetailComponent implements OnInit {
         })
     }
 
-    addVisitDate(){
+    addVisitDate(fechaNull?: any){
         this.spinner.show();
         const data = {
             fecha_visita: this.visitForm.value.fecha_visita
+        };
+        this.requestsService.addVisit(data, this.request.id).subscribe({
+            next: res => {
+                this.spinner.hide();
+                this.messagesService.printStatus(res.message, 'success');
+                this.getId();
+            },
+            error: err => {
+                this.spinner.hide();
+                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+            }
+        })
+    }
+
+    setVisitDateNull(){
+        this.spinner.show();
+        const data = {
+            fecha_visita: ''
         };
         this.requestsService.addVisit(data, this.request.id).subscribe({
             next: res => {

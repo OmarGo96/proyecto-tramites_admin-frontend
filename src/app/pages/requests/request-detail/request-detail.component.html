@@ -45,6 +45,13 @@
                                     </span>
                                 </li>
 
+                                <li class="flex items-center space-x-2.5" *ngIf="[8].includes(request.servicio_id)"
+                                    [ngClass]="request.estatus_solicitud_id === 36 ? 'text-blue-600' : 'text-gray-300'">
+                                    <span>
+                                        <p class="text-sm">Inspección fisica</p>
+                                    </span>
+                                </li>
+
                                 <li class="flex items-center space-x-2.5"
                                     *ngIf="[14, 15, 21, 22, 2, 8].includes(request.servicio_id)"
                                     [ngClass]="request.estatus_solicitud_id === 25 ? 'text-blue-600' : 'text-gray-300'">
@@ -119,7 +126,7 @@
                             </div>
                             <!-- Form para actualizar estatus -->
                             <form [formGroup]="solicitudForm" class="flex justify-between items-center"
-                                  *ngIf="(request.fecha_visita) || (reqChecked && reqChecked.length === reqWithDocuments.length && request.DocumentosPago.length === paymentDocs.length || paymentDocsRejected.length >= 1 || (invoices.length === 1) ) && ![10, 5, 21, 22, 24, 26, 17, 18].includes(request.estatus_solicitud_id) || (request.DocumentoAnuencia && anuenciaDoc)">
+                                  *ngIf="(request.fecha_visita || request.fecha_visita >= currentDate) || (reqChecked && reqChecked.length === reqWithDocuments.length && request.DocumentosPago.length === paymentDocs.length || paymentDocsRejected.length >= 1 || (invoices.length === 1) ) && ![10, 5, 21, 22, 24, 26, 17, 18, 36, 35].includes(request.estatus_solicitud_id) || (request.DocumentoAnuencia && anuenciaDoc)">
                                 <mat-form-field appearance="legacy" class="w-full mr-5">
                                     <mat-label>Selecciona estatus</mat-label>
                                     <mat-select formControlName="estatus_solicitud_id">
@@ -348,6 +355,63 @@
                                                     <form [formGroup]="visitForm">
                                                         <div>
                                                             <mat-label>Fecha de visita para valuación</mat-label>
+                                                            <mat-form-field appearance="outline">
+                                                                <input matInput [matDatepicker]="picker3"
+                                                                       (click)="picker3.open()" [min]="minDate"
+                                                                       formControlName="fecha_visita">
+                                                                <span matSuffix class="text-slate-400 text-sm">
+                                                                <i class="fa-solid fa-calendar"></i>&nbsp;
+                                                            </span>
+                                                                <mat-datepicker #picker3>
+                                                                    <mat-datepicker-actions>
+                                                                        <button mat-button matDatepickerCancel>
+                                                                            Cancelar
+                                                                        </button>
+                                                                        <button mat-raised-button color="primary"
+                                                                                matDatepickerApply>Aplicar
+                                                                        </button>
+                                                                    </mat-datepicker-actions>
+                                                                </mat-datepicker>
+                                                            </mat-form-field>
+                                                            <div>
+                                                                <button mat-flat-button color="primary"
+                                                                        (click)="addVisitDate()" class="rounded-md"
+                                                                        [disabled]="visitForm.invalid">
+                                                                    Agregar fecha
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </dd>
+                                    </div>
+                                </dl>
+                            </div>
+
+                            <!--<div class="px-4 pb-4 text-right"
+                                 *ngIf="request.estatus_solicitud_id === 10 && request.DocumentosPago.length === paymentDocs.length">
+                                <button mat-flat-button (click)="validatePayment('20')" class="rounded-md"
+                                        color="success">
+                                    Validar pago
+                                </button>
+                            </div>-->
+                        </ng-container>
+
+                        <!-- Visita inspección fisica -->
+                        <ng-container *ngIf="request.estatus_solicitud_id === 36 && !request.fecha_visita">
+                            <div class="border-t border-gray-200">
+                                <dl class="pb-5 text-gray-900">
+                                    <div class="border-b flex flex-col px-5 py-5">
+                                        <!--<dt class="mb-1 text-md">
+                                            Fecha de Visita Topográfica
+                                        </dt>-->
+                                        <dd class="flex items-center justify-between font-medium text-gray-500">
+                                            <div class="flex space-x-2">
+                                                <div class="mr-4">
+                                                    <form [formGroup]="visitForm">
+                                                        <div>
+                                                            <mat-label>Fecha de inspección fisica</mat-label>
                                                             <mat-form-field appearance="outline">
                                                                 <input matInput [matDatepicker]="picker3"
                                                                        (click)="picker3.open()" [min]="minDate"
@@ -805,7 +869,32 @@
                                 <div>
                                     <p class="font-medium text-lg">La solicitud esta en Visita para Valuación</p>
                                     <p>Fecha programada de la visita: <b>{{request.fecha_visita | date }}</b></p>
+                                    <p *ngIf="request.fecha_visita && request.fecha_visita <= currentDate"
+                                       class="text-md text-red-500">La fecha de visita vencio</p>
                                 </div>
+                                <button *ngIf="request.fecha_visita && request.fecha_visita <= currentDate"
+                                        mat-flat-button color="primary" (click)="setVisitDateNull()"
+                                        class="rounded-md">
+                                    Reprogramar Visita para Valuación
+                                </button>
+                            </div>
+                        </ng-container>
+
+                        <ng-container
+                            *ngIf="request.estatus_solicitud_id === 36 && request.fecha_visita">
+                            <div class="w-full mx-auto block p-10 text-center space-y-3">
+                                <i class="fa-regular fa-clock fa-5x text-slate-500"></i>
+                                <div>
+                                    <p class="font-medium text-lg">La solicitud esta en proceso de inspección fisica</p>
+                                    <p>Fecha programada de la visita: <b>{{request.fecha_visita | date }}</b></p>
+                                    <p *ngIf="request.fecha_visita && request.fecha_visita <= currentDate"
+                                    class="text-md text-red-500">La fecha de visita vencio</p>
+                                </div>
+                                <button *ngIf="request.fecha_visita && request.fecha_visita <= currentDate"
+                                        mat-flat-button color="primary" (click)="setVisitDateNull()"
+                                        class="rounded-md">
+                                    Reprogramar inspección fisica
+                                </button>
                             </div>
                         </ng-container>
 
