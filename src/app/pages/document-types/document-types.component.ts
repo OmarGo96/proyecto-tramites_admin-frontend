@@ -44,7 +44,8 @@ export class DocumentTypesComponent implements OnInit {
             nombre: ['', Validators.required],
             clave: ['', Validators.required],
             descripcion: ['', Validators.required],
-            aprobacion: false
+            aprobacion: false,
+            expediente: false
         })
     }
 

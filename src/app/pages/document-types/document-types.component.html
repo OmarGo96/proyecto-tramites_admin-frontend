@@ -32,8 +32,11 @@
                                     <textarea matInput rows="4" formControlName="descripcion"></textarea>
                                 </mat-form-field>
                             </div>
-                            <div class="flex items-center mb-4">
+                            <div class="flex items-center">
                                 <mat-checkbox class="example-margin" formControlName="aprobacion">¿Requiere aprobación?</mat-checkbox>
+                            </div>
+                            <div class="flex items-center mb-4">
+                                <mat-checkbox class="example-margin" formControlName="expediente">¿Es parte del expediente único?</mat-checkbox>
                             </div>
                             <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">
                                 Crear
@@ -74,7 +77,7 @@
                                 <td class="mat-cell" colspan="4">No se encontraron resultados...</td>
                             </tr>
                         </table>
-                        <mat-paginator [pageSizeOptions]="[15, 30, 60]" aria-label="Select page of users"></mat-paginator>
+                        <mat-paginator [pageSizeOptions]="[10, 20, 50]" aria-label="Select page of users"></mat-paginator>
                     </div>
                 </div>
             </div>

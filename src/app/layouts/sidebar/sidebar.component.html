@@ -57,6 +57,13 @@
                         <span class="flex-1 ml-3 whitespace-nowrap">Requisitos</span>
                     </a>
                 </li>
+                <li *ngIf="['1'].includes(rol)">
+                    <a [routerLink]="['contribuyentes']"
+                       class="flex items-center p-2 font-normal text-gray-500 rounded-lg hover:bg-slate-200 duration-200 hover:cursor-pointer">
+                        <i class="fa-solid fa-users-rectangle"></i>
+                        <span class="flex-1 ml-3 whitespace-nowrap">Contribuyentes</span>
+                    </a>
+                </li>
                 <li *ngIf="['1', '2'].includes(rol)">
                     <a [routerLink]="['usuarios']"
                        class="flex items-center p-2 font-normal text-gray-500 rounded-lg hover:bg-slate-200 duration-200 hover:cursor-pointer">
