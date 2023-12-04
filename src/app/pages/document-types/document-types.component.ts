@@ -16,7 +16,7 @@ import {NgxSpinnerService} from "ngx-spinner";
 export class DocumentTypesComponent implements OnInit {
 
     public dataSource: any;
-    public displayedColumns: string[] = ['nombre', 'clave', 'aprobacion'];
+    public displayedColumns: string[] = ['nombre', 'clave', 'aprobacion', 'expediente'];
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
