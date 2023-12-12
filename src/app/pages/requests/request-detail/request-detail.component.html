@@ -126,7 +126,7 @@
                             </div>
                             <!-- Form para actualizar estatus -->
                             <form [formGroup]="solicitudForm" class="flex justify-between items-center"
-                                  *ngIf="(request.fecha_visita || request.fecha_visita >= currentDate) || (reqChecked && reqChecked.length === reqWithDocuments.length && request.DocumentosPago.length === paymentDocs.length || paymentDocsRejected.length >= 1 || (invoices.length === 1) ) && ![10, 5, 21, 22, 24, 26, 17, 18, 36, 35].includes(request.estatus_solicitud_id) || (request.DocumentoAnuencia && anuenciaDoc)">
+                                  *ngIf="(request.fecha_visita) || (reqChecked && reqChecked.length === reqWithDocuments.length && request.DocumentosPago.length === paymentDocs.length || paymentDocsRejected.length >= 1 || (invoices.length === 1) ) && ![10, 5, 21, 22, 24, 26, 17, 18, 36, 35].includes(request.estatus_solicitud_id) || (request.DocumentoAnuencia && anuenciaDoc)">
                                 <mat-form-field appearance="legacy" class="w-full mr-5">
                                     <mat-label>Selecciona estatus</mat-label>
                                     <mat-select formControlName="estatus_solicitud_id">
@@ -872,8 +872,8 @@
                                     <p *ngIf="request.fecha_visita && request.fecha_visita <= currentDate"
                                        class="text-md text-red-500">La fecha de visita vencio</p>
                                 </div>
-                                <button *ngIf="request.fecha_visita && request.fecha_visita <= currentDate"
-                                        mat-flat-button color="primary" (click)="setVisitDateNull()"
+                                <button mat-flat-button color="warn" (click)="setVisitDateNull()"
+                                        *ngIf="request.estatus_solicitud_id === 31"
                                         class="rounded-md">
                                     Reprogramar Visita para Valuación
                                 </button>
@@ -890,8 +890,8 @@
                                     <p *ngIf="request.fecha_visita && request.fecha_visita <= currentDate"
                                     class="text-md text-red-500">La fecha de visita vencio</p>
                                 </div>
-                                <button *ngIf="request.fecha_visita && request.fecha_visita <= currentDate"
-                                        mat-flat-button color="primary" (click)="setVisitDateNull()"
+                                <button
+                                        mat-flat-button color="warn" (click)="setVisitDateNull()"
                                         class="rounded-md">
                                     Reprogramar inspección fisica
                                 </button>

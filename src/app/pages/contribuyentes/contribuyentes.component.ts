@@ -18,7 +18,7 @@ import {ContribuyentesService} from "../../services/contribuyentes.service";
 export class ContribuyentesComponent implements OnInit {
 
     public dataSource: any;
-    public displayedColumns: string[] = ['name', 'email', 'action'];
+    public displayedColumns: string[] = ['id', 'name', 'rfc', 'email', 'action'];
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
@@ -40,6 +40,7 @@ export class ContribuyentesComponent implements OnInit {
         this.spinner.show();
         this.contribuyentesService.getContribuyentes().subscribe({
             next: res => {
+                console.log(res.contribuyentes);
                 this.spinner.hide();
                 this.dataSource = new MatTableDataSource(res.contribuyentes);
                 this.dataSource.paginator = this.paginator;
