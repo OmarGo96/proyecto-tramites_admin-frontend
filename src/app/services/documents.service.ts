@@ -47,4 +47,8 @@ export class DocumentsService {
     public uploadInvoiceFile(data: any): Observable<any> {
         return this.httpClient.post(`${this.urlApi}/documentacion`, data, {headers: this.headers})
     }
+
+    public updateDocumentType(data: any): Observable<any> {
+        return this.httpClient.put(`${this.urlApi}/update/tipo_documento`, data, {headers: this.headers})
+    }
 }

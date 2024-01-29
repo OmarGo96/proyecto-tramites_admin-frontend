@@ -23,6 +23,7 @@ import {
     LinkRequerimentsModalComponent
 } from "./modals/requeriments/link-requeriments-modal/link-requeriments-modal.component";
 import {NgSelectModule} from "@ng-select/ng-select";
+import { EditDocumentsComponent } from './modals/edit-documents/edit-documents.component';
 
 @NgModule({
     declarations: [
@@ -41,7 +42,8 @@ import {NgSelectModule} from "@ng-select/ng-select";
         UsersModalComponent,
         CreateRequerimentsModalComponent,
         UpdateRequerimentsModalComponent,
-        LinkRequerimentsModalComponent
+        LinkRequerimentsModalComponent,
+        EditDocumentsComponent
     ],
     imports: [
         CommonModule,

@@ -7,6 +7,8 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
 import {NgxSpinnerService} from "ngx-spinner";
+import {DependenciesModalComponent} from "../../layouts/modals/dependencies-modal/dependencies-modal.component";
+import {EditDocumentsComponent} from "../../layouts/modals/edit-documents/edit-documents.component";
 
 @Component({
     selector: 'app-document-types',
@@ -16,7 +18,7 @@ import {NgxSpinnerService} from "ngx-spinner";
 export class DocumentTypesComponent implements OnInit {
 
     public dataSource: any;
-    public displayedColumns: string[] = ['nombre', 'clave', 'aprobacion', 'expediente'];
+    public displayedColumns: string[] = ['nombre', 'aprobacion', 'expediente', 'editar'];
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
@@ -71,6 +73,20 @@ export class DocumentTypesComponent implements OnInit {
         });
     }
 
+    editDocument(documentType: any){
+        const config = {
+            data: {
+                document: documentType
+            }
+        }
+
+        const dialogRef = this.matDialog.open(EditDocumentsComponent, config);
+
+        dialogRef.afterClosed().subscribe((result: any) => {
+            this.getDocumentTypes();
+        });
+    }
+
     getDocumentTypes(){
         this.documentTypesService.getRecords().subscribe({
             next: res => {
@@ -86,5 +102,6 @@ export class DocumentTypesComponent implements OnInit {
             }
         })
     }
+
 
 }

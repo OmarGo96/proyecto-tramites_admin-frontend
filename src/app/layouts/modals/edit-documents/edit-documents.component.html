@@ -1,0 +1,12 @@
+<h3 mat-dialog-title>Editar tipo de documento</h3>
+<form [formGroup]="documentForm">
+    <div>
+        <mat-label class="block text-sm font-medium text-slate-700">Nombre de documento</mat-label>
+        <mat-form-field appearance="outline" class="w-full">
+            <input matInput type="text" formControlName="nombre">
+        </mat-form-field>
+    </div>
+    <button mat-flat-button color="primary" class="w-full rounded-lg" (click)="updateDocument()">
+        Actualizar documento
+    </button>
+</form>
