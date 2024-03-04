@@ -97,7 +97,7 @@ export class MessageService {
     confirmRequest(msg?: any, confirmBtnText?: any, cancelBtnText?: any) {
         this.deletePopOup = Swal.fire({
             title: msg ? msg : 'Are you sure to proceed ?',
-            icon: 'warning',
+            icon: 'question',
             showCancelButton: true,
             focusCancel: true,
             confirmButtonText: confirmBtnText ? confirmBtnText : 'Yes',

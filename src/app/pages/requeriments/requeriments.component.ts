@@ -108,6 +108,28 @@ export class RequerimentsComponent implements OnInit {
         });
     }
 
+    deleteRequeriment(reqUuid: any){
+        this.messagesService.confirmDelete('¿Estás seguro de eliminar este requerimiento?')
+            .then((result: any) => {
+                if (result.isConfirmed) {
+                    this.spinner.show();
+                    this.requerimentsService.deleteRecord(reqUuid).subscribe({
+                        next: res => {
+                            this.spinner.hide();
+                            this.messagesService.printStatus(res.message, 'success');
+                            setTimeout(() => {
+                                this.getRequeriments();
+                            }, 2500)
+                        },
+                        error: err => {
+                            this.spinner.hide();
+                            this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+                        }
+                    });
+                }
+            });
+    }
+
     applyFilter(event: Event) {
         const filterValue = (event.target as HTMLInputElement).value;
         this.dataSource.filter = filterValue.trim().toLowerCase();
