@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
                 } else {
                     this.router.navigate(['contribuyentes']);
                 }
-                
+
             },
             error: err => {
                 this.spinner.hide();
