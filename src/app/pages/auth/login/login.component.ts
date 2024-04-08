@@ -49,7 +49,13 @@ export class LoginComponent implements OnInit {
                 sessionStorage.setItem('rol', res.rol);
                 sessionStorage.setItem('usuario', res.name);
                 sessionStorage.setItem('dependencia', res.dependencia);
-                this.router.navigate(['solicitudes/todas']);
+
+                if (res.rol !== 4){
+                    this.router.navigate(['solicitudes/todas']);
+                } else {
+                    this.router.navigate(['contribuyentes']);
+                }
+                
             },
             error: err => {
                 this.spinner.hide();

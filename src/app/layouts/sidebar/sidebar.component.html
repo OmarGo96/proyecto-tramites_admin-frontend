@@ -5,7 +5,7 @@
             <!--<p class="text-xs text-slate-400">@{{ user.usuario }}</p>-->
         </div>
         <ul class="space-y-1.5 text-sm">
-            <div>
+            <div *ngIf="['1', '2', '3'].includes(rol)">
                 <h3 class="uppercase text-xs font-bold label-section px-2.5 pt-2">GENERAL</h3>
                 <li>
                     <a [routerLink]="['solicitudes/todas']"
@@ -15,33 +15,35 @@
                     </a>
                 </li>
             </div>
-            <div *ngFor="let item of menu" class="space-y-1.5">
-                <h3 class="uppercase text-xs font-bold label-section px-2.5 pt-2">
-                    {{ item.name }}
-                </h3>
-                <div class="space-y-1">
-                    <li *ngFor="let value of item.values">
-                        <!--
-                            Se debe agregar el modulo de permisos *appPermissionModule="{module: value.module, action: value.action}"
-                        -->
-                        <a [routerLink]="[value.path]" [routerLinkActive]="['bg-slate-200']" *ngIf="value.rol.includes(usersService.getRol())"
-                           class="flex items-center p-2 font-normal text-gray-500 rounded-lg hover:bg-slate-200 duration-200">
-                            <i class="fa-solid {{value.icon}}"></i>
-                            <span class="flex-1 ml-3 whitespace-nowrap">{{ value.title }}</span>
-                            <ng-container *ngFor="let badge of badges">
-                                <!--<ng-container *ngFor="let status of statuses">
-                                    <span *ngIf="value.id && value.id === badge.id && status.value === value.id"
-                                          class="inline-flex items-center justify-center w-4 h-4 ml-2 text-xs font-semibold rounded-full {{ status.styles }}">
-                                    {{ badge.cuantos }}
-                                </span>
-                                </ng-container>-->
-                            </ng-container>
-                        </a>
-                    </li>
+            <div *ngIf="['1', '2', '3'].includes(rol)">
+                <div *ngFor="let item of menu" class="space-y-1.5">
+                    <h3 class="uppercase text-xs font-bold label-section px-2.5 pt-2">
+                        {{ item.name }}
+                    </h3>
+                    <div class="space-y-1">
+                        <li *ngFor="let value of item.values">
+                            <!--
+                                Se debe agregar el modulo de permisos *appPermissionModule="{module: value.module, action: value.action}"
+                            -->
+                            <a [routerLink]="[value.path]" [routerLinkActive]="['bg-slate-200']" *ngIf="value.rol.includes(usersService.getRol())"
+                               class="flex items-center p-2 font-normal text-gray-500 rounded-lg hover:bg-slate-200 duration-200">
+                                <i class="fa-solid {{value.icon}}"></i>
+                                <span class="flex-1 ml-3 whitespace-nowrap">{{ value.title }}</span>
+                                <ng-container *ngFor="let badge of badges">
+                                    <!--<ng-container *ngFor="let status of statuses">
+                                        <span *ngIf="value.id && value.id === badge.id && status.value === value.id"
+                                              class="inline-flex items-center justify-center w-4 h-4 ml-2 text-xs font-semibold rounded-full {{ status.styles }}">
+                                        {{ badge.cuantos }}
+                                    </span>
+                                    </ng-container>-->
+                                </ng-container>
+                            </a>
+                        </li>
+                    </div>
                 </div>
             </div>
 
-            <div class="space-y-1.5" *ngIf="['1', '2'].includes(rol)">
+            <div class="space-y-1.5" *ngIf="['1', '2', '4'].includes(rol)">
                 <h3 class="uppercase text-xs font-bold label-section px-2.5 pt-2">CONFIGURACIÓN</h3>
                 <li *ngIf="['1', '2'].includes(rol)">
                     <a [routerLink]="['dependencias']"
@@ -57,7 +59,7 @@
                         <span class="flex-1 ml-3 whitespace-nowrap">Requisitos</span>
                     </a>
                 </li>
-                <li *ngIf="['1', '2'].includes(rol)">
+                <li *ngIf="['1', '2', '4'].includes(rol)">
                     <a [routerLink]="['contribuyentes']"
                        class="flex items-center p-2 font-normal text-gray-500 rounded-lg hover:bg-slate-200 duration-200 hover:cursor-pointer">
                         <i class="fa-solid fa-users-rectangle"></i>

@@ -40,6 +40,10 @@ export class UsersService {
         return this.httpClient.get(`${this.urlApi}/info_administrador`);
     }
 
+    public deleteUser(userUuid: any): Observable<any> {
+        return this.httpClient.delete(`${this.urlApi}/administradores/${userUuid}`);
+    }
+
     public getToken() {
         let token: any;
         const tokenFromSessionStorage = sessionStorage.getItem('token');

@@ -127,4 +127,26 @@ export class UsersComponent implements OnInit {
         });
     }
 
+    deleteUser(userUuid: any){
+        this.messagesService.confirmDelete('¿Estás seguro de eliminar este usuario?')
+            .then((result: any) => {
+                if (result.isConfirmed) {
+                    this.spinner.show();
+                    this.usersService.deleteUser(userUuid).subscribe({
+                        next: res => {
+                            this.spinner.hide();
+                            this.messagesService.printStatus(res.message, 'success');
+                            setTimeout(() => {
+                                this.getUsers();
+                            }, 2500);
+                        },
+                        error: err => {
+                            this.spinner.hide();
+                            this.messagesService.errorAlert(err.error.errors);
+                        }
+                    })
+                }
+             });
+    }
+
 }
