@@ -285,7 +285,7 @@ export class RequestDetailComponent implements OnInit {
 
     openAnuenciaDocument(requestId: any) {
         this.spinner.show();
-        this.documentsService.getAnuenciaDocument(requestId).subscribe({
+        this.documentsService.getUserDocument(requestId).subscribe({
             next: res => {
                 this.spinner.hide();
                 let url = URL.createObjectURL(res);
