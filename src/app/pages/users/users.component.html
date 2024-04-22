@@ -20,6 +20,8 @@
                                 <mat-form-field appearance="outline" class="w-full">
                                     <mat-select formControlName="role" placeholder="Seleccionar rol">
                                         <mat-option value="3">Revisor</mat-option>
+                                        <mat-option value="4">Expediente Unico</mat-option>
+                                        <mat-option value="5">Validador de Pagos</mat-option>
                                         <mat-option value="2" *ngIf="['1'].includes(rol)">Administrador</mat-option>
                                     </mat-select>
                                 </mat-form-field>

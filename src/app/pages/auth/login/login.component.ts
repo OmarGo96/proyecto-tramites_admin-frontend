@@ -56,6 +56,18 @@ export class LoginComponent implements OnInit {
                     this.router.navigate(['contribuyentes']);
                 }
 
+                switch (res.rol){
+                    case 1 || 2 || 3:
+                        this.router.navigate(['solicitudes/todas']);
+                        break;
+                    case 4:
+                        this.router.navigate(['contribuyentes']);
+                        break;
+                    case 5:
+                        this.router.navigate(['solicitudes/validacion-pago']);
+                        break;
+                }
+
             },
             error: err => {
                 this.spinner.hide();

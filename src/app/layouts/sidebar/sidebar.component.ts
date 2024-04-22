@@ -163,7 +163,7 @@ export const ROUTES = [
         title: 'Validación de pago',
         icon: 'fa-comment-dollar',
         class: '',
-        rol: ['1', '2', '3']
+        rol: ['1', '2', '3', '5']
     },
     {
         id: 21,

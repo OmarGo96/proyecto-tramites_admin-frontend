@@ -16,6 +16,7 @@ import {NgxSpinnerService} from "ngx-spinner";
 import {MensajesService} from "../../../services/mensajes.service";
 import {RequestsStatus} from "../../../const/status";
 import * as moment from 'moment';
+import {UsersService} from "../../../services/users.service";
 
 @Component({
     selector: 'app-request-detail',
@@ -67,6 +68,7 @@ export class RequestDetailComponent implements OnInit {
     constructor(
         private requestsService: RequestsService,
         private documentsService: DocumentsService,
+        private usersService: UsersService,
         private messagesService: MessageService,
         private statusesService: StatusesService,
         private mensajeServie: MensajesService,
@@ -576,9 +578,13 @@ export class RequestDetailComponent implements OnInit {
         this.requestsService.updateRecord(data, this.request.id.toString()).subscribe({
             next: res => {
                 this.spinner.hide();
-                setTimeout(() => {
-                    this.getId();
-                }, 2500);
+                if (this.usersService.getRol() === '5'){
+                    this.router.navigate(['solicitudes/validacion-pago']);
+                } else {
+                    setTimeout(() => {
+                        this.getId();
+                    }, 2500);
+                }
             },
             error: err => {
                 this.spinner.hide();
@@ -688,7 +694,6 @@ export class RequestDetailComponent implements OnInit {
     updateReciboPago(){
         this.requestsService.updateReciboPago(this.request.id).subscribe({
             next: res => {
-                console.log(res);
                 this.updateStatus(11);
             },
             error: err => {

@@ -4,7 +4,8 @@
             <div class="flex items-center justify-between w-full">
                 <div>
                     <div class="text-3xl font-semibold tracking-tight leading-8">Trámite
-                        de: {{ request.Servicio.nombre }}</div>
+                        de: {{ request.Servicio.nombre }}
+                    </div>
 
                     <div class="font-medium tracking-tight text-slate-500">
                         Se creo el: <b>{{ request.fecha_alta | date: 'longDate' }}</b>
@@ -14,7 +15,7 @@
                         <ng-container *ngFor="let status of estatuses">
                             <span *ngIf="status.value === request.estatus_solicitud_id"
                                   class="inline-flex items-center font-bold px-2.5 py-0.5 rounded-full tracking-wide uppercase {{ status.styles }}">
-                                <span class="whitespace-nowrap text-xs">{{status.name}}</span>
+                                <span class="whitespace-nowrap text-xs">{{ status.name }}</span>
                             </span>
                         </ng-container>
                     </div>
@@ -834,7 +835,8 @@
                             <div class="w-full mx-auto block p-10 text-center space-y-3">
                                 <i class="fa-solid fa-user-clock fa-5x text-slate-600"></i>
                                 <div>
-                                    <p class="font-medium text-lg">La solicitud esta en en proceso Licencia de Uso de Suelo Giro Comercial</p>
+                                    <p class="font-medium text-lg">La solicitud esta en en proceso Licencia de Uso de
+                                        Suelo Giro Comercial</p>
                                 </div>
                             </div>
                         </ng-container>
@@ -845,7 +847,7 @@
                                 <i class="fa-regular fa-clock fa-5x text-slate-500"></i>
                                 <div>
                                     <p class="font-medium text-lg">La solicitud esta en Visita Topográfica</p>
-                                    <p>Fecha programada de la visita: <b>{{request.fecha_visita | date }}</b></p>
+                                    <p>Fecha programada de la visita: <b>{{ request.fecha_visita | date }}</b></p>
                                 </div>
                             </div>
                         </ng-container>
@@ -868,7 +870,7 @@
                                 <i class="fa-regular fa-clock fa-5x text-slate-500"></i>
                                 <div>
                                     <p class="font-medium text-lg">La solicitud esta en Visita para Valuación</p>
-                                    <p>Fecha programada de la visita: <b>{{request.fecha_visita | date }}</b></p>
+                                    <p>Fecha programada de la visita: <b>{{ request.fecha_visita | date }}</b></p>
                                     <p *ngIf="request.fecha_visita && request.fecha_visita <= currentDate"
                                        class="text-md text-red-500">La fecha de visita vencio</p>
                                 </div>
@@ -886,13 +888,13 @@
                                 <i class="fa-regular fa-clock fa-5x text-slate-500"></i>
                                 <div>
                                     <p class="font-medium text-lg">La solicitud esta en proceso de inspección fisica</p>
-                                    <p>Fecha programada de la visita: <b>{{request.fecha_visita | date }}</b></p>
+                                    <p>Fecha programada de la visita: <b>{{ request.fecha_visita | date }}</b></p>
                                     <p *ngIf="request.fecha_visita && request.fecha_visita <= currentDate"
-                                    class="text-md text-red-500">La fecha de visita vencio</p>
+                                       class="text-md text-red-500">La fecha de visita vencio</p>
                                 </div>
                                 <button
-                                        mat-flat-button color="warn" (click)="setVisitDateNull()"
-                                        class="rounded-md">
+                                    mat-flat-button color="warn" (click)="setVisitDateNull()"
+                                    class="rounded-md">
                                     Reprogramar inspección fisica
                                 </button>
                             </div>
@@ -930,7 +932,7 @@
                                     <ng-container *ngFor="let status of estatuses">
                                         <p
                                             *ngIf="status.value === request.estatus_solicitud_id">
-                                            La solicitud esta en estatus: <b>{{status.name}}</b>
+                                            La solicitud esta en estatus: <b>{{ status.name }}</b>
                                         </p>
                                     </ng-container>
                                 </div>
@@ -949,7 +951,7 @@
                                         </p>
                                         <p
                                             *ngIf="status.value === request.estatus_solicitud_id">
-                                            La solicitud esta en estatus: <b>{{status.name}}</b>
+                                            La solicitud esta en estatus: <b>{{ status.name }}</b>
                                         </p>
 
                                     </ng-container>
@@ -969,7 +971,7 @@
                                         </p>
                                         <p
                                             *ngIf="status.value === request.estatus_solicitud_id">
-                                            La solicitud esta en estatus: <b>{{status.name}}</b>
+                                            La solicitud esta en estatus: <b>{{ status.name }}</b>
                                         </p>
 
                                     </ng-container>
@@ -1001,7 +1003,8 @@
                                     <div
                                         class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white"></div>
                                     <time
-                                        class="mb-1 text-xs font-normal leading-none text-gray-400">{{ record.fecha_alta | date: 'medium':'UTC' }}</time>
+                                        class="mb-1 text-xs font-normal leading-none text-gray-400">{{ record.fecha_alta | date: 'medium':'UTC' }}
+                                    </time>
                                     <p class="mb-4 text-md font-normal text-gray-500">{{ record.mensaje }}</p>
                                 </li>
                             </ol>
@@ -1045,7 +1048,8 @@
                                     <div
                                         class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white"></div>
                                     <time
-                                        class="mb-1 text-xs font-normal leading-none text-gray-400">{{ history.fecha_alta | date: 'medium':'UTC' }}</time>
+                                        class="mb-1 text-xs font-normal leading-none text-gray-400">{{ history.fecha_alta | date: 'medium':'UTC' }}
+                                    </time>
                                     <p class="mb-4 text-md font-normal text-gray-500">{{ history.comentario }}</p>
                                 </li>
                             </ol>
