@@ -1,0 +1,36 @@
+<h3 mat-dialog-title>Editar contribuyente</h3>
+<form [formGroup]="contribuyenteForm">
+    <div>
+        <mat-label class="block text-sm font-medium text-slate-700">Nombre(s)</mat-label>
+        <mat-form-field appearance="outline"  class="w-full">
+            <input matInput type="text" formControlName="nombre">
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-label class="block text-sm font-medium text-slate-700">Apellidos</mat-label>
+        <mat-form-field appearance="outline"  class="w-full">
+            <input matInput type="text" formControlName="apellidos">
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-label class="block text-sm font-medium text-slate-700">Correo electrónico</mat-label>
+        <mat-form-field appearance="outline"  class="w-full">
+            <input matInput type="text" formControlName="email">
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-label class="block text-sm font-medium text-slate-700">Teléfono</mat-label>
+        <mat-form-field appearance="outline"  class="w-full">
+            <input matInput type="text" formControlName="telefono">
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-label class="block text-sm font-medium text-slate-700">RFC</mat-label>
+        <mat-form-field appearance="outline"  class="w-full">
+            <input matInput type="text" formControlName="rfc">
+        </mat-form-field>
+    </div>
+    <button mat-flat-button color="primary" class="w-full rounded-lg" (click)="updateContribuyente()">
+        Actualizar usuario
+    </button>
+</form>

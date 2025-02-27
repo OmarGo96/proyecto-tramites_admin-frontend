@@ -50,9 +50,20 @@
                         <ng-container matColumnDef="email">
                             <th mat-header-cell *matHeaderCellDef
                                 class="py-3 px-6 text-gray-700 font-bold uppercase">
-                                Activo
+                                Correo electrónico
                             </th>
                             <td mat-cell *matCellDef="let element">{{ element.email}}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="activo">
+                            <th mat-header-cell *matHeaderCellDef
+                                class="py-3 px-6 text-gray-700 font-bold uppercase">
+                                Activo
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                <span *ngIf="element.activo === 1" class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm">Activo</span>
+                                <span *ngIf="element.activo === 0" class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm">Inactivo</span>
                             </td>
                         </ng-container>
 
@@ -65,14 +76,35 @@
                             </td>
                         </ng-container>
 
-                        <ng-container matColumnDef="action">
+                        <ng-container matColumnDef="expediente">
                             <th mat-header-cell *matHeaderCellDef class="py-3 px-6 text-gray-700 font-bold uppercase text-center">
-                                Acción
+                                Expediente
                             </th>
                             <td mat-cell *matCellDef="let element" class="text-center">
                                 <button mat-stroked-button color="primary" class="rounded-md" (click)="getExpediente(element.uuid)">
                                     Descargar expediente único
                                 </button>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="action">
+                            <th mat-header-cell *matHeaderCellDef class="py-3 px-6 text-gray-700 font-bold uppercase text-center">
+                                Acción
+                            </th>
+                            <td mat-cell *matCellDef="let element" class="text-center">
+                                <button mat-icon-button class="bg-slate-200 text-slate-800" [matMenuTriggerFor]="menu">
+                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                                </button>
+                                <mat-menu #menu="matMenu">
+                                    <button mat-menu-item class="text-slate-600" (click)="openEditContribuyenteModal(element)">
+                                        <i class="fa-solid fa-file-pen"></i>
+                                        Editar datos
+                                    </button>
+                                    <button *ngIf="element.activo === 0" mat-menu-item class="text-slate-600" (click)="resendActivationCode(element.uuid)">
+                                        <i class="fa-solid fa-comment-sms"></i>
+                                        Reenviar SMS
+                                    </button>
+                                </mat-menu>
                             </td>
                         </ng-container>
 
