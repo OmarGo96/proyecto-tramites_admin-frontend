@@ -9,6 +9,7 @@ import {NgxSpinnerService} from "ngx-spinner";
 import {MatDialog} from "@angular/material/dialog";
 import {MatTableDataSource} from "@angular/material/table";
 import {ContribuyentesService} from "../../services/contribuyentes.service";
+import {ContribuyentesModalComponent} from "../../layouts/modals/contribuyentes-modal/contribuyentes-modal.component";
 
 @Component({
     selector: 'app-contribuyentes',
@@ -18,7 +19,7 @@ import {ContribuyentesService} from "../../services/contribuyentes.service";
 export class ContribuyentesComponent implements OnInit {
 
     public dataSource: any;
-    public displayedColumns: string[] = ['id', 'name', 'rfc', 'email', 'action'];
+    public displayedColumns: string[] = ['id', 'name', 'rfc', 'email', 'activo', 'expediente', 'action'];
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
@@ -36,7 +37,7 @@ export class ContribuyentesComponent implements OnInit {
         this.getContribuyentes();
     }
 
-    getContribuyentes(){
+    getContribuyentes() {
         this.spinner.show();
         this.contribuyentesService.getContribuyentes().subscribe({
             next: res => {
@@ -52,7 +53,7 @@ export class ContribuyentesComponent implements OnInit {
         });
     }
 
-    getExpediente(contribuyenteUuid: any){
+    getExpediente(contribuyenteUuid: any) {
         this.spinner.show();
         this.contribuyentesService.getExpedienteContribuyente(contribuyenteUuid).subscribe({
             next: res => {
@@ -65,6 +66,43 @@ export class ContribuyentesComponent implements OnInit {
                 this.messagesService.printStatus('Hubo un problema al descargar el archivo. Intente nuevamente', 'error');
             }
         });
+    }
+
+    openEditContribuyenteModal(contribuyente: any){
+        const config = {
+            width: '50%',
+            data: {
+                contribuyente
+            },
+        }
+
+        const dialogRef = this.dialog.open(ContribuyentesModalComponent, config);
+
+        dialogRef.afterClosed().subscribe(res => {
+            this.getContribuyentes();
+        });
+    }
+
+    resendActivationCode(contribuyenteUuid: string){
+        this.messagesService.confirmRequest('¿Estás seguro de reenviar el código de activación?')
+            .then((result: any) => {
+                if (result.isConfirmed) {
+                    this.spinner.show();
+                    this.contribuyentesService.resentActivationCode(contribuyenteUuid).subscribe({
+                        next: res => {
+                            this.spinner.hide();
+                            this.messagesService.printStatus(res.message, 'success');
+                            setTimeout(() => {
+                                this.getContribuyentes();
+                            }, 2500)
+                        },
+                        error: err => {
+                            this.spinner.hide();
+                            this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+                        }
+                    });
+                }
+            });
     }
 
     applyFilter(event: Event) {

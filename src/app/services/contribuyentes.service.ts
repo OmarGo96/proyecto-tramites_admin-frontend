@@ -22,7 +22,17 @@ export class ContribuyentesService {
         return this.httpClient.get(`${this.urlApi}/contribuyentes`);
     }
 
+    public editContribuyentes(contribuyenteUuid: string, data: any): Observable<any> {
+        return this.httpClient.put(`${this.urlApi}/contribuyente/${contribuyenteUuid}`, data);
+    }
+
     public getExpedienteContribuyente(contribuyenteUuid: any): Observable<any> {
         return this.httpClient.get(`${this.urlApi}/contribuyente/expediente/${contribuyenteUuid}`, { responseType: 'blob',});
     }
+
+    public resentActivationCode(contribuyenteUuid: string): Observable<any> {
+        return this.httpClient.get(`${this.urlApi}/contribuyente/reenvio_activacion/${contribuyenteUuid}`);
+    }
+
+
 }
