@@ -73,10 +73,7 @@ export class RequestDetailComponent implements OnInit {
         private statusesService: StatusesService,
         private mensajeServie: MensajesService,
         private formBuilder: UntypedFormBuilder,
-        private dialog: MatDialog,
         private router: Router,
-        private activeRouter: ActivatedRoute,
-        private _snackBar: MatSnackBar,
         private activatedRoute: ActivatedRoute,
         private spinner: NgxSpinnerService
     ) {

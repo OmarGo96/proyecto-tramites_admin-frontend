@@ -11,23 +11,30 @@ import {NgxSpinnerModule} from "ngx-spinner";
 import {JwtInterceptor} from "./interceptors/jwt.interceptor";
 import {NgSelectModule} from "@ng-select/ng-select";
 import {CurrencyMaskModule} from "ng2-currency-mask";
+import { PredialFormComponent } from './shared/components/forms/predial-form/predial-form.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MaterialModule} from "./material/material.module";
+import {ReactiveFormsModule} from "@angular/forms";
 
 registerLocaleData(localeEsMX, 'mx');
 
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        PredialFormComponent
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
-        NgxSpinnerModule.forRoot({ type: 'ball-beat' }),
+        NgxSpinnerModule.forRoot({type: 'ball-beat'}),
         LayoutsModule,
         BrowserAnimationsModule,
         CurrencyMaskModule,
-        NgSelectModule
+        NgSelectModule,
+        MaterialModule,
+        ReactiveFormsModule
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     providers: [
