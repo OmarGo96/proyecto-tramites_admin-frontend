@@ -185,5 +185,15 @@ export const RequestsStatus = [
         name: 'En validación de licencia de uso de suelo',
         value: 39,
         styles: 'bg-indigo-200 text-indigo-800'
+    },
+    {
+        name: 'Licencia generada',
+        value: 40,
+        styles: 'bg-indigo-200 text-indigo-800'
+    },
+    {
+        name: 'Constancia generada',
+        value: 41,
+        styles: 'bg-indigo-200 text-indigo-800'
     }
 ]

@@ -31,7 +31,7 @@
                     <input matInput formControlName="folio_pago_predial">
                 </mat-form-field>
             </div>
-            <button mat-fab extended>
+            <button mat-fab extended (click)="validarFolioPagoPredial()">
                 Agregar
             </button>
         </div>
@@ -59,7 +59,9 @@
                 </mat-card-content>
             </mat-card>
         </div>
-        <button mat-flat-button (click)="savePredial()" [disabled]="predialesForm.invalid || !catastroValidado">Guardar</button>
+        <div class="mt-5">
+            <button mat-flat-button color="primary" (click)="savePredial()" [disabled]="predialesForm.invalid || !catastroValidado">Guardar</button>
+        </div>
     </form>
 
 </div>

@@ -21,4 +21,8 @@ export class PredialService {
     public savePredial(solicitudId: any, data: any): Observable <any> {
         return this.httpClient.post(`${this.urlApi}/predial/generar-constancia/${solicitudId}`, data, { headers: this.headers })
     }
+
+    public validarFolioPagoPredial(data: any): Observable<any> {
+        return this.httpClient.post(`${this.urlApi}/predial/valida-pago`, data);
+    }
 }

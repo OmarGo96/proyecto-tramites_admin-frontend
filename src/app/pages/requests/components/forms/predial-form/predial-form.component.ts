@@ -58,6 +58,23 @@ export class PredialFormComponent implements OnInit {
                 this.spinner.hide();
                 this.messagesService.errorAlert(err.error.errors);
             }
+        });
+    }
+
+    validarFolioPagoPredial(){
+        this.spinner.show();
+        const data = {
+            folio_pago_predial: this.predialesForm.value.folio_pago_predial,
+        }
+        this.predialService.validarFolioPagoPredial(data).subscribe({
+            next: data => {
+                this.spinner.hide();
+                this.catastroValidado = data.catastro;
+            },
+            error: err => {
+                this.spinner.hide();
+                this.messagesService.errorAlert(err.error.errors);
+            }
         })
     }
 
