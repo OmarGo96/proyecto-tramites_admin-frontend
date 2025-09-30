@@ -126,7 +126,6 @@ export class RequestDetailComponent implements OnInit {
                 this.spinner.hide();
 
                 this.request = res.solicitud;
-                console.log(this.request);
 
                 this.currentDate = moment(new Date).format('YYYY-MM-DD');
                 if (this.request.PaseCaja){

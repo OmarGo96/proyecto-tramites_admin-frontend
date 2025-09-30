@@ -1,0 +1,55 @@
+<div class="w-1/2">
+    <form [formGroup]="licenciaFuncionamientoForm">
+        <mat-form-field appearance="outline" class="w-full">
+            <input matInput formControlName="numero_licencia" placeholder="Número de licencia">
+        </mat-form-field>
+
+        <div class="grid grid-cols-2 gap-3">
+            <div>
+                <mat-label>Fecha de oficio</mat-label>
+                <mat-form-field appearance="outline" class="w-full">
+                    <input matInput [matDatepicker]="picker1" [min]="currentYear" formControlName="fecha_expedicion">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-label>Fecha de impresión</mat-label>
+                <mat-form-field appearance="outline" class="w-full">
+                    <input matInput [matDatepicker]="picker2" [min]="currentYear" formControlName="fecha_impresion">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+            <div>
+                <mat-label>Vigencia</mat-label>
+                <mat-form-field appearance="outline" class="w-full">
+                    <input matInput [matDatepicker]="picker3" [min]="currentYear" formControlName="vigencia">
+                    <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                    <mat-datepicker #picker3></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-label>Número de expediente</mat-label>
+                <mat-form-field appearance="outline" class="w-full">
+                    <input matInput formControlName="numero_expediente">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div>
+            <mat-label>Recibo de pago del certificado</mat-label>
+            <mat-form-field appearance="outline" class="w-full">
+                <input matInput formControlName="recibo_pago_certificado">
+            </mat-form-field>
+        </div>
+    </form>
+    <div class="mt-5">
+        <button mat-flat-button color="primary" (click)="addLicenciaFuncionamiento()">Agregar</button>
+    </div>
+
+</div>

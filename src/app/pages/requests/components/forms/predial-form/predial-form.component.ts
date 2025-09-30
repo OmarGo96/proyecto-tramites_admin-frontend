@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import * as moment from "moment";
 import {NgxSpinnerService} from "ngx-spinner";
@@ -14,6 +14,7 @@ import {MessagesService} from "../../../../../services/messages.service";
 export class PredialFormComponent implements OnInit {
 
     @Input() request: any;
+    @Output() constanciaGenerada: EventEmitter<any> = new EventEmitter();
 
     public predialesForm: any;
     public catastroValidado: any;
@@ -52,7 +53,7 @@ export class PredialFormComponent implements OnInit {
             next: res => {
                 this.spinner.hide();
                 this.messagesService.printStatus(res.message, 'success');
-                // TODO: enviar success a componente padre
+                this.constanciaGenerada.emit(true);
             },
             error: (err: any) => {
                 this.spinner.hide();

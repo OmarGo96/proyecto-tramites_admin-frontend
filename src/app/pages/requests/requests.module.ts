@@ -31,6 +31,7 @@ import {CurrencyMaskModule} from "ng2-currency-mask";
 import { GeneralRequestsComponent } from './general-requests/general-requests.component';
 import {PredialFormComponent} from "./components/forms/predial-form/predial-form.component";
 import {RouterModule, Routes} from "@angular/router";
+import { AddLicenciaFuncionamientoFormComponent } from './components/forms/add-licencia-funcionamiento-form/add-licencia-funcionamiento-form.component';
 
 const routes: Routes = [
     {path: 'todas', component: GeneralRequestsComponent},
@@ -90,7 +91,8 @@ const routes: Routes = [
         ComplementaryDocsValidationComponent,
         CheckoutGenerationComponent,
         GeneralRequestsComponent,
-        PredialFormComponent
+        PredialFormComponent,
+        AddLicenciaFuncionamientoFormComponent
     ],
     imports: [
         CommonModule,
