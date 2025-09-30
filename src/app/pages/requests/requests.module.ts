@@ -31,6 +31,7 @@ import { CheckoutGenerationComponent } from './checkout-generation/checkout-gene
 import {CurrencyMaskModule} from "ng2-currency-mask";
 import { GeneralRequestsComponent } from './general-requests/general-requests.component';
 import {AppModule} from "../../app.module";
+import {PredialFormComponent} from "./components/forms/predial-form/predial-form.component";
 
 const routes: Routes = [
     {path: 'todas', component: GeneralRequestsComponent},
@@ -89,7 +90,8 @@ const routes: Routes = [
         ComplementaryDocsRequestComponent,
         ComplementaryDocsValidationComponent,
         CheckoutGenerationComponent,
-        GeneralRequestsComponent
+        GeneralRequestsComponent,
+        PredialFormComponent
     ],
     imports: [
         CommonModule,

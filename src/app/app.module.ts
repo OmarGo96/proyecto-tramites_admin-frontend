@@ -19,8 +19,7 @@ registerLocaleData(localeEsMX, 'mx');
 
 @NgModule({
     declarations: [
-        AppComponent,
-        PredialFormComponent
+        AppComponent
     ],
     imports: [
         BrowserModule,
@@ -30,9 +29,7 @@ registerLocaleData(localeEsMX, 'mx');
         LayoutsModule,
         BrowserAnimationsModule,
         CurrencyMaskModule,
-        NgSelectModule,
-        MaterialModule,
-        ReactiveFormsModule
+        NgSelectModule
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     providers: [
