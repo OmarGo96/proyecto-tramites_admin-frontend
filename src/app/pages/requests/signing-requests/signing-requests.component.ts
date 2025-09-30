@@ -3,7 +3,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {RequestsStatus} from "../../../const/status";
 import {RequestsService} from "../../../services/requests.service";
-import {MessageService} from "../../../services/messages.service";
+import {MessagesService} from "../../../services/messages.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {MatTableDataSource} from "@angular/material/table";
 import {Router} from "@angular/router";
@@ -25,7 +25,7 @@ export class SigningRequestsComponent implements OnInit {
 
     constructor(
         private requestsService: RequestsService,
-        private messagesService: MessageService,
+        private messagesService: MessagesService,
         private router: Router,
         private spinner: NgxSpinnerService
     ) {

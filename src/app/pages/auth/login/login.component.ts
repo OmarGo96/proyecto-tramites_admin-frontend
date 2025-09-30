@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {UntypedFormBuilder, Validators} from "@angular/forms";
 import {UsersService} from "../../../services/users.service";
-import {MessageService} from "../../../services/messages.service";
+import {MessagesService} from "../../../services/messages.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import * as moment from 'moment';
 
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     constructor(
         private formBuilder: UntypedFormBuilder,
         private usersService: UsersService,
-        private messagesService: MessageService,
+        private messagesService: MessagesService,
         private spinner: NgxSpinnerService,
         private router: Router,
     ) {

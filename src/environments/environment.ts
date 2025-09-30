@@ -4,8 +4,8 @@
 
 export const environment = {
     production: false,
-    urlApi: 'http://localhost:8028/api',
-    // urlApi: 'http://192.168.10.61:8028/api',
+    // urlApi: 'http://localhost:8028/api',
+    urlApi: 'http://192.168.10.61:8028/api',
     // urlApi: 'https://development.ismx.com.mx:8000/api',
 };
 

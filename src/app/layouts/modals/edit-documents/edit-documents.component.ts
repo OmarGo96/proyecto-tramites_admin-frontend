@@ -4,7 +4,7 @@ import {FormBuilder} from "@angular/forms";
 import {UsersService} from "../../../services/users.service";
 import {DependenciesService} from "../../../services/dependencies.service";
 import {NgxSpinnerService} from "ngx-spinner";
-import {MessageService} from "../../../services/messages.service";
+import {MessagesService} from "../../../services/messages.service";
 import {DocumentsService} from "../../../services/documents.service";
 import {DialogRef} from "@angular/cdk/dialog";
 
@@ -23,7 +23,7 @@ export class EditDocumentsComponent implements OnInit {
         private formBuilder: FormBuilder,
         private documentsService: DocumentsService,
         private spinner: NgxSpinnerService,
-        private messagesService: MessageService,
+        private messagesService: MessagesService,
         private dialog: DialogRef
     ) {
     }

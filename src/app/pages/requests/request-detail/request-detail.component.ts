@@ -3,7 +3,6 @@ import {RequestsService} from "../../../services/requests.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MatTableDataSource} from "@angular/material/table";
 import {DocumentsService} from "../../../services/documents.service";
-import {MessageService} from "../../../services/messages.service";
 import {UntypedFormBuilder, Validators} from "@angular/forms";
 import {StatusesService} from "../../../services/statuses.service";
 import {NgxSpinnerService} from "ngx-spinner";
@@ -11,6 +10,7 @@ import {MensajesService} from "../../../services/mensajes.service";
 import {RequestsStatus} from "../../../const/status";
 import * as moment from 'moment';
 import {UsersService} from "../../../services/users.service";
+import {MessagesService} from "../../../services/messages.service";
 
 @Component({
     selector: 'app-request-detail',
@@ -63,7 +63,7 @@ export class RequestDetailComponent implements OnInit {
         private requestsService: RequestsService,
         private documentsService: DocumentsService,
         private usersService: UsersService,
-        private messagesService: MessageService,
+        private messagesService: MessagesService,
         private statusesService: StatusesService,
         private mensajeServie: MensajesService,
         private formBuilder: UntypedFormBuilder,

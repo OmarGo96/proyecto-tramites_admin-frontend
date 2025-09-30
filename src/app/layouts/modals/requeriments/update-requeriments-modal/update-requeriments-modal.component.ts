@@ -3,7 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {RequerimentsService} from "../../../../services/requeriments.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {DocumentTypesService} from "../../../../services/document-types.service";
-import {MessageService} from "../../../../services/messages.service";
+import {MessagesService} from "../../../../services/messages.service";
 import {UntypedFormBuilder, Validators} from "@angular/forms";
 
 @Component({
@@ -24,7 +24,7 @@ export class UpdateRequerimentsModalComponent implements OnInit {
         private requirementsService: RequerimentsService,
         private spinner: NgxSpinnerService,
         private documentTypesService: DocumentTypesService,
-        private messagesService: MessageService,
+        private messagesService: MessagesService,
         private formBuilder: UntypedFormBuilder,
         private dialogRef: MatDialogRef<any>
     ) {

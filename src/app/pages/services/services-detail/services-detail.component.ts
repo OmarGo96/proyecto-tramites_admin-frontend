@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ServicesService} from "../../../services/services.service";
-import {MessageService} from "../../../services/messages.service";
+import {MessagesService} from "../../../services/messages.service";
 import {DependenciesModalComponent} from "../../../layouts/modals/dependencies-modal/dependencies-modal.component";
 import {MatDialog} from "@angular/material/dialog";
 import {UploadModalComponent} from "../../../layouts/modals/upload-modal/upload-modal.component";
@@ -21,7 +21,7 @@ export class ServicesDetailComponent implements OnInit {
 
     constructor(
         private servicesService: ServicesService,
-        private messagesService: MessageService,
+        private messagesService: MessagesService,
         private activatedRoute: ActivatedRoute,
         public dialog: MatDialog
     ) {

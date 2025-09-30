@@ -1,6 +1,9 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, Input, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import * as moment from "moment";
+import {NgxSpinnerService} from "ngx-spinner";
+import {PredialService} from "../../../../../services/predial.service";
+import {MessagesService} from "../../../../../services/messages.service";
 
 
 @Component({
@@ -10,13 +13,18 @@ import * as moment from "moment";
 })
 export class PredialFormComponent implements OnInit {
 
-    private formBuilder = inject(FormBuilder);
+    @Input() request: any;
 
     public predialesForm: any;
     public catastroValidado: any;
     public currentYear = new Date();
 
-    constructor() {
+    constructor(
+        private spinner: NgxSpinnerService,
+        private messagesService: MessagesService,
+        private formBuilder: FormBuilder,
+        private predialService: PredialService,
+    ) {
     }
 
     ngOnInit(): void {
@@ -30,6 +38,27 @@ export class PredialFormComponent implements OnInit {
             recibo_pago_certificado: ['', Validators.required],
             folio_pago_predial: ['', Validators.required]
         });
+    }
+
+    savePredial() {
+        this.spinner.show();
+        const data = {
+            fecha_oficio: moment(this.predialesForm.value.fecha_oficio).format("YYYY-MM-DD"),
+            numero_oficio: this.predialesForm.value.numero_oficio,
+            recibo_pago_certificado: this.predialesForm.value.recibo_pago_certificado,
+            folio_pago_predial: this.predialesForm.value.folio_pago_predial,
+        };
+        this.predialService.savePredial(this.request.id, data).subscribe({
+            next: res => {
+                this.spinner.hide();
+                this.messagesService.printStatus(res.message, 'success');
+                // TODO: enviar success a componente padre
+            },
+            error: (err: any) => {
+                this.spinner.hide();
+                this.messagesService.errorAlert(err.error.errors);
+            }
+        })
     }
 
 }

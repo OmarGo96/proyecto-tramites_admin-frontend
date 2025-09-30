@@ -15,7 +15,6 @@ import {ToDeliverRequestsComponent} from "./to-deliver-requests/to-deliver-reque
 import {PreventRequestsComponent} from "./prevent-requests/prevent-requests.component";
 import {CancelledRequestsComponent} from "./cancelled-requests/cancelled-requests.component";
 import {DeliveredRequestsComponent} from "./delivered-requests/delivered-requests.component";
-import {RouterModule, Routes} from "@angular/router";
 import {LayoutsModule} from "../../layouts/layouts.module";
 import {RequestDetailComponent} from "./request-detail/request-detail.component";
 import {MaterialModule} from "../../material/material.module";
@@ -30,8 +29,8 @@ import { ComplementaryDocsValidationComponent } from './complementary-docs-valid
 import { CheckoutGenerationComponent } from './checkout-generation/checkout-generation.component';
 import {CurrencyMaskModule} from "ng2-currency-mask";
 import { GeneralRequestsComponent } from './general-requests/general-requests.component';
-import {AppModule} from "../../app.module";
 import {PredialFormComponent} from "./components/forms/predial-form/predial-form.component";
+import {RouterModule, Routes} from "@angular/router";
 
 const routes: Routes = [
     {path: 'todas', component: GeneralRequestsComponent},
@@ -97,11 +96,10 @@ const routes: Routes = [
         CommonModule,
         MaterialModule,
         ReactiveFormsModule,
-        RouterModule.forChild(routes),
         LayoutsModule,
         NgxDropzoneModule,
         CurrencyMaskModule,
-        AppModule
+        RouterModule.forChild(routes)
     ]
 })
 export class RequestsModule {

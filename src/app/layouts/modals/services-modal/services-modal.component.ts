@@ -2,9 +2,8 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {UntypedFormBuilder, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 
-import {MessageService} from "src/app/services/messages.service";
+import {MessagesService} from "src/app/services/messages.service";
 import {ServicesService} from "../../../services/services.service";
-import {getLocaleFirstDayOfWeek} from "@angular/common";
 import {DialogRef} from "@angular/cdk/dialog";
 import {NgxSpinnerService} from "ngx-spinner";
 import {DocumentTypesService} from "../../../services/document-types.service";
@@ -27,7 +26,7 @@ export class ServicesModalComponent implements OnInit {
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
         private servicesService: ServicesService,
-        private messagesService: MessageService,
+        private messagesService: MessagesService,
         private documentTypesService: DocumentTypesService,
         private formBuilder: UntypedFormBuilder,
         private spinner: NgxSpinnerService,

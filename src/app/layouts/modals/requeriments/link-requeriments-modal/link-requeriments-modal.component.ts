@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {RequerimentsService} from "../../../../services/requeriments.service";
-import {MessageService} from "../../../../services/messages.service";
+import {MessagesService} from "../../../../services/messages.service";
 import {Router} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
 import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
@@ -40,7 +40,7 @@ export class LinkRequerimentsModalComponent implements OnInit {
         @Inject(MAT_DIALOG_DATA) public data: any,
         private requerimentsService: RequerimentsService,
         private formBuilder: FormBuilder,
-        private messagesService: MessageService,
+        private messagesService: MessagesService,
         private router: Router,
         private spinner: NgxSpinnerService,
         public dialog: MatDialog,

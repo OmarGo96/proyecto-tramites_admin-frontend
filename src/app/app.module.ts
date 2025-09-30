@@ -11,8 +11,6 @@ import {NgxSpinnerModule} from "ngx-spinner";
 import {JwtInterceptor} from "./interceptors/jwt.interceptor";
 import {NgSelectModule} from "@ng-select/ng-select";
 import {CurrencyMaskModule} from "ng2-currency-mask";
-import {MaterialModule} from "./material/material.module";
-import {ReactiveFormsModule} from "@angular/forms";
 
 registerLocaleData(localeEsMX, 'mx');
 
@@ -25,7 +23,7 @@ registerLocaleData(localeEsMX, 'mx');
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
-        NgxSpinnerModule.forRoot({type: 'ball-beat'}),
+        NgxSpinnerModule,
         LayoutsModule,
         BrowserAnimationsModule,
         CurrencyMaskModule,

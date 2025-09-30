@@ -3,7 +3,7 @@ import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {DependenciesModalComponent} from "../../layouts/modals/dependencies-modal/dependencies-modal.component";
 import {DependenciesService} from "../../services/dependencies.service";
-import {MessageService} from "../../services/messages.service";
+import {MessagesService} from "../../services/messages.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
@@ -23,7 +23,7 @@ export class DependenciesComponent implements OnInit {
     constructor(
         private dependenciesService: DependenciesService,
         private usersService: UsersService,
-        private messagesService: MessageService,
+        private messagesService: MessagesService,
         private router: Router,
         private spinner: NgxSpinnerService,
         public dialog: MatDialog

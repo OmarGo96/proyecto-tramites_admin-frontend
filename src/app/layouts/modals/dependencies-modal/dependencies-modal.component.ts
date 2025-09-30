@@ -4,7 +4,7 @@ import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 
 /* Services */
 import {DependenciesService} from "src/app/services/dependencies.service";
-import {MessageService} from "../../../services/messages.service";
+import {MessagesService} from "../../../services/messages.service";
 import {NgxSpinnerService} from "ngx-spinner";
 
 @Component({
@@ -23,7 +23,7 @@ export class DependenciesModalComponent implements OnInit {
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
         private dependenciesService: DependenciesService,
-        private messagesService: MessageService,
+        private messagesService: MessagesService,
         private formBuilder: FormBuilder,
         private spinner: NgxSpinnerService,
         public matDialog: MatDialog,

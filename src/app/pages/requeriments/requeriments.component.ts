@@ -3,7 +3,7 @@ import {RequestsStatus} from "../../const/status";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {RequestsService} from "../../services/requests.service";
-import {MessageService} from "../../services/messages.service";
+import {MessagesService} from "../../services/messages.service";
 import {Router} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
 import {RequerimentsService} from "../../services/requeriments.service";
@@ -35,7 +35,7 @@ export class RequerimentsComponent implements OnInit {
     constructor(
         private requestsService: RequestsService,
         private requerimentsService: RequerimentsService,
-        private messagesService: MessageService,
+        private messagesService: MessagesService,
         private router: Router,
         private spinner: NgxSpinnerService,
         public dialog: MatDialog,

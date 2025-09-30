@@ -1,13 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Form, FormBuilder, UntypedFormBuilder, Validators} from "@angular/forms";
-import {MessageService} from "../../services/messages.service";
+import {FormBuilder, Validators} from "@angular/forms";
+import {MessagesService} from "../../services/messages.service";
 import {MatDialog} from "@angular/material/dialog";
 import {UsersService} from "../../services/users.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {DependenciesService} from "../../services/dependencies.service";
 import {MatTableDataSource} from "@angular/material/table";
-import {DependenciesModalComponent} from "../../layouts/modals/dependencies-modal/dependencies-modal.component";
 import {UsersModalComponent} from "../../layouts/modals/users-modal/users-modal.component";
 import {NgxSpinnerService} from "ngx-spinner";
 
@@ -32,7 +31,7 @@ export class UsersComponent implements OnInit {
     constructor(
         private usersService: UsersService,
         private dependenciesService: DependenciesService,
-        private messagesService: MessageService,
+        private messagesService: MessagesService,
         private formBuilder: FormBuilder,
         private spinner: NgxSpinnerService,
         public dialog: MatDialog,

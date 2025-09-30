@@ -3,7 +3,7 @@ import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 import {FormBuilder, Validators} from "@angular/forms";
 import {UsersService} from "../../../services/users.service";
 import {NgxSpinnerService} from "ngx-spinner";
-import {MessageService} from "../../../services/messages.service";
+import {MessagesService} from "../../../services/messages.service";
 import {DependenciesService} from "../../../services/dependencies.service";
 
 @Component({
@@ -24,7 +24,7 @@ export class UsersModalComponent implements OnInit {
         private usersService: UsersService,
         private dependenciesService: DependenciesService,
         private spinner: NgxSpinnerService,
-        private messagesService: MessageService,
+        private messagesService: MessagesService,
         private dialog: MatDialog
     ) {
     }

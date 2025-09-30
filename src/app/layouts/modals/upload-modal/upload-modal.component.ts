@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 import {DocumentsService} from "../../../services/documents.service";
-import {MessageService} from "../../../services/messages.service";
+import {MessagesService} from "../../../services/messages.service";
 
 @Component({
     selector: 'app-upload-modal',
@@ -18,7 +18,7 @@ export class UploadModalComponent implements OnInit {
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
         private documentsService: DocumentsService,
-        private messagesService: MessageService,
+        private messagesService: MessagesService,
         public matDialog: MatDialog,
     ) {
     }

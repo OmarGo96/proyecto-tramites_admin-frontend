@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {RequestsService} from "../../../services/requests.service";
-import {MessageService} from "../../../services/messages.service";
+import {MessagesService} from "../../../services/messages.service";
 import {UntypedFormBuilder, Validators} from "@angular/forms";
 import {MensajesService} from "../../../services/mensajes.service";
 import {NgxSpinnerService} from "ngx-spinner";
@@ -28,7 +28,7 @@ export class MessagesModalComponent implements OnInit {
         private requestService: RequestsService,
         private formBuilder: UntypedFormBuilder,
         private mensajeServie: MensajesService,
-        private messagesService: MessageService,
+        private messagesService: MessagesService,
         private spinner: NgxSpinnerService
     ) {
     }

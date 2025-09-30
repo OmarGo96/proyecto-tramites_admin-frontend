@@ -1,62 +1,65 @@
-<form [formGroup]="predialesForm">
-    <div class="grid grid-cols-2 gap-3">
-        <div>
-            <mat-label>Fecha de oficio</mat-label>
-            <mat-form-field appearance="outline" class="w-full">
-                <input matInput [matDatepicker]="picker" formControlName="fecha_oficio">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
+<div class="w-1/2">
+    <form [formGroup]="predialesForm">
+        <div class="grid grid-cols-2 gap-3">
+            <div>
+                <mat-label>Fecha de oficio</mat-label>
+                <mat-form-field appearance="outline" class="w-full">
+                    <input matInput [matDatepicker]="picker" formControlName="fecha_oficio">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-label>Número de oficio</mat-label>
+                <mat-form-field appearance="outline" class="w-full">
+                    <input matInput formControlName="numero_oficio">
+                </mat-form-field>
+            </div>
+
         </div>
         <div>
-            <mat-label>Número de oficio</mat-label>
+            <mat-label>Recibo de pago del certificado</mat-label>
             <mat-form-field appearance="outline" class="w-full">
-                <input matInput formControlName="numero_oficio">
+                <input matInput formControlName="recibo_pago_certificado">
             </mat-form-field>
         </div>
 
-    </div>
-    <div>
-        <mat-label>Recibo de pago del certificado</mat-label>
-        <mat-form-field appearance="outline" class="w-full">
-            <input matInput formControlName="recibo_pago_certificado">
-        </mat-form-field>
-    </div>
-
-    <mat-label>Agregar recibo de pago de predial</mat-label>
-    <div class="flex gap-3">
-        <div class="w-full">
-            <mat-form-field appearance="outline" class="w-full">
-                <input matInput formControlName="folio_pago_predial">
-            </mat-form-field>
+        <mat-label>Agregar recibo de pago de predial</mat-label>
+        <div class="flex gap-3">
+            <div class="w-full">
+                <mat-form-field appearance="outline" class="w-full">
+                    <input matInput formControlName="folio_pago_predial">
+                </mat-form-field>
+            </div>
+            <button mat-fab extended>
+                Agregar
+            </button>
         </div>
-        <button mat-fab extended>
-            Agregar
-        </button>
-    </div>
 
 
-    <div *ngIf="catastroValidado">
-        <mat-card appearance="outlined" class="bg-green-500">
-            <mat-card-header>
-                <mat-card-title class="items-center">
-                    <div class="flex items-center gap-3">
-                        {{ catastroValidado.clave_catastral }}
-                        <mat-icon [svgIcon]="'heroicons_outline:check-badge'" class="text-green-500"></mat-icon>
-                    </div>
-                </mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                <div class="text-xs">
-                    <p>
+        <div *ngIf="catastroValidado">
+            <mat-card class="bg-green-500">
+                <mat-card-header>
+                    <mat-card-title class="items-center">
+                        <div class="flex items-center gap-3">
+                            {{ catastroValidado.clave_catastral }}
+                            <mat-icon [svgIcon]="'heroicons_outline:check-badge'" class="text-green-500"></mat-icon>
+                        </div>
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="text-xs">
+                        <p>
                         <span
                             class="font-bold">Nombre del contribuyente:</span><br> {{ catastroValidado.nombre_contribuyente }}
-                    </p>
-                    <p><span class="font-bold">Ubicación:</span><br> {{ catastroValidado.ubicacion }}</p>
-                    <p><span class="font-bold">RFC:</span><br> {{ catastroValidado.rfc }}</p>
-                </div>
-            </mat-card-content>
-        </mat-card>
-    </div>
+                        </p>
+                        <p><span class="font-bold">Ubicación:</span><br> {{ catastroValidado.ubicacion }}</p>
+                        <p><span class="font-bold">RFC:</span><br> {{ catastroValidado.rfc }}</p>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <button mat-flat-button (click)="savePredial()" [disabled]="predialesForm.invalid || !catastroValidado">Guardar</button>
+    </form>
 
-</form>
+</div>

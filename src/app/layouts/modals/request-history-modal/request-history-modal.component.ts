@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
-import {MessageService} from "../../../services/messages.service";
+import {MessagesService} from "../../../services/messages.service";
 import {RequestsService} from "../../../services/requests.service";
 
 @Component({
@@ -15,7 +15,7 @@ export class RequestHistoryModalComponent implements OnInit {
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
         private requestService: RequestsService,
-        private messagesService: MessageService
+        private messagesService: MessagesService
     ) {
     }
 

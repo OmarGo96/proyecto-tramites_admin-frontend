@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
     providedIn: 'root'
 })
 
-export class MessageService {
+export class MessagesService {
 
     public message: any;
     public status: any;

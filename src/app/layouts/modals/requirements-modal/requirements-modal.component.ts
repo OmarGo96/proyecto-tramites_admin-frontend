@@ -6,7 +6,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {UntypedFormBuilder, Validators} from "@angular/forms";
 
 /* Services */
-import {MessageService} from "src/app/services/messages.service";
+import {MessagesService} from "src/app/services/messages.service";
 import {DocumentTypesService} from "src/app/services/document-types.service";
 import {RequerimentsService} from "src/app/services/requeriments.service";
 import {NgxSpinnerService} from "ngx-spinner";
@@ -44,7 +44,7 @@ export class RequirementsModalComponent implements OnInit {
         private requirementsService: RequerimentsService,
         private spinner: NgxSpinnerService,
         private documentTypesService: DocumentTypesService,
-        private messagesService: MessageService,
+        private messagesService: MessagesService,
         private formBuilder: UntypedFormBuilder,
         public matDialog: MatDialog,
     ) {

@@ -3,7 +3,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {RequestsService} from "../../services/requests.service";
 import {RequerimentsService} from "../../services/requeriments.service";
-import {MessageService} from "../../services/messages.service";
+import {MessagesService} from "../../services/messages.service";
 import {Router} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
 import {MatDialog} from "@angular/material/dialog";
@@ -26,7 +26,7 @@ export class ContribuyentesComponent implements OnInit {
 
     constructor(
         private contribuyentesService: ContribuyentesService,
-        private messagesService: MessageService,
+        private messagesService: MessagesService,
         private router: Router,
         private spinner: NgxSpinnerService,
         public dialog: MatDialog

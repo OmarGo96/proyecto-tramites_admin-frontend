@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 import {FormBuilder} from "@angular/forms";
 import {NgxSpinnerService} from "ngx-spinner";
-import {MessageService} from "../../../services/messages.service";
+import {MessagesService} from "../../../services/messages.service";
 import {ContribuyentesService} from "../../../services/contribuyentes.service";
 
 @Component({
@@ -20,7 +20,7 @@ export class ContribuyentesModalComponent implements OnInit {
         private formBuilder: FormBuilder,
         private contribuyentesService: ContribuyentesService,
         private spinner: NgxSpinnerService,
-        private messagesService: MessageService,
+        private messagesService: MessagesService,
         private dialog: MatDialog
     ) {
     }

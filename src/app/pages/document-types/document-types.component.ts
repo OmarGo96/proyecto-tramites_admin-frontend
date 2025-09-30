@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, UntypedFormBuilder, Validators} from "@angular/forms";
-import {MessageService} from "../../services/messages.service";
+import {MessagesService} from "../../services/messages.service";
 import {MatDialog} from "@angular/material/dialog";
 import {DocumentTypesService} from "../../services/document-types.service";
 import {MatPaginator} from "@angular/material/paginator";
@@ -28,7 +28,7 @@ export class DocumentTypesComponent implements OnInit {
 
     constructor(
         private documentTypesService: DocumentTypesService,
-        private messagesService: MessageService,
+        private messagesService: MessagesService,
         private formBuilder: FormBuilder,
         private spinner: NgxSpinnerService,
         public matDialog: MatDialog,

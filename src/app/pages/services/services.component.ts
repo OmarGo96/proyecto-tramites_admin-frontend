@@ -1,12 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {DependenciesModalComponent} from "../../layouts/modals/dependencies-modal/dependencies-modal.component";
 import {MatDialog} from "@angular/material/dialog";
 import {ActivatedRoute} from "@angular/router";
 import {DependenciesService} from "../../services/dependencies.service";
-import {MessageService} from "../../services/messages.service";
+import {MessagesService} from "../../services/messages.service";
 import {ServicesModalComponent} from "../../layouts/modals/services-modal/services-modal.component";
 import {ServicesService} from "../../services/services.service";
-import {RequirementsModalComponent} from "../../layouts/modals/requirements-modal/requirements-modal.component";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
@@ -35,7 +33,7 @@ export class ServicesComponent implements OnInit {
     constructor(
         private dependenciesService: DependenciesService,
         private servicesService: ServicesService,
-        private messagesService: MessageService,
+        private messagesService: MessagesService,
         private activatedRoute: ActivatedRoute,
         private spinner: NgxSpinnerService,
         public dialog: MatDialog
