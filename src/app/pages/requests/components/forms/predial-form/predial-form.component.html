@@ -30,7 +30,7 @@
                 <input matInput formControlName="folio_pago_predial">
             </mat-form-field>
         </div>
-        <button mat-fab extended (click)="validarFolioPagoPredial()">
+        <button mat-fab extended>
             Agregar
         </button>
     </div>
@@ -49,8 +49,8 @@
             <mat-card-content>
                 <div class="text-xs">
                     <p>
-    <span
-        class="font-bold">Nombre del contribuyente:</span><br> {{ catastroValidado.nombre_contribuyente }}
+                        <span
+                            class="font-bold">Nombre del contribuyente:</span><br> {{ catastroValidado.nombre_contribuyente }}
                     </p>
                     <p><span class="font-bold">Ubicación:</span><br> {{ catastroValidado.ubicacion }}</p>
                     <p><span class="font-bold">RFC:</span><br> {{ catastroValidado.rfc }}</p>

@@ -4,14 +4,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {MatTableDataSource} from "@angular/material/table";
 import {DocumentsService} from "../../../services/documents.service";
 import {MessageService} from "../../../services/messages.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {UntypedFormBuilder, Validators} from "@angular/forms";
 import {StatusesService} from "../../../services/statuses.service";
-import {
-    RequestHistoryModalComponent
-} from "../../../layouts/modals/request-history-modal/request-history-modal.component";
-import {MessagesModalComponent} from "../../../layouts/modals/messages-modal/messages-modal.component";
-import {MatDialog} from "@angular/material/dialog";
 import {NgxSpinnerService} from "ngx-spinner";
 import {MensajesService} from "../../../services/mensajes.service";
 import {RequestsStatus} from "../../../const/status";

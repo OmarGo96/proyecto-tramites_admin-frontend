@@ -30,6 +30,7 @@ import { ComplementaryDocsValidationComponent } from './complementary-docs-valid
 import { CheckoutGenerationComponent } from './checkout-generation/checkout-generation.component';
 import {CurrencyMaskModule} from "ng2-currency-mask";
 import { GeneralRequestsComponent } from './general-requests/general-requests.component';
+import {AppModule} from "../../app.module";
 
 const routes: Routes = [
     {path: 'todas', component: GeneralRequestsComponent},
@@ -97,7 +98,8 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         LayoutsModule,
         NgxDropzoneModule,
-        CurrencyMaskModule
+        CurrencyMaskModule,
+        AppModule
     ]
 })
 export class RequestsModule {
