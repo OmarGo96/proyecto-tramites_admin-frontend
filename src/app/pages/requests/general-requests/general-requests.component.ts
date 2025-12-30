@@ -9,6 +9,7 @@ import {NgxSpinnerService} from "ngx-spinner";
 import {MatTableDataSource} from "@angular/material/table";
 import * as moment from 'moment';
 import {FormBuilder, Validators} from "@angular/forms";
+import {data} from "autoprefixer";
 
 @Component({
     selector: 'app-general-requests',
@@ -44,41 +45,38 @@ export class GeneralRequestsComponent implements OnInit {
 
     initReportForm() {
         this.reportForm = this.formBuilder.group({
-            startDate: [moment().format('YYYY-MM-DD'), Validators.required],
-            endDate: [moment().format('YYYY-MM-DD'), Validators.required]
+            startDate: ['', Validators.required],
+            endDate: ['', Validators.required]
         });
-
-        this.getRequests();
-    }
-
-    getRequests(){
-        if (this.reportForm.value.startDate && this.reportForm.value.endDate){
-            this.spinner.show();
+        if (this.reportForm.value.startDate && this.reportForm.value.endDate) {
             const data = {
                 startDate: moment(this.reportForm.value.startDate).format('YYYY-MM-DD'),
                 endDate: moment(this.reportForm.value.endDate).format('YYYY-MM-DD'),
             };
-            this.requestsService.getAllRequests(data).subscribe({
-                next: res => {
-                    this.spinner.hide();
-                    this.dataSource = new MatTableDataSource(res.solicitudes);
-                    this.dataSource.paginator = this.paginator;
-                    this.dataSource.sort = this.sort;
-
-                    this.requests = res.solicitudes;
-                },
-                error: err => {
-                    this.spinner.hide();
-                    this.messagesService.printStatusArrayNew(err.error.errors, 'error');
-                }
-            });
+            this.getRequests(data);
         } else {
-            this.messagesService.errorAlert([{message: 'El rango de fechas es incorrecto. Intente nueuvamente'}]);
+            this.getRequests();
         }
-
     }
 
-    downloadReport(){
+    getRequests(data?: any) {
+        this.requestsService.getAllRequests(data).subscribe({
+            next: res => {
+                this.spinner.hide();
+                this.dataSource = new MatTableDataSource(res.solicitudes);
+                this.dataSource.paginator = this.paginator;
+                this.dataSource.sort = this.sort;
+
+                this.requests = res.solicitudes;
+            },
+            error: err => {
+                this.spinner.hide();
+                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+            }
+        });
+    }
+
+    downloadReport() {
         this.spinner.show();
         const data = {
             startDate: moment(this.reportForm.value.startDate).format('YYYY-MM-DD'),

@@ -7,6 +7,7 @@ import {MessagesService} from "../../../services/messages.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {MatTableDataSource} from "@angular/material/table";
 import {Router} from "@angular/router";
+import {DocumentsService} from "../../../services/documents.service";
 
 @Component({
     selector: 'app-digitization-requests',
@@ -25,6 +26,7 @@ export class DigitizationRequestsComponent implements OnInit {
 
     constructor(
         private requestsService: RequestsService,
+        private documentsService: DocumentsService,
         private messagesService: MessagesService,
         private router: Router,
         private spinner: NgxSpinnerService
@@ -53,6 +55,22 @@ export class DigitizationRequestsComponent implements OnInit {
             }
         });
     }
+
+    downloadZip(requestId: any){
+        this.spinner.show();
+        this.documentsService.downloadZip(requestId).subscribe({
+            next: res => {
+                this.spinner.hide();
+                let url = URL.createObjectURL(res);
+                window.open(url, '_blank');
+            },
+            error: err => {
+                this.spinner.hide();
+                this.messagesService.errorAlert([{message:'No es posible generar zip en estos momentos.'}])
+            }
+        });
+    }
+
 
     applyFilter(event: Event) {
         const filterValue = (event.target as HTMLInputElement).value;

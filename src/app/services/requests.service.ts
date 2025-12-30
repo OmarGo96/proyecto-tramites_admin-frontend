@@ -20,7 +20,7 @@ export class RequestsService {
     }
 
     public getAllRequests(data: any): Observable <any> {
-        return this.httpClient.post(`${this.urlApi}/reportes/generateByDateRange`, data, { headers: this.headers });
+        return this.httpClient.post(`${this.urlApi}/reportes/generateByDateRange`, data);
     }
 
     public getRecords(data: any): Observable <any> {
