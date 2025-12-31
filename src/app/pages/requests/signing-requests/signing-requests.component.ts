@@ -71,6 +71,32 @@ export class SigningRequestsComponent implements OnInit {
         });
     }
 
+    cancelRequest(solicitudId: any){
+        this.messagesService.confirmDelete('¿Estás seguro de cancelar esta solicitud?')
+            .then((result: any) => {
+                if (result.isConfirmed) {
+                    this.spinner.show();
+                    const data = {
+                        estatus_solicitud_id: '7'
+                    };
+                    this.requestsService.updateRecord(data, solicitudId).subscribe({
+                        next: res => {
+                            this.spinner.hide();
+                            this.messagesService.printStatus(res.message, 'success');
+                            setTimeout(() => {
+                                this.getRequests();
+                            }, 2500)
+                        },
+                        error: err => {
+                            this.spinner.hide();
+                            this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+                        }
+                    });
+                }
+            });
+    }
+
+
     applyFilter(event: Event) {
         const filterValue = (event.target as HTMLInputElement).value;
         this.dataSource.filter = filterValue.trim().toLowerCase();

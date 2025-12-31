@@ -39,6 +39,10 @@ export class ServicesService {
         return this.httpClient.put(`${this.urlApi}/servicios/${uuid}`, data, { headers: this.headers })
     }
 
+    public getActiveServices(): Observable <any> {
+        return this.httpClient.get(`${this.urlApi}/servicios`);
+    }
+
 
 
 }

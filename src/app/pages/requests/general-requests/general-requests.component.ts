@@ -10,6 +10,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import * as moment from 'moment';
 import {FormBuilder, Validators} from "@angular/forms";
 import {data} from "autoprefixer";
+import {ServicesService} from "../../../services/services.service";
 
 @Component({
     selector: 'app-general-requests',
@@ -29,9 +30,15 @@ export class GeneralRequestsComponent implements OnInit {
     public statuses = RequestsStatus;
 
     public requests: any;
+    public activeServices: any;
+
+    // Agregar estas propiedades
+    selectedServiceId: number | null = null;
+    originalRequests: any[] = []; // Para guardar los datos originales
 
     constructor(
         private requestsService: RequestsService,
+        private servicesService: ServicesService,
         private messagesService: MessagesService,
         private formBuilder: FormBuilder,
         private router: Router,
@@ -41,6 +48,7 @@ export class GeneralRequestsComponent implements OnInit {
 
     ngOnInit(): void {
         this.initReportForm();
+        this.getServices();
     }
 
     initReportForm() {
@@ -48,26 +56,26 @@ export class GeneralRequestsComponent implements OnInit {
             startDate: ['', Validators.required],
             endDate: ['', Validators.required]
         });
-        if (this.reportForm.value.startDate && this.reportForm.value.endDate) {
-            const data = {
-                startDate: moment(this.reportForm.value.startDate).format('YYYY-MM-DD'),
-                endDate: moment(this.reportForm.value.endDate).format('YYYY-MM-DD'),
-            };
-            this.getRequests(data);
-        } else {
-            this.getRequests();
-        }
+        this.getRequests();
     }
 
     getRequests(data?: any) {
-        this.requestsService.getAllRequests(data).subscribe({
+        this.spinner.show();
+        let dates: any;
+        if (this.reportForm.value.startDate && this.reportForm.value.endDate) {
+            dates = {
+                startDate: moment(this.reportForm.value.startDate).format('YYYY-MM-DD'),
+                endDate: moment(this.reportForm.value.endDate).format('YYYY-MM-DD'),
+            };
+        } else {
+            dates = {};
+        }
+        this.requestsService.getAllRequests(dates).subscribe({
             next: res => {
                 this.spinner.hide();
-                this.dataSource = new MatTableDataSource(res.solicitudes);
-                this.dataSource.paginator = this.paginator;
-                this.dataSource.sort = this.sort;
-
+                this.originalRequests = res.solicitudes; // Guardar datos originales
                 this.requests = res.solicitudes;
+                this.applyServiceFilter(); // Aplicar filtro si existe
             },
             error: err => {
                 this.spinner.hide();
@@ -93,6 +101,39 @@ export class GeneralRequestsComponent implements OnInit {
                 this.messagesService.printStatusArrayNew(err.error.errors, 'error');
             }
         });
+    }
+
+    getServices() {
+        this.servicesService.getActiveServices().subscribe({
+            next: res => {
+                const services = res.servicios;
+                this.activeServices = res.servicios.filter((serv: any) => serv.activo);
+            },
+            error: err => {
+                this.messagesService.printStatusArrayNew(err.error.errors, 'warning');
+            }
+        });
+    }
+
+    applyServiceFilter() {
+        let filteredData = [...this.originalRequests];
+
+        if (this.selectedServiceId && this.selectedServiceId !== 0) {
+            filteredData = filteredData.filter(
+                (request: any) => request.servicio_id === this.selectedServiceId
+            );
+        }
+
+        this.dataSource = new MatTableDataSource(filteredData);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.requests = filteredData;
+    }
+
+    // Método del evento del select
+    filterByServiceId(event: any) {
+        this.selectedServiceId = event.value; // Para mat-select
+        this.applyServiceFilter();
     }
 
     applyFilter(event: Event) {
