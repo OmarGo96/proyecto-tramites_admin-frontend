@@ -8,6 +8,10 @@ import {NgxSpinnerService} from "ngx-spinner";
 import {MatTableDataSource} from "@angular/material/table";
 import {Router} from "@angular/router";
 import {DocumentsService} from "../../../services/documents.service";
+import {
+    AsignarLicenciaModalComponent
+} from "../../../layouts/modals/asignar-licencia-modal/asignar-licencia-modal.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
     selector: 'app-prevent-requests',
@@ -29,6 +33,7 @@ export class PreventRequestsComponent implements OnInit {
         private documentsService: DocumentsService,
         private messagesService: MessagesService,
         private router: Router,
+        private dialog: MatDialog,
         private spinner: NgxSpinnerService
     ) {
     }
@@ -67,6 +72,47 @@ export class PreventRequestsComponent implements OnInit {
             error: err => {
                 this.spinner.hide();
                 this.messagesService.errorAlert([{message:'No es posible generar zip en estos momentos.'}])
+            }
+        });
+    }
+
+    cancelRequest(solicitudId: any){
+        this.messagesService.confirmDelete('¿Estás seguro de cancelar esta solicitud?')
+            .then((result: any) => {
+                if (result.isConfirmed) {
+                    this.spinner.show();
+                    const data = {
+                        estatus_solicitud_id: '7'
+                    };
+                    this.requestsService.updateRecord(data, solicitudId).subscribe({
+                        next: res => {
+                            this.spinner.hide();
+                            this.messagesService.printStatus(res.message, 'success');
+                            setTimeout(() => {
+                                this.getRequests();
+                            }, 2500)
+                        },
+                        error: err => {
+                            this.spinner.hide();
+                            this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+                        }
+                    });
+                }
+            });
+    }
+
+    openAsignarNumLicencia(requestId: any){
+        const config = {
+            data:{
+                solicitud_id: requestId,
+            }
+        }
+
+        const dialogRef = this.dialog.open(AsignarLicenciaModalComponent, config);
+
+        dialogRef.afterClosed().subscribe(res => {
+            if (res){
+                this.getRequests();
             }
         });
     }

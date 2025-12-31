@@ -100,6 +100,11 @@
                                     <i class="fa-solid fa-file-zipper"></i>
                                     Descargar ZIP
                                 </a>
+                                <a mat-menu-item *ngIf="element.servicio_id === 6"
+                                   (click)="openAsignarNumLicencia(element.id)">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                    Editar Número Licencia
+                                </a>
                                 <a mat-menu-item class="text-red-500" (click)="cancelRequest(element.id)">
                                     <i class="fa-solid fa-xmark"></i>
                                     Cancelar solicitud

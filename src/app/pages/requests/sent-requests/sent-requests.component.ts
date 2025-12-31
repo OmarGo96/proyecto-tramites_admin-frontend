@@ -8,6 +8,13 @@ import {NgxSpinnerService} from "ngx-spinner";
 import {MatTableDataSource} from "@angular/material/table";
 import {Router} from "@angular/router";
 import {DocumentsService} from "../../../services/documents.service";
+import {
+    ContribuyentesModalComponent
+} from "../../../layouts/modals/contribuyentes-modal/contribuyentes-modal.component";
+import {MatDialog} from "@angular/material/dialog";
+import {
+    AsignarLicenciaModalComponent
+} from "../../../layouts/modals/asignar-licencia-modal/asignar-licencia-modal.component";
 
 @Component({
     selector: 'app-sent-requests',
@@ -29,7 +36,8 @@ export class SentRequestsComponent implements OnInit {
         private documentsService: DocumentsService,
         private messagesService: MessagesService,
         private router: Router,
-        private spinner: NgxSpinnerService
+        private spinner: NgxSpinnerService,
+        private dialog: MatDialog
     ) {
     }
 
@@ -111,6 +119,22 @@ export class SentRequestsComponent implements OnInit {
                     });
                 }
             });
+    }
+
+    openAsignarNumLicencia(requestId: any){
+        const config = {
+            data:{
+                solicitud_id: requestId,
+            }
+        }
+
+        const dialogRef = this.dialog.open(AsignarLicenciaModalComponent, config);
+
+        dialogRef.afterClosed().subscribe(res => {
+            if (res){
+                this.getRequests();
+            }
+        });
     }
 
     applyFilter(event: Event) {

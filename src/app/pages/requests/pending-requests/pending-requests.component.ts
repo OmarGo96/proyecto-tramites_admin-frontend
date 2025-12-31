@@ -8,6 +8,10 @@ import {NgxSpinnerService} from "ngx-spinner";
 import {MatTableDataSource} from "@angular/material/table";
 import {Router} from "@angular/router";
 import {DocumentsService} from "../../../services/documents.service";
+import {
+    AsignarLicenciaModalComponent
+} from "../../../layouts/modals/asignar-licencia-modal/asignar-licencia-modal.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
     selector: 'app-pending-requests',
@@ -29,6 +33,7 @@ export class PendingRequestsComponent implements OnInit {
         private documentsService: DocumentsService,
         private messagesService: MessagesService,
         private router: Router,
+        private dialog: MatDialog,
         private spinner: NgxSpinnerService
     ) {
     }
@@ -113,6 +118,21 @@ export class PendingRequestsComponent implements OnInit {
             });
     }
 
+    openAsignarNumLicencia(requestId: any){
+        const config = {
+            data:{
+                solicitud_id: requestId,
+            }
+        }
+
+        const dialogRef = this.dialog.open(AsignarLicenciaModalComponent, config);
+
+        dialogRef.afterClosed().subscribe(res => {
+            if (res){
+                this.getRequests();
+            }
+        });
+    }
 
     applyFilter(event: Event) {
         const filterValue = (event.target as HTMLInputElement).value;

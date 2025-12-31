@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Asignar numero de licencia</h2>
+<mat-dialog-content class="mat-typography" >
+    <form [formGroup]="form" *ngIf="form">
+        <div>
+            <mat-label>Número de licencia</mat-label>
+            <mat-form-field appearance="outline">
+                <input matInput formControlName="numero_licencia">
+            </mat-form-field>
+        </div>
+
+        <div>
+            <button mat-flat-button color="primary" (click)="asignarNumeroLicencia()">Actualizar</button>
+        </div>
+    </form>
+</mat-dialog-content>

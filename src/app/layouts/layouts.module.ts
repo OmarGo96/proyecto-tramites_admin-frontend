@@ -25,6 +25,7 @@ import {
 import {NgSelectModule} from "@ng-select/ng-select";
 import { EditDocumentsComponent } from './modals/edit-documents/edit-documents.component';
 import { ContribuyentesModalComponent } from './modals/contribuyentes-modal/contribuyentes-modal.component';
+import { AsignarLicenciaModalComponent } from './modals/asignar-licencia-modal/asignar-licencia-modal.component';
 
 @NgModule({
     declarations: [
@@ -45,7 +46,8 @@ import { ContribuyentesModalComponent } from './modals/contribuyentes-modal/cont
         UpdateRequerimentsModalComponent,
         LinkRequerimentsModalComponent,
         EditDocumentsComponent,
-        ContribuyentesModalComponent
+        ContribuyentesModalComponent,
+        AsignarLicenciaModalComponent
     ],
     imports: [
         CommonModule,

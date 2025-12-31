@@ -81,4 +81,8 @@ export class RequestsService {
     public updateReciboPago(solicitudId: any): Observable <any> {
         return this.httpClient.put(`${this.urlApi}/solicitud/recibo-pago/${solicitudId}`, { headers: this.headers });
     }
+
+    public asignarNumLicencia(data: any, solicitudId: any): Observable <any> {
+        return this.httpClient.put(`${this.urlApi}/solicitud/asignar-numero-licencia/${solicitudId}`, data, { headers: this.headers });
+    }
 }
