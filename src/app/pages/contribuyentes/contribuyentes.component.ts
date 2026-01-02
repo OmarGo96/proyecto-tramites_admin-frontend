@@ -10,6 +10,9 @@ import {MatDialog} from "@angular/material/dialog";
 import {MatTableDataSource} from "@angular/material/table";
 import {ContribuyentesService} from "../../services/contribuyentes.service";
 import {ContribuyentesModalComponent} from "../../layouts/modals/contribuyentes-modal/contribuyentes-modal.component";
+import {
+    ChangeContribuyentesPasswordModalComponent
+} from "../../layouts/modals/change-contribuyentes-password-modal/change-contribuyentes-password-modal.component";
 
 @Component({
     selector: 'app-contribuyentes',
@@ -103,6 +106,21 @@ export class ContribuyentesComponent implements OnInit {
                     });
                 }
             });
+    }
+
+    openChangeContribuyentePasswordModal(contribuyente: any){
+        const config = {
+            width: '30%',
+            data: {
+                contribuyente
+            }
+        }
+
+        const dialogRef = this.dialog.open(ChangeContribuyentesPasswordModalComponent, config);
+
+        dialogRef.afterClosed().subscribe(res => {
+            this.getContribuyentes();
+        });
     }
 
     applyFilter(event: Event) {

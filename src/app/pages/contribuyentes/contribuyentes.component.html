@@ -95,14 +95,18 @@
                                 <button mat-icon-button class="bg-slate-200 text-slate-800" [matMenuTriggerFor]="menu">
                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </button>
-                                <mat-menu #menu="matMenu">
+                                <mat-menu #menu="matMenu" xPosition="before">
                                     <button mat-menu-item class="text-slate-600" (click)="openEditContribuyenteModal(element)">
                                         <i class="fa-solid fa-file-pen"></i>
                                         Editar datos
                                     </button>
-                                    <button *ngIf="element.activo === 0" mat-menu-item class="text-slate-600" (click)="resendActivationCode(element.uuid)">
+                                    <button mat-menu-item  *ngIf="element.activo === 0"  class="text-slate-600" (click)="resendActivationCode(element.uuid)">
                                         <i class="fa-solid fa-comment-sms"></i>
                                         Reenviar SMS
+                                    </button>
+                                    <button mat-menu-item class="text-slate-600" (click)="openChangeContribuyentePasswordModal(element)">
+                                        <i class="fa-solid fa-lock"></i>
+                                        Cambiar contraseña
                                     </button>
                                 </mat-menu>
                             </td>

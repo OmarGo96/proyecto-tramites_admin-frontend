@@ -34,5 +34,9 @@ export class ContribuyentesService {
         return this.httpClient.get(`${this.urlApi}/contribuyente/reenvio_activacion/${contribuyenteUuid}`);
     }
 
+    public restorePassword(contribuyenteUuid: string, data: any): Observable<any> {
+        return this.httpClient.post(`${this.urlApi}/restaurar_password_administrador/${contribuyenteUuid}`, data);
+    }
+
 
 }

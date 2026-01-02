@@ -5,6 +5,7 @@
 export const environment = {
     production: false,
     urlApi: 'http://localhost:8028/api',
+    // urlApi: 'https://translationally-regardant-joella.ngrok-free.dev/api',
     // urlApi: 'http://192.168.10.61:8028/api',
     // urlApi: 'https://development.ismx.com.mx:8000/api',
 };
