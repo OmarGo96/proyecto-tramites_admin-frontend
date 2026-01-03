@@ -66,7 +66,7 @@ export class ContribuyentesComponent implements OnInit {
             },
             error: err => {
                 this.spinner.hide();
-                this.messagesService.printStatus('Hubo un problema al descargar el archivo. Intente nuevamente', 'error');
+                this.messagesService.printStatus('Hubo un problema al momento descargar el archivo o el contribuyente no cuenta con documentación. Intente nuevamente', 'error');
             }
         });
     }
