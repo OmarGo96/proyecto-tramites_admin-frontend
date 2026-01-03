@@ -5,6 +5,7 @@ import {ContribuyentesService} from "../../../services/contribuyentes.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {MessagesService} from "../../../services/messages.service";
 import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
     selector: 'app-change-contribuyentes-password-modal',
@@ -23,6 +24,7 @@ export class ChangeContribuyentesPasswordModalComponent implements OnInit {
         private contribuyentesService: ContribuyentesService,
         private spinner: NgxSpinnerService,
         private messagesService: MessagesService,
+        private snackBar: MatSnackBar,
         private router: Router,
         private dialog: MatDialog
     ) {
@@ -33,7 +35,7 @@ export class ChangeContribuyentesPasswordModalComponent implements OnInit {
         this.initPasswordForm();
     }
 
-    initPasswordForm(){
+    initPasswordForm() {
         this.resetPasswordForm = this.formBuilder.group({
             password: ['', Validators.required],
             re_password: ['', Validators.required]
@@ -55,4 +57,49 @@ export class ChangeContribuyentesPasswordModalComponent implements OnInit {
         });
     }
 
+    generatePassword(length: number = 16): void {
+        const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const lowercase = 'abcdefghijklmnopqrstuvwxyz';
+        const numbers = '0123456789';
+        const symbols = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+
+        const allChars = uppercase + lowercase + numbers + symbols;
+
+        // Al menos un carácter de cada tipo
+        let password = [
+            uppercase[Math.floor(Math.random() * uppercase.length)],
+            lowercase[Math.floor(Math.random() * lowercase.length)],
+            numbers[Math.floor(Math.random() * numbers.length)],
+            symbols[Math.floor(Math.random() * symbols.length)]
+        ];
+
+        // Completar el resto de la contraseña
+        for (let i = password.length; i < length; i++) {
+            password.push(allChars[Math.floor(Math.random() * allChars.length)]);
+        }
+
+        // Mezclar el array
+        for (let i = password.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [password[i], password[j]] = [password[j], password[i]];
+        }
+
+        const generatedPassword = password.join('');
+
+        // Actualizar ambos campos del formulario
+        this.resetPasswordForm.patchValue({
+            password: generatedPassword,
+            re_password: generatedPassword
+        });
+    }
+
+    copyPassword(): void {
+        const password = this.resetPasswordForm.get('password')?.value;
+
+        if (password) {
+            navigator.clipboard.writeText(password).then(() => {
+                this.snackBar.open('Contraseña copiada', 'Cerrar', { duration: 2000 });
+            });
+        }
+    }
 }
