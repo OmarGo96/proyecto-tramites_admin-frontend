@@ -616,10 +616,10 @@ export class RequestDetailComponent implements OnInit {
         }
     }
 
-    downloadZip(){
+    downloadPaymentZip(){
         this.spinner.show();
         const requestId = this.request.id;
-        this.documentsService.downloadZip(requestId).subscribe({
+        this.documentsService.downloadPaymentZip(requestId).subscribe({
             next: res => {
                 this.spinner.hide();
                 let url = URL.createObjectURL(res);

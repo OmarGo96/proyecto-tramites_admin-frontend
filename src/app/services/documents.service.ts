@@ -21,7 +21,7 @@ export class DocumentsService {
     }
 
     public createRecords(serviceUuid: any, data: any): Observable<any> {
-        return this.httpClient.post(`${this.urlApi}/adjuntar_documento_servicio/${serviceUuid}`, data, {headers: this.headers})
+        return this.httpClient.post(`${this.urlApi}/adjuntar_documento_servicio/${serviceUuid}`, data)
     }
 
     public getUserDocument(id: any): Observable<any> {
@@ -29,11 +29,15 @@ export class DocumentsService {
     }
 
     public downloadZip(id: any): Observable<any> {
-        return this.httpClient.get(`${this.urlApi}/solicitud/get-documents-zip/${id}`, { responseType: 'blob', headers: this.headers });
+        return this.httpClient.get(`${this.urlApi}/solicitud/get-documents-zip/${id}`, { responseType: 'blob'});
+    }
+
+    public downloadPaymentZip(solicitudId: any): Observable<any> {
+        return this.httpClient.get(`${this.urlApi}/documentacion-pago-zip/${solicitudId}`, { responseType: 'blob' });
     }
 
     public digitalizarDocumento(requestId: any, data: any): Observable<any> {
-        return this.httpClient.post(`${this.urlApi}/solicitud/documento-digital/${requestId}`, data, {headers: this.headers})
+        return this.httpClient.post(`${this.urlApi}/solicitud/documento-digital/${requestId}`, data)
     }
 
     public getAnuenciaDocument(requestId: any): Observable<any> {
@@ -41,7 +45,7 @@ export class DocumentsService {
     }
 
     public generarPaseCaja(requestId: any, data: any): Observable<any> {
-        return this.httpClient.post(`${this.urlApi}/solicitud/pase-caja/${requestId}`, data, {headers: this.headers})
+        return this.httpClient.post(`${this.urlApi}/solicitud/pase-caja/${requestId}`, data)
     }
 
     public uploadInvoiceFile(data: any): Observable<any> {

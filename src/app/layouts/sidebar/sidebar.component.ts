@@ -248,8 +248,8 @@ export const ROUTES = [
         group: 'SOLICITUDES',
         module: 'solicitudes',
         action: 'list',
-        title: 'Impresión de documento',
-        icon: 'fa-print',
+        title: 'Generación de QR',
+        icon: 'fa-qrcode',
         class: '',
         rol: ['1', '2', '3']
     },
