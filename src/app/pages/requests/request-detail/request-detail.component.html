@@ -937,7 +937,7 @@
                             </div>
                         </ng-container>
 
-                        <ng-container *ngIf="[37, 34, 11, 19, 15, 16, 8].includes(request.estatus_solicitud_id) ">
+                        <ng-container *ngIf="[37, 34, 11, 19, 15, 16, 8].includes(request.estatus_solicitud_id) && ![6, 7].includes(request.servicio_id)">
                             <!-- && ![5, 6, 7].includes(request.servicio_id) -->
                             <div class="w-full mx-auto block p-10 text-center space-y-3">
                                 <i class="fa-solid fa-circle-right fa-5x text-slate-600"></i>
@@ -953,26 +953,30 @@
                             </div>
                         </ng-container>
 
-                        <ng-container>
+                        <ng-container *ngIf=" [6,7].includes(request.servicio_id) && [11].includes(request.estatus_solicitud_id)">
+
                             <div class="p-5 w-1/2">
-                                <mat-label>
+                                <div class="my-3 bg-blue-100 border border-blue-200 text-sm text-blue-800 rounded-lg p-4 dark:bg-blue-800/10 dark:border-blue-900 dark:text-blue-500" role="alert" tabindex="-1" aria-labelledby="hs-soft-color-info-label">
+                                    <span id="hs-soft-color-info-label" class="font-bold">¡Importante!</span> El documento adjunto se vera reflejado el en expediente único del contribuyente.
+                                </div>
+                                <mat-label class="font-bold">
                                     Adjuntar formato de trámite
                                 </mat-label>
-                                <ngx-dropzone (change)="onSelectPaymentInvoice($event)" class="w-50">
+                                <ngx-dropzone (change)="onSelectFormatoTramite($event)" class="w-50">
                                     <ngx-dropzone-label class="ring-amber-600 flex flex-col" autofocus>
                                         <i class="fa-solid fa-upload fa-3x mx-auto text-gray-400"></i>
                                         Da click aquí o arrastra el documento
                                         <p class="text-xs">Formato PDF no más de 5MB</p>
                                     </ngx-dropzone-label>
 
-                                    <ngx-dropzone-preview *ngFor="let f of invoices" [removable]="true"
-                                                          (removed)="onRemovePaymentInvoice(f)">
+                                    <ngx-dropzone-preview *ngFor="let f of formats" [removable]="true"
+                                                          (removed)="onRemoveFormatoTramite(f)">
                                         <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
                                     </ngx-dropzone-preview>
                                 </ngx-dropzone>
                                 <div class="py-4 text-right">
                                     <button mat-flat-button class="rounded-md" color="success"
-                                            (click)="sendInvoiceFile()">
+                                            (click)="sendFormatoTramite()">
                                         Subir formato
                                     </button>
                                 </div>

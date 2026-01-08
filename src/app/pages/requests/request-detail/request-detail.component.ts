@@ -43,6 +43,7 @@ export class RequestDetailComponent implements OnInit {
 
     public files: File[] = [];
     public invoices: File[] = [];
+    public formats: File[] = [];
 
     public dataSource: any;
     public displayedColumns: string[] = ['requisito', 'archivo', 'accion'];
@@ -668,7 +669,7 @@ export class RequestDetailComponent implements OnInit {
         formData.append('vigencia_final', '');
         formData.append('contribuyente_id', this.request.contribuyente_id);
         formData.append('file', invoice);
-        this.documentsService.uploadInvoiceFile(formData).subscribe({
+        this.documentsService.uploadFiles(formData).subscribe({
             next: res => {
                 this.spinner.hide();
                 this.messagesService.printStatus(res.message, 'success');
@@ -678,7 +679,7 @@ export class RequestDetailComponent implements OnInit {
                 this.spinner.hide();
                 this.messagesService.printStatusArrayNew(err.error.errors, 'error');
             }
-        })
+        });
     }
 
     updateReciboPago(){
@@ -691,4 +692,47 @@ export class RequestDetailComponent implements OnInit {
             }
         })
     }
+
+
+    onSelectFormatoTramite(event: any) {
+        if (this.formats.length >= 1){
+            this.messagesService.printStatus('Solo se puede adjuntar un documento a la vez', 'error');
+        } else {
+            this.formats.push(...event.addedFiles);
+        }
+    }
+
+    onRemoveFormatoTramite(event: any) {
+        this.formats.splice(this.formats.indexOf(event), 1);
+    }
+
+    sendFormatoTramite() {
+        this.formats.forEach(invoice => {
+            this.uploadFormatoTramite(invoice);
+        });
+    }
+
+    uploadFormatoTramite(format: any){
+        this.spinner.show();
+        let formData = new FormData()
+        formData.append('tipos_documentos_id', '13');
+        formData.append('tipo_documento', '0');
+        formData.append('vigencia_inicial', '');
+        formData.append('nombre_documento', `Formato de trámite: ${this.request.folio}`);
+        formData.append('vigencia_final', '');
+        formData.append('contribuyente_id', this.request.contribuyente_id);
+        formData.append('file', format);
+        this.documentsService.uploadFiles(formData).subscribe({
+            next: res => {
+                this.spinner.hide();
+                this.messagesService.printStatus(res.message, 'success');
+                this.updateStatus(22);
+            },
+            error: err => {
+                this.spinner.hide();
+                this.messagesService.printStatusArrayNew(err.error.errors, 'error');
+            }
+        })
+    }
+
 }
